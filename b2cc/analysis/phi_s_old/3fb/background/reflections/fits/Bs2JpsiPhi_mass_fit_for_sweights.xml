@@ -1,0 +1,168 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>SignalFraction</Name>      // Fraction of first Gaussian
+<Value>0.1</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>f_sig_m1</Name>      // Gaussian width in MeV
+<Value>1.</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>ratio_21</Name>      // Gaussian width in MeV
+<Value>0.2</Value>
+<Minimum>0.1</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>sigma_m1</Name>      // Gaussian width in MeV
+<Value>6.5</Value>
+<Minimum>3.0</Minimum>
+<Maximum>100.0</Maximum>
+<Type>Fixed</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>sigma_m2</Name>      // Gaussian width in MeV
+<Value>16.5</Value>
+<Minimum>9.0</Minimum>
+<Maximum>100.0</Maximum>
+<Type>Fixed</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>m_Bs</Name>
+<Value>5620.2</Value>
+<Minimum>5600</Minimum>
+<Maximum>5640</Maximum>
+<Type>Fixed</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>Poly_0</Name>
+<Value>0</Value>
+<Minimum>0</Minimum>
+<Maximum>640</Maximum>
+<Type>Fixed</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>Poly_1</Name>
+<Value>10</Value>
+<Minimum>0</Minimum>
+<Maximum>100</Maximum>
+<Type>Fixed</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>Poly_2</Name>
+<Value>10</Value>
+<Type>Fixed</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+
+</ParameterSet>
+
+
+//==========================================
+// Specify which minimiser to use.
+<Precalculator>
+<Name>SWeightPrecalculator</Name>
+<WeightName>signal_sw</WeightName>
+<OutputFile>test.root</OutputFile>
+</Precalculator>
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+<ConfigureMinimiser>TestNewErrors</ConfigureMinimiser>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+<Threads>8</Threads>
+<SetIntegratorTest>True</SetIntegratorTest>
+<UseGSLNumericalIntegration>True</UseGSLNumericalIntegration>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+<ToFit>
+
+<NormalisedSumPDF>
+<FractionName>SignalFraction</FractionName>
+	<PDF>
+		<Name>BsMass</Name>
+		<ConfigurationParameter>UseSig1Sig2:True</ConfigurationParameter>
+	</PDF>
+	<PDF>
+		<Name>PolyPDF</Name>
+		<ParameterSubstitution>x:mass</ParameterSubstitution>
+		<ConfigurationParameter>Order:2</ConfigurationParameter>
+	</PDF>
+</NormalisedSumPDF>
+
+
+
+<DataSet>
+<Source>File</Source>
+<FileName>../reflection_upper_sideband.root</FileName>
+<NTuplePath>DecayTree</NTuplePath>
+<NumberEvents>100000000</NumberEvents>
+
+<PhaseSpaceBoundary>
+
+<Observable>
+<Name>mass</Name>
+<Minimum>5560</Minimum>
+<Maximum>5710</Maximum>
+<Unit>MeV/c^{2}</Unit>
+</Observable>
+
+</PhaseSpaceBoundary>
+</DataSet>
+</ToFit>
+
+<Output>
+	<ComponentProjection>
+	                <Name>mass</Name>
+	                <XTitle>m(J/#psi Kp) [MeV/c^{2}]</XTitle>
+			<YTitle>Candidates</YTitle>
+			<CompNames>Total:Signal:Background</CompNames>
+           		<ColorKey>1:16:12</ColorKey>
+			<StyleKey>1:1:4</StyleKey>
+			<WidthKey>3:3:3</WidthKey>
+                        <LogY>False</LogY>
+			<DataBins>100</DataBins>
+			<NoLegend>True</NoLegend>
+                        <DrawPull>True</DrawPull>
+			<AddLHCb>True</AddLHCb>
+	</ComponentProjection>
+</Output>
+
+</RapidFit>
+

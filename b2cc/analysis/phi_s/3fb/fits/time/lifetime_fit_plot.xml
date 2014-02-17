@@ -1,0 +1,155 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>tau</Name>           
+<Minimum>1.45</Minimum>
+<Maximum>1.65</Maximum>
+<Value>1.459</Value>                   
+<Type>Free</Type>
+<Unit>ps</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution2Fraction</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution3Fraction</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution1</Name>     
+<Value>0.045</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution2</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution3</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeOffset</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolutionScale1</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolutionScale2</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolutionScale3</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+</ParameterSet>
+
+
+//==========================================
+// Specify which minimiser to use.
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihood</FunctionName>
+<Threads>8</Threads>
+<WeightName>sWeights_ipatia</WeightName>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+
+<ToFit>
+
+		<PDF>
+			<Name>Exponential</Name>
+			<ConfigurationParameter>UseNumericalIntegration:False</ConfigurationParameter>
+			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
+			<ConfigurationParameter>UseEventResolution:False</ConfigurationParameter>
+		</PDF>
+
+<DataSet>
+<Source>File</Source>
+<FileName>../../data/fitNTuple_peakBkg_2011_2012_Reco14_20140116.root</FileName>  
+<NTuplePath>DecayTree</NTuplePath>
+<NumberEvents>30000000</NumberEvents>
+
+<PhaseSpaceBoundary>
+
+<Observable>
+<Name>mass</Name>
+<Minimum>5200</Minimum> 
+<Maximum>5550</Maximum>
+<Unit>MeV/c^{2}</Unit>
+</Observable>
+
+<Observable>
+<Name>time</Name>
+<Minimum>0.3</Minimum> 
+<Maximum>14.0</Maximum>
+<Unit>ps</Unit>
+</Observable>
+
+<Observable>
+<Name>sWeights_ipatia</Name>
+<Minimum>-1000</Minimum> 
+<Maximum>1000</Maximum>
+<Unit>ps</Unit>
+</Observable>
+
+</PhaseSpaceBoundary>
+</DataSet>
+</ToFit>
+
+<Output>
+	<ComponentProjection>
+	        <Name>time</Name>
+			<XTitle>t [ps]</XTitle>
+			<CompNames>Total:Signal:Background</CompNames>
+            <ColorKey>1:16:12</ColorKey>
+			<StyleKey>1:1:4</StyleKey>
+			<WidthKey>3:3:3</WidthKey>
+	        <LogY>True</LogY>
+			<DrawPull>True</DrawPull>
+	</ComponentProjection>
+</Output>
+
+</RapidFit>
