@@ -1,0 +1,271 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>SignalFraction</Name>      // Fraction of first Gaussian
+<Value>0.83</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>f_sig_m1</Name>      // Gaussian width in MeV
+<Value>1.</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>ratio_21</Name>      // Gaussian width in MeV
+<Value>0.2</Value>
+<Minimum>0.1</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>sigma_m1</Name>      // Gaussian width in MeV
+<Value>6.5</Value>
+<Minimum>3.0</Minimum>
+<Maximum>15.0</Maximum>
+<Type>Free</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>sigma_m2</Name>      // Gaussian width in MeV
+<Value>16.5</Value>
+<Minimum>9.0</Minimum>
+<Maximum>100.0</Maximum>
+<Type>Free</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>m_Bs</Name>
+<Value>5375.5</Value>
+<Minimum>5360</Minimum>
+<Maximum>5390</Maximum>
+<Type>Free</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>alphaM_pr</Name>      // exponent
+<Value>0.0013</Value>
+<Minimum>0.</Minimum>
+<Maximum>0.003</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+         <PhysicsParameter>
+         <Name>fraction_total_mc</Name>
+         <Value>0.07</Value>
+         <Minimum>0.0</Minimum>
+         <Maximum>1.0</Maximum>
+         <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+         <Name>fraction_reflec</Name>
+         <Value>0.25</Value>
+         <Minimum>0.0</Minimum>
+         <Maximum>1.0</Maximum>
+         <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+         <Name>m0</Name>
+         <Value>5.41550e+03</Value>
+         <Minimum>5350.0</Minimum>
+         <Maximum>5450.0</Maximum>
+         <Type>Fixed</Type>
+         </PhysicsParameter>
+
+         <PhysicsParameter>
+                 <Name>sigma</Name>
+                 <Value>3.09276e+01</Value>
+                 <Minimum>25.0</Minimum>
+                 <Maximum>40.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+                 <Name>alpha</Name>
+                 <Value>1.97079e-01</Value>
+                 <Minimum>0.0</Minimum>
+                 <Maximum>1.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+                 <Name>fraction_bd</Name>
+                 <Value>1.</Value>
+         	 <Minimum>0.0</Minimum>
+         	 <Maximum>1.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+                 <Name>m0_bd</Name>
+                 <Value>5.34933e+03</Value>
+                 <Minimum>5200.0</Minimum>
+                 <Maximum>5420.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+                 <Name>sigma_bd</Name>
+                 <Value>1.24127e+01</Value>
+                 <Minimum>4.0</Minimum>
+                 <Maximum>15.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+
+         <PhysicsParameter>
+                 <Name>alpha_bd</Name>
+                 <Value>-5.42922e-01</Value>
+                 <Minimum>-3.5</Minimum>
+                 <Maximum>0.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+                 <Name>n</Name>
+                 <Value>1</Value>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+ 
+         <PhysicsParameter>
+                 <Name>sigma2_bd</Name>
+                 <Value>1.57872e+01</Value>
+                 <Minimum>5.0</Minimum>
+                 <Maximum>100.0</Maximum>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+
+         <PhysicsParameter>
+                 <Name>f_sig1</Name>
+                 <Value>0.0</Value>
+                 <Type>Fixed</Type>
+         </PhysicsParameter>
+
+</ParameterSet>
+
+
+//==========================================
+// Specify which minimiser to use.
+<Precalculator>
+<Name>SWeightPrecalculator</Name>
+<WeightName>signal_sw</WeightName>
+<OutputFile>test.root</OutputFile>
+</Precalculator>
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+<ConfigureMinimiser>TestNewErrors</ConfigureMinimiser>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+<Threads>8</Threads>
+<SetIntegratorTest>True</SetIntegratorTest>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+
+<ToFit>
+
+<NormalisedSumPDF>
+<FractionName>SignalFraction</FractionName>
+	<PDF>
+		<Name>BsMass</Name>
+		<ConfigurationParameter>UseSig1Sig2:True</ConfigurationParameter>
+	</PDF>
+        <NormalisedSumPDF>
+        <FractionName>fraction_total_mc</FractionName>
+	        <NormalisedSumPDF>
+                <FractionName>fraction_reflec</FractionName>
+                	<NormalisedSumPDF>
+                        <FractionName>fraction_bd</FractionName>
+                        <PDF>
+                        	<Name>CrystalBall</Name>
+                                <ParameterSubstitution>alpha:alpha_bd</ParameterSubstitution>
+                                <ParameterSubstitution>m0:m0_bd</ParameterSubstitution>
+                                <ParameterSubstitution>sigma:sigma_bd</ParameterSubstitution>
+                        </PDF>
+                        <PDF>
+                                <Name>OptimisedDoubleGauss</Name>
+                                <ParameterSubstitution>center:m0_bd</ParameterSubstitution>
+                                <ParameterSubstitution>x:mass</ParameterSubstitution>
+                                <ParameterSubstitution>sigma2:sigma2_bd</ParameterSubstitution>
+                         </PDF>
+                         </NormalisedSumPDF>
+                         <PDF>
+                                 <Name>CrystalBall</Name>
+                         </PDF>
+                </NormalisedSumPDF>
+		<PDF>
+		<Name>Bs2JpsiPhiMassBkg</Name>
+		</PDF>
+	</NormalisedSumPDF>
+</NormalisedSumPDF>
+
+<DataSet>
+<Source>File</Source>
+<FileName>../../data/fitNTuple_peakBkg_2011_2012_Reco14_TOS_20140215.root</FileName>  
+<CutString>runPeriod==2012&&((hlt1_excl_biased==0)&&hlt2_unbiased==1)</CutString>
+<NTuplePath>DecayTree</NTuplePath>
+<NumberEvents>30000000</NumberEvents>
+
+<PhaseSpaceBoundary>
+
+<Observable>
+<Name>mass</Name>
+<Minimum>5200</Minimum> 
+<Maximum>5550</Maximum>
+<Unit>MeV/c^{2}</Unit>
+</Observable>
+
+<Observable>
+<Name>time</Name>
+<Minimum>0.3</Minimum> 
+<Maximum>14.0</Maximum>
+<Unit>ps</Unit>
+</Observable>
+
+</PhaseSpaceBoundary>
+</DataSet>
+</ToFit>
+
+<Output>
+	<ComponentProjection>
+	                <Name>mass</Name>
+	                <XTitle>m(J/#psi K^{+}K^{#font[122]{-}}) [MeV/c^{2}]</XTitle>
+			<CompNames>Total:Signal:Bkg1:Bkg2:Bkg3:Bkg4</CompNames>
+           		<ColorKey>1:16:12:12:12:12</ColorKey>
+			<StyleKey>1:1:4:4:4:4</StyleKey>
+			<WidthKey>3:3:1:2:3:4</WidthKey>
+                        <LogY>False</LogY>
+			<DataBins>80</DataBins>
+			<Ymin>1</Ymin>
+			<NoLegend>True</NoLegend>
+                        <DrawPull>True</DrawPull>
+			<AddLHCb>True</AddLHCb>
+	</ComponentProjection>
+</Output>
+
+</RapidFit>
+
