@@ -1,0 +1,8 @@
+## Particle names and cuts ##
+src/particleProperties.C
+
+## Getting Bs -> J/psi phi lower decay time acceptance histograms with 20 bins ##
+make
+./TupleOutput.exe /panfs/fdupertu/ROOT/Bs2JpsiPhi_2012_s20r0p1_dv33r6p1_20131217_tupleA_BestCand.root /panfs/fdupertu/ROOT/Bs2JpsiPhi_2012_s20r0p1_dv33r6p1_2013127_tupleA_BestCand.root 0 2012
+./getHltAcceptance.exe data/BsTuple_Data_2012_Trigger.txt 20
+--> ROOT/Bs_HltPropertimeAcceptance_Data_2012_20bins.root

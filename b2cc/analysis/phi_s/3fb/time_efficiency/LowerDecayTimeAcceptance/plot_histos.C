@@ -1,0 +1,31 @@
+{
+	gStyle->SetOptStat(0);
+	TFile * f1 = TFile::Open("ROOT/Bs_HltPropertimeAcceptance_Data_2012_BPT_1_20bins.root");
+	//TH1F * h1 = (TH1F*)f1->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_1_20bins_Hlt1DiMuon_Hlt2DiMuonDetached");
+	TH1F * h1 = (TH1F*)f1->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_1_20bins_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached");
+	TCanvas * c = new TCanvas();
+	c->SetLogx();
+	h1->SetMarkerColor(kRed);
+	h1->SetLineColor(kRed);
+	h1->SetMinimum(0.);
+	h1->Draw();
+	h1->GetXaxis()->SetTitle("t [ps]");
+	h1->GetYaxis()->SetTitle("Efficiency");
+	TFile * f2 = TFile::Open("ROOT/Bs_HltPropertimeAcceptance_Data_2012_BPT_2_20bins.root");
+	//TH1F * h2 = (TH1F*)f2->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_2_20bins_Hlt1DiMuon_Hlt2DiMuonDetached");
+	TH1F * h2 = (TH1F*)f2->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_2_20bins_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached");
+	h2->SetMarkerColor(kGreen);
+	h2->SetLineColor(kGreen);
+	h2->Draw("same");
+	TFile * f3 = TFile::Open("ROOT/Bs_HltPropertimeAcceptance_Data_2012_BPT_3_20bins.root");
+	//TH1F * h3 = (TH1F*)f3->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_3_20bins_Hlt1DiMuon_Hlt2DiMuonDetached");
+	TH1F * h3 = (TH1F*)f3->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_3_20bins_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached");
+	h3->SetMarkerColor(kBlue);
+	h3->SetLineColor(kBlue);
+	h3->Draw("same");
+	TFile * f4 = TFile::Open("ROOT/Bs_HltPropertimeAcceptance_Data_2012_BPT_4_20bins.root");
+	//TH1F * h4 = (TH1F*)f4->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_4_20bins_Hlt1DiMuon_Hlt2DiMuonDetached");
+	TH1F * h4 = (TH1F*)f4->Get("Bs_HltPropertimeAcceptance_Data_2012_BPT_4_20bins_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached");
+	h4->Draw("same");
+	c->SaveAs("2012_biased_BPT.pdf");
+}

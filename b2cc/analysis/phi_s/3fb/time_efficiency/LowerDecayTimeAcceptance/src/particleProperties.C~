@@ -1,0 +1,381 @@
+#include "TString.h"
+
+struct particleProperties{
+  particleProperties(TString const& particle){
+    if(particle.Contains("Bd2JpsiKS")){
+      name = "Bd2JpsiKS";
+      tupleName = "b_particle";
+      plotName = "B^{0}";
+      daughtersName = "J/#psi K^{0}_{S}";
+      mass = 5281.;
+      mass_low = 5150.;
+      mass_high = 5340.;
+      mass_low_acc = mass_low;
+      mass_high_acc = 5340.;
+      t_min = 0.45;
+      t_max = 14.;
+      tau = 1.525;
+      beta = -0.00928693;
+      betaerr = 0.000996007;
+      frac_M_sig = 0.65;
+      rfrac_M_sig = 2.;
+      
+      afactor = 1.84885e+00;
+      afactor2 = 2.;
+      bfactor = 2.37290e+00;
+      bfactor2 = 2.25;
+      nufactor = 2.;
+      nfactor = 2.89592e+00;
+      nfactor2 = 1.06988e+01;
+      
+      //Lousonna
+      afactor = 2.75031e+00;
+      nufactor = 5.99285e+00;
+      nfactor = 2.79932e+00;
+      nfactor2 = 1.47688e+01;
+      
+      selection = "b_particle_ModifiedPVStandardLifetimeFit_ctau[0]/0.299792458>";
+      selection += t_min;
+      selection += "&&b_particle_ModifiedPVStandardLifetimeFit_ctau[0]/0.299792458<";
+      selection += t_max;
+      selection += "&&b_particle_MassFitConsAll_M[0]>";
+      selection += mass_low;
+      selection += "&&b_particle_MassFitConsAll_M[0]<";
+      selection += mass_high;
+      //selection += "&&isFullSelected_Corrected&&has2ndBestIPChi2&&hasBestDTFCHI2&&(piminus_TRACK_Type==3&&LL_fiducial_cuts||piminus_TRACK_Type==5&&DD_fiducial_cuts)&&(TMath::Abs(pminuspiplus_M-1116)>20.&&TMath::Abs(ppluspiminus_M-1116.)>20.)&&(b_particle_ModifiedPVStandardLifetimeFit_chi2_B[0]/b_particle_ModifiedPVStandardLifetimeFit_nDOF[0]<5.)";
+      selection += "&&isFullSelected_Corrected&&hasBestDTFCHI2_0_45";
+      selectionstrip = "hasDetachedStrippingTriggered";
+      selectionstripexcl = "hasExclStrippingTriggered";
+      selectionmctruth = "TMath::Abs(b_particle_TRUEID)==511 && TMath::Abs(J_psi_1S_TRUEID)==443 && TMath::Abs(KS0_TRUEID)==310 && ((muplus_TRUEID==13&&muminus_TRUEID==-13) || (muplus_TRUEID==-13&&muminus_TRUEID==13)) && ((piplus_TRUEID==211 && piminus_TRUEID==-211) || (piplus_TRUEID==-211 && piminus_TRUEID==211))";
+      selectionmctruth2 = "TMath::Abs(b_particle_TRUEID)==5122 && TMath::Abs(J_psi_1S_TRUEID)==443 && TMath::Abs(KS0_TRUEID)==3122 && ((muplus_TRUEID==13&&muminus_TRUEID==-13) || (muplus_TRUEID==-13&&muminus_TRUEID==13)) && ((piplus_TRUEID==2212 && piminus_TRUEID==-211) || (piplus_TRUEID==-2212 && piminus_TRUEID==211) || (piplus_TRUEID==211 && piminus_TRUEID==-2212) || (piplus_TRUEID==-211 && piminus_TRUEID==2212))";
+      selectionsidebands = "(b_particle_M>";
+      selectionsidebands += mass_low;
+      selectionsidebands += ")&&(b_particle_M<";
+      selectionsidebands += mass_high;
+      selectionsidebands += ")&&TMath::Abs(b_particle_M-";
+      selectionsidebands += mass;
+      selectionsidebands += ")>40.";
+      blindstring = "Bd2JpsiKSLifetime2013";
+      blindscale = 0.1;
+    }else if(particle.Contains("Lambdab0")){
+      name = "Lambdab0";
+      tupleName = "b_particle";
+      plotName = "#Lambda^{0}_{b}";
+      daughtersName = "J/#psi #Lambda";
+      mass = 5619.;
+      //mass_low = 5470.;
+      mass_low = 5500.;
+      //mass_high = 5770.;
+      mass_high = 5740.;
+      mass_low_acc = mass_low;
+      mass_high_acc = mass_high;
+      t_min = 0.45;
+      t_max = 14.;
+      tau = 1.38;
+      beta = -0.00928693;
+      betaerr = 0.000996007;
+      frac_M_sig = 7.92810e-01;
+      rfrac_M_sig = 2.02883e+00;
+      
+      afactor = 2.36282e+00;
+      afactor2 = 2.37443e+00;
+      bfactor = 2.25830e+00;
+      bfactor2 = 2.25;
+      nufactor = 2.;
+      nfactor = 4.72759e+00;
+      nfactor2 = 5.03439e+00;
+      
+      //Lousonna
+      afactor = 4.89773e+00;
+      nufactor = 6.19160e+00;
+      nfactor = 2.95538e+00;
+      nfactor2 = 3.29318e+00;
+      
+      selection = "b_particle_ModifiedPVStandardLifetimeFit_ctau[0]/0.299792458>";
+      selection += t_min;
+      selection += "&&b_particle_ModifiedPVStandardLifetimeFit_ctau[0]/0.299792458<";
+      selection += t_max;
+      selection += "&&b_particle_MassFitConsAll_M[0]>";
+      selection += mass_low;
+      selection += "&&b_particle_MassFitConsAll_M[0]<";
+      selection += mass_high;
+      selection += "&&isFullSelected_Corrected&&hasBestDTFCHI2_0_45";
+      selectionstrip = "hasDetachedStrippingTriggered";
+      selectionstripexcl = "hasExclStrippingTriggered";
+      selectionmctruth = "TMath::Abs(b_particle_TRUEID)==5122 && TMath::Abs(J_psi_1S_TRUEID)==443 && TMath::Abs(Lambda0_TRUEID)==3122 && ((muplus_TRUEID==13&&muminus_TRUEID==-13) || (muplus_TRUEID==-13&&muminus_TRUEID==13)) && ((pplus_TRUEID==2212 && piminus_TRUEID==-211) || (pplus_TRUEID==-2212 && piminus_TRUEID==211))";
+      selectionmctruth2 = "TMath::Abs(b_particle_TRUEID)==511 && TMath::Abs(J_psi_1S_TRUEID)==443 && TMath::Abs(Lambda0_TRUEID)==310 && ((muplus_TRUEID==13&&muminus_TRUEID==-13) || (muplus_TRUEID==-13&&muminus_TRUEID==13)) && ((pplus_TRUEID==211 && piminus_TRUEID==-211) || (pplus_TRUEID==-211 && piminus_TRUEID==211))";
+      selectionsidebands = "(b_particle_M>";
+      selectionsidebands += mass_low;
+      selectionsidebands += ")&&(b_particle_M<";
+      selectionsidebands += mass_high;
+      selectionsidebands += ")&&TMath::Abs(b_particle_M-";
+      selectionsidebands += mass;
+      selectionsidebands += ")>40.";
+      blindstring = "Lambdab0Lifetime2013";
+      blindscale = 0.25;
+    }else if(particle.Contains("BsJpsiPhi")){
+      name = "BsJpsiPhi";
+      tupleName = "Bs";
+      plotName = "B^{0}_{s}";
+      daughtersName = "J/#psi K^{+}K^{#font[122]{-}}";
+      mass = 5368.;
+      mass_low = 5200.;
+      mass_high = 5550.;
+      mass_low_acc = mass_low;
+      mass_high_acc = mass_high;
+      t_min = 0.3;
+      t_max = 14.;
+      tau = 1.472;
+      beta = -0.00928693;
+      betaerr = 0.000996007;
+      frac_M_sig = 8.7351e-01;
+      rfrac_M_sig = 2.3838e+00;
+      
+      afactor = 2.41126e+00;
+      afactor2 = 2.39442e+00;
+      bfactor = 1.97141e+00;
+      bfactor2 = 2.25;
+      nufactor = 2.;
+      nfactor = 2.94174e+00;
+      nfactor2 = 3.04374e+00;
+      
+      //Lousonna
+      afactor = 3.72333e+00;
+      nufactor = 5.23260e+00;
+      nfactor = 2.57426e+00;
+      nfactor2 = 2.76978e+00;
+      
+      selection = "Bs_ct>";
+      selection += t_min;
+      selection += "&&Bs_ct<";
+      selection += t_max;
+      selection += "&&Bs_M>";
+      selection += mass_low;
+      selection += "&&Bs_M<";
+      selection += mass_high;
+      selection += "&&(Mu1_Eta>2.&&Mu1_Eta<4.5)&&(Mu2_Eta>2.&&Mu2_Eta<4.5)&&(Mu1_Pt>550.)&&(Mu2_Pt>550.)&&(Mu1_DLLmu>0.)&&(Mu2_DLLmu>0.)&&(Mu1_TrackChi2ndof<4.)&&(Mu2_TrackChi2ndof<4.)&&(TMath::Abs(JPsi_M-3090)<60)&&(JPsi_VtxChi2ndof<16.)&&(K1_Eta>2.&&K1_Eta<4.5)&&(K2_Eta>2.&&K2_Eta<4.5)&&(K1_DLLk>0.)&&(K2_DLLk>0.)&&(K1_TrackChi2ndof<4.)&&(K2_TrackChi2ndof<4.)&&(TMath::Abs(Phi_M-1020)<12.)&&(Phi_Pt>1000.)&&(Bs_DTFChi2ndof<3.)&&(Bs_IPChi2<25.)&&(Bs_2ndBestIPChi2>50.)&&(Bs_hasBestDTFCHI2==1)&&(TMath::Abs(Bs_PVz)<100.)";
+      selectionstrip = "Ev_StrippingFullDSTDiMuonJpsi2MuMuDetachedLine";
+      selectionstripexcl = "Ev_StrippingBetaSBs2JpsiPhiDetached";
+      selectionmctruth = "1==1";
+      selectionsidebands = "(Bs_M>";
+      selectionsidebands += mass_low;
+      selectionsidebands += ")&&(Bs_M<";
+      selectionsidebands += mass_high;
+      selectionsidebands += ")&&TMath::Abs(Bs_M-";
+      selectionsidebands += mass;
+      selectionsidebands += ")>50.";
+      blindstring = "BsLifetime2013";
+      blindscale = 0.1;
+    }else if(particle.Contains("BdJpsiKstar")){
+      name = "BdJpsiKstar";
+      tupleName = "Bd";
+      plotName = "B^{0}";
+      daughtersName = "J/#psi K^{+}#pi^{#font[122]{-}}";
+      mass = 5281.;
+      mass_low = 5150.;
+      mass_high = 5340.;
+      mass_low_acc = mass_low;
+      mass_high_acc = 5340.;
+      t_min = 0.3;
+      t_max = 14.;
+      tau = 1.525;
+      beta = -0.00928693;
+      betaerr = 0.000996007;
+      frac_M_sig = 8.7351e-01;
+      rfrac_M_sig = 2.3838e+00;
+
+      afactor = 2.01486e+00;
+      afactor2 = 2.05184e+00;
+      bfactor = 2.43463e+00;
+      bfactor2 = 2.25;
+      nufactor = 2.;
+      nfactor = 1.63471e+00;
+      nfactor2 = 4.15434e+00;
+      
+      //Lousonna
+      afactor = 3.09925e+00;
+      nufactor = 6.12721e+00;
+      nfactor = 1.50962e+00;
+      nfactor2 = 4.45312e+00;
+      
+      selection = "Bd_ct>";
+      selection += t_min;
+      selection += "&&Bd_ct<";
+      selection += t_max;
+      selection += "&&Bd_M>";
+      selection += mass_low;
+      selection += "&&Bd_M<";
+      selection += mass_high;
+      selection += "&&(Mu1_Eta>2.&&Mu1_Eta<4.5)&&(Mu2_Eta>2.&&Mu2_Eta<4.5)&&(Mu1_Pt>550.)&&(Mu2_Pt>550.)&&(Mu1_DLLmu>0.)&&(Mu2_DLLmu>0.)&&(Mu1_TrackChi2ndof<4.)&&(Mu2_TrackChi2ndof<4.)&&(TMath::Abs(JPsi_M-3090)<60)&&(JPsi_VtxChi2ndof<16.)&&(K1_Eta>2.&&K1_Eta<4.5)&&(Pi1_Eta>2.&&Pi1_Eta<4.5)&&(Pi1_Pt>300.)&&(K1_DLLk>0.)&&(Pi1_DLLk<0.)&&(K1_TrackChi2ndof<4.)&&(Pi1_TrackChi2ndof<4.)&&(TMath::Abs(Kstar_M-892)<70.)&&(Kstar_Pt>1500.)&&(Bd_DTFChi2ndof<3.)&&(Bd_IPChi2<25.)&&(Bd_2ndBestIPChi2>50.)&&(Bd_hasBestDTFCHI2==1)&&(TMath::Abs(Bd_PVz)<100.)";
+      selectionstrip = "Ev_StrippingFullDSTDiMuonJpsi2MuMuDetachedLine";
+      selectionstripexcl = "Ev_StrippingBetaSBd2JpsiKstarDetachedLineDecision";
+      selectionmctruth = "1==1";
+      selectionsidebands = "(Bd_M>";
+      selectionsidebands += mass_low;
+      selectionsidebands += ")&&(Bd_M<";
+      selectionsidebands += mass_high;
+      selectionsidebands += ")&&TMath::Abs(Bd_M-";
+      selectionsidebands += mass;
+      selectionsidebands += ")>50.";
+      blindstring = "BdLifetime2013";
+      blindscale = 0.05;
+    }else if(particle.Contains("BuJpsiK")){
+      name = "BuJpsiK";
+      tupleName = "Bu";
+      plotName = "B^{#pm}";
+      daughtersName = "J/#psi K^{+}";
+      mass = 5281.;
+      mass_low = 5170.;
+      mass_high = 5400.;
+      mass_low_acc = mass_low;
+      mass_high_acc = mass_high;
+      t_min = 0.3;
+      t_max = 14.;
+      tau = 1.641;
+      beta = -0.00928693;
+      betaerr = 0.000996007;
+      frac_M_sig = 8.7351e-01;
+      rfrac_M_sig = 2.3838e+00;
+
+      afactor = 1.90019e+00;
+      afactor2 = 1.95703e+00;
+      bfactor = 2.93093e+00;
+      bfactor2 = 2.25;
+      nufactor = 2.;
+      nfactor = 1.52303e+00;
+      nfactor2 = 3.34431e+00;
+      
+      //Lousonna
+      afactor = 3.23797e+00;
+      nufactor = 7.25017e+00;
+      nfactor = 1.36717e+00;
+      nfactor2 = 3.33493e+00;
+      
+      selection = "Bu_ct>";
+      selection += t_min;
+      selection += "&&Bu_ct<";
+      selection += t_max;
+      selection += "&&Bu_M>";
+      selection += mass_low;
+      selection += "&&Bu_M<";
+      selection += mass_high;
+      selection += "&&(Mu1_Eta>2.&&Mu1_Eta<4.5)&&(Mu2_Eta>2.&&Mu2_Eta<4.5)&&(Mu1_Pt>550.)&&(Mu2_Pt>550.)&&(Mu1_DLLmu>0.)&&(Mu2_DLLmu>0.)&&(Mu1_TrackChi2ndof<4.)&&(Mu2_TrackChi2ndof<4.)&&(TMath::Abs(JPsi_M-3090)<60)&&(JPsi_VtxChi2ndof<16.)&&(K1_Eta>2.&&K1_Eta<4.5)&&(K1_Pt>1000.)&&(K1_P>10000.)&&(K1_DLLk>0.)&&(K1_TrackChi2ndof<4.)&&(Bu_VtxChi2ndof<10.)&&(Bu_DTFChi2ndof<5.)&&(Bu_IPChi2<25.)&&(Bu_2ndBestIPChi2>50.)&&(Bu_hasBestDTFCHI2==1)&&(TMath::Abs(Bu_PVz)<100.)";
+      selectionstrip = "Ev_StrippingFullDSTDiMuonJpsi2MuMuDetachedLine";
+      selectionstripexcl = "Ev_StrippingBetaSBu2JpsiKDetachedLineDecision";
+      selectionmctruth = "1==1";
+      selectionsidebands = "(Bu_M>";
+      selectionsidebands += mass_low;
+      selectionsidebands += ")&&(Bu_M<";
+      selectionsidebands += mass_high;
+      selectionsidebands += ")&&TMath::Abs(Bu_M-";
+      selectionsidebands += mass;
+      selectionsidebands += ")>50.";
+      blindstring = "BuLifetime2013";
+      blindscale = 0.03;
+    }else if(particle.Contains("Bs")){
+      name = "Bs";
+      tupleName = "B_s0";
+      plotName = "B^{0}_{s}";
+      mass = 5368.;
+      mass_low = 5200.;
+      mass_high = 5550.;
+      mass_low_acc = mass_low;
+      mass_high_acc = mass_high;
+      t_min = 0.3;
+      t_max = 14.;
+      tau = 1.472;
+      beta = -0.00928693;
+      betaerr = 0.000996007;
+      frac_M_sig = 8.7351e-01;
+      rfrac_M_sig = 2.3838e+00;
+      afactor = 2.;
+      afactor2 = 2.;
+      bfactor = 2.25;
+      bfactor2 = 2.25;
+      nufactor = 2.;
+      nfactor = 3.;
+      nfactor2 = 3.;
+      selection = "B_s0_LOKI_DTF_CTAU/0.299792458>";
+      selection += t_min;
+      selection += "&&B_s0_LOKI_DTF_CTAU/0.299792458<";
+      selection += t_max;
+      selection += "&&B_s0_LOKI_MASS_JpsiConstr>";
+      selection += mass_low;
+      selection += "&&B_s0_LOKI_MASS_JpsiConstr<";
+      selection += mass_high;
+      selection += "&& (B_s0_LOKI_DTF_CTAUERR/0.299792458 < 0.12) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (B_s0_LOKI_DTF_CHI2NDOF < 5.) && (B_s0_ENDVERTEX_CHI2/B_s0_ENDVERTEX_NDOF < 10.) && (B_s0_IPCHI2_OWNPV < 25.) && (B_s0_MINIPCHI2NEXTBEST > 50 || B_s0_MINIPCHI2NEXTBEST < 0) && (J_psi_1S_ENDVERTEX_CHI2/J_psi_1S_ENDVERTEX_NDOF < 16.) && (TMath::Abs(J_psi_1S_MM - 3090) < 60) && (muplus_PT > 500.) && (muminus_PT > 500.) && (muplus_PIDmu > 0.) && (muminus_PIDmu > 0.) && (muplus_TRACK_CHI2NDOF < 4) && (muminus_TRACK_CHI2NDOF < 4) && (phi_1020_ENDVERTEX_CHI2/phi_1020_ENDVERTEX_NDOF < 16.) && (TMath::Abs(phi_1020_M - 1020.) < 30.) && (phi_1020_PT > 1000.) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && (Kplus_TRACK_CHI2NDOF < 4.) && (Kminus_TRACK_CHI2NDOF < 4.) && (hasBestVtxChi2 == 1)";
+      selectionstrip = "B_s0_TAU*1000.>0.2";
+      selectionstripexcl = "1==1";
+      selectionmctruth = "B_s0_BKGCAT==0";
+      selectionsidebands = "(B_s0_M>";
+      selectionsidebands += mass_low;
+      selectionsidebands += ")&&(B_s0_M<";
+      selectionsidebands += mass_high;
+      selectionsidebands += ")&&TMath::Abs(B_s0_M-";
+      selectionsidebands += mass;
+      selectionsidebands += ")>50.";
+      blindstring = "BsLifetime2013";
+      blindscale = 0.1;
+    }
+  }
+
+  TString GetName(){
+    return name;
+  }
+  
+  TString GetTupleName(){
+    return tupleName;
+  }
+
+  TString GetPlotName(){
+    return tupleName;
+  }
+
+  Double_t GetMass(){
+    return mass;
+  }
+  
+  Double_t GetTau(){
+    return tau;
+  }
+
+  Double_t GetBeta(){
+    return beta;
+  }
+  
+  Double_t GetBetaErr(){
+    return betaerr;
+  }
+    
+  TString name;
+  TString tupleName;
+  TString plotName;
+  TString daughtersName;
+  Double_t mass;
+  Double_t mass_low;
+  Double_t mass_high;
+  Double_t mass_low_acc;
+  Double_t mass_high_acc;
+  Double_t t_min;
+  Double_t t_max;
+  Double_t tau;
+  Double_t beta;
+  Double_t betaerr;
+  Double_t frac_M_sig;
+  Double_t rfrac_M_sig;
+  Double_t afactor;
+  Double_t afactor2;
+  Double_t bfactor;
+  Double_t bfactor2;
+  Double_t nufactor;
+  Double_t nfactor;
+  Double_t nfactor2;
+  TString selection;
+  TString selectionstrip;
+  TString selectionstripexcl;
+  TString selectionmctruth;
+  TString selectionmctruth2;
+  TString selectionsidebands;
+  TString blindstring;
+  Double_t blindscale;
+};

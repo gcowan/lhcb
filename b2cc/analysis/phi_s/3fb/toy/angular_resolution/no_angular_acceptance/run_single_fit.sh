@@ -18,14 +18,14 @@ cd $workdir
 source /cvmfs/lhcb.cern.ch/group_login.sh
 SetupProject.sh DaVinci
 
-RAPIDFITROOT=/exports/home/gcowan1/software/RapidFit/trunk
-ANGULAR=/exports/home/gcowan1/lhcb/b2cc/analysis/phi_s/3fb/toy/angular_resolution/no_angular_acceptance 
+RAPIDFITROOT=/Home/gcowan1/software/RapidFit/trunk
+ANGULAR=/Home/gcowan1/lhcb/lhcb/b2cc/analysis/phi_s/3fb/toy/angular_resolution/no_angular_acceptance 
 CONFIG1=$ANGULAR/Bs2JpsiPhi_2012_singlebin_toy_gen.xml
 CONFIG2=$ANGULAR/Bs2JpsiPhi_2012_singlebin_toy_fit_nominal.xml
 CONFIG3=$ANGULAR/Bs2JpsiPhi_2012_singlebin_toy_fit.xml
 $RAPIDFITROOT/bin/fitting -f $CONFIG1 --saveOneDataSet test.root
 $RAPIDFITROOT/bin/fitting -f $CONFIG2 --doPulls pulls_nominal.root
-python /exports/home/gcowan1/lhcb/b2cc/analysis/phi_s/3fb/toy/angular_resolution/Preselection_trans.py test.root
+python /Home/gcowan1/lhcb/b2cc/analysis/phi_s/3fb/toy/angular_resolution/Preselection_trans.py test.root
 $RAPIDFITROOT/bin/fitting -f $CONFIG3 --doPulls pulls_smeared.root
 
 datadir=$ANGULAR/one_angle_smeared
