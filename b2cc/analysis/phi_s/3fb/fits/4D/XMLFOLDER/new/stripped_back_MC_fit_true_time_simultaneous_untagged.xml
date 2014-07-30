@@ -197,9 +197,9 @@
 			<Name>Bs2JpsiPhi_Signal_v7</Name>
 			<ConfigurationParameter>UseHelicityBasis:True</ConfigurationParameter>
                         <ConfigurationParameter>AngularAcceptanceIgnoreNumerator:True</ConfigurationParameter>			
-			<ConfigurationParameter>UseTimeAcceptance:True</ConfigurationParameter>
+			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
 			<ConfigurationParameter>UseEventResolution:True</ConfigurationParameter>
-			<ConfigurationParameter>ResolutionModel:DoubleFixedResModel</ConfigurationParameter>
+			<ConfigurationParameter>ResolutionModel:DummyResolutionModel</ConfigurationParameter>
 		</PDF>
 	</CommonPDF>
 
@@ -257,8 +257,6 @@
 			</Observable>
 			<Observable>
 				<Name>weight</Name>
-				#<TF1>1./(1-0.001955 *B_s0_LOKI_DTF_CTAU/0.299792458*B_s0_LOKI_DTF_CTAU/0.299792458)</TF1> # MC2012 true
-				#<TF1>1./(1-0.0006362*B_s0_LOKI_DTF_CTAU/0.299792458*B_s0_LOKI_DTF_CTAU/0.299792458)</TF1> # MC2011 true
 				<TF1>1.</TF1>
 				#<TF1>B_velo_eff_weight_with_trigger</TF1>	
 				<Minimum>-10</Minimum>
@@ -280,7 +278,7 @@
 			<Source>File</Source>
 			<FileName>/Disk/speyside8/lhcb/gcowan1/MC2011_all_BsJpsiPhi_DTT_20131006_minimal_truth_roel_with_IPz_weights.root</FileName>
                         #<CutString>(30. > TMath::Abs(phi_1020_M - 1020.)) && (16. > phi_1020_ENDVERTEX_CHI2/phi_1020_ENDVERTEX_NDOF) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (10. > B_s0_ENDVERTEX_CHI2/B_s0_ENDVERTEX_NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (B_s0_MINIPCHI2NEXTBEST > 50 || 0 > B_s0_MINIPCHI2NEXTBEST) && (60 > TMath::Abs(J_psi_1S_MM - 3090))&& (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedJPsiDecision_TOS==1)</CutString>	
-			<NumberEvents>1000000000</NumberEvents>
+			<NumberEvents>0</NumberEvents>
 
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>

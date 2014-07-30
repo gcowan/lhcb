@@ -173,7 +173,7 @@
 			<ConfigurationParameter>UseHelicityBasis:True</ConfigurationParameter>
                         <ConfigurationParameter>AngularAcceptanceIgnoreNumerator:True</ConfigurationParameter>			
 			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
-			<ConfigurationParameter>UseEventResolution:True</ConfigurationParameter>
+			<ConfigurationParameter>UseEventResolution:False</ConfigurationParameter>
 			<ConfigurationParameter>ResolutionModel:DummyResolutionModel</ConfigurationParameter>
 		</PDF>
 	</CommonPDF>
@@ -232,8 +232,8 @@
 			</Observable>
 			<Observable>
 				<Name>weight</Name>
-				<TF1>1.</TF1>
-				#<TF1>B_velo_eff_weight_no_trigger</TF1>	
+				#<TF1>1.</TF1>
+				<TF1>B_velo_eff_weight_with_trigger</TF1>	
 				<Minimum>-10</Minimum>
 				<Maximum>10</Maximum>
 				<Unit> </Unit>
@@ -246,13 +246,13 @@
                 <PDFConfigurator>
                     #<ConfigurationParameter>AngularAcceptanceFile:acceptance_weights_and_histos_MC2012_DG0_no_sel.root</ConfigurationParameter>
                     #<ConfigurationParameter>AngularAcceptanceFile:acceptance_weights_and_histos_MC2012_DG0_with_sel_no_trig.root</ConfigurationParameter>
-                    <ConfigurationParameter>AngularAcceptanceFile:acc_weights_MC2012_DG0.root</ConfigurationParameter>
+                    <ConfigurationParameter>AngularAcceptanceFile:acc_weights_MC2012_DG0_with_trig.root</ConfigurationParameter>
                     <ConfigurationParameter>TimeAcceptanceFile:/Home/gcowan1/lhcb/lhcb/b2cc/analysis/phi_s/3fb/toy/beta/reco_and_stripping_time_acceptance_MC2012.txt</ConfigurationParameter>
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
 			<FileName>/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_DG0_minimal_truth_with_IPz_weights.root</FileName>
-                        <CutString>(30. > TMath::Abs(phi_1020_M - 1020.)) && (16. > phi_1020_ENDVERTEX_CHI2/phi_1020_ENDVERTEX_NDOF) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (10. > B_s0_ENDVERTEX_CHI2/B_s0_ENDVERTEX_NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (B_s0_MINIPCHI2NEXTBEST > 50 || 0 > B_s0_MINIPCHI2NEXTBEST) && (60 > TMath::Abs(J_psi_1S_MM - 3090))&& (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)</CutString>	
+                        <CutString>(30. > TMath::Abs(phi_1020_M - 1020.)) && (16. > phi_1020_ENDVERTEX_CHI2/phi_1020_ENDVERTEX_NDOF) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (10. > B_s0_ENDVERTEX_CHI2/B_s0_ENDVERTEX_NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (B_s0_MINIPCHI2NEXTBEST > 50 || 0 > B_s0_MINIPCHI2NEXTBEST) && (60 > TMath::Abs(J_psi_1S_MM - 3090))&& (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedJPsiDecision_TOS==1)</CutString>	
 			<NumberEvents>1000000000</NumberEvents>
 
 			<CommonPhaseSpace>

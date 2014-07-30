@@ -188,52 +188,50 @@
 			</Observable>
 			<Observable>
                                 <Name>helcosthetaK</Name>
-                                <TF1>helcosthetaK</TF1>
+                                <TF1>helcosthetaK_true</TF1>
                                 <Minimum>-1.0</Minimum>
                                 <Maximum>1.0</Maximum>
                                 <Unit> </Unit>
                         </Observable>
                         <Observable>
                                 <Name>helphi</Name>
-                                <TF1>(helphi+TMath::Pi()-(helphi>0.)*(2.*TMath::Pi()))</TF1>
+                                <TF1>(helphi_true+TMath::Pi()-(helphi_true>0.)*(2.*TMath::Pi()))</TF1>
                                 <Minimum>-3.1416</Minimum>
                                 <Maximum>3.1416</Maximum>
                                 <Unit>rad</Unit>
                         </Observable>
                         <Observable>
                                 <Name>helcosthetaL</Name>
-                                <TF1>helcosthetaL</TF1>
+                                <TF1>helcosthetaL_true</TF1>
                                 <Minimum>-1.0</Minimum>
                                 <Maximum>1.0</Maximum>
                                 <Unit> </Unit>
                         </Observable>
 			<Observable>
 				<Name>cosTheta</Name>
-				<TF1>cosTheta</TF1>
+				<TF1>cosTheta_true</TF1>
 				<Minimum>-1.0</Minimum>
 				<Maximum>1.0</Maximum>
 				<Unit> </Unit>
 			</Observable>
 			<Observable>
 				<Name>phi</Name>
-				<TF1>phi</TF1>
+				<TF1>phi_true</TF1>
 				<Minimum>-3.1416</Minimum>
 				<Maximum>3.1416</Maximum>
 				<Unit>rad</Unit>
 			</Observable>
 			<Observable>
 				<Name>cosPsi</Name>
-				<TF1>cosPsi</TF1>
+				<TF1>cosPsi_true</TF1>
 				<Minimum>-1.0</Minimum>
 				<Maximum>1.0</Maximum>
 				<Unit> </Unit>
 			</Observable>
 			<Observable>
 				<Name>tag</Name>
-				#<TF1>B_s0_TRUEID/531.</TF1>
-				<TF1>0.</TF1>
+				<TF1>B_s0_TRUEID/531.</TF1>
 				<Value>1.</Value>
-				<Value>0.</Value>
 				<Value>-1.</Value>
 				<Unit> </Unit>
 			</Observable>
@@ -251,10 +249,8 @@
 		<CommonPDF>True</CommonPDF>
 		<DataSet>
 			<Source>File</Source>
-			#<FileName>/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_DG0_minimal_truth_with_IPz_weights.root</FileName>
-			<FileName>/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_DG0_minimal_truth.root</FileName>
+			<FileName>/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_DG0_minimal_truth_with_IPz_weights.root</FileName>
                         <CutString>(30. > TMath::Abs(phi_1020_M - 1020.)) && (16. > phi_1020_ENDVERTEX_CHI2/phi_1020_ENDVERTEX_NDOF) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (10. > B_s0_ENDVERTEX_CHI2/B_s0_ENDVERTEX_NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (B_s0_MINIPCHI2NEXTBEST > 50 || 0 > B_s0_MINIPCHI2NEXTBEST) && (60 > TMath::Abs(J_psi_1S_MM - 3090))&& (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)</CutString>
-                        <CutString>(30. > TMath::Abs(phi_1020_M - 1020.)) && (16. > phi_1020_ENDVERTEX_CHI2/phi_1020_ENDVERTEX_NDOF) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (10. > B_s0_ENDVERTEX_CHI2/B_s0_ENDVERTEX_NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (B_s0_MINIPCHI2NEXTBEST > 50 || 0 > B_s0_MINIPCHI2NEXTBEST) && (60 > TMath::Abs(J_psi_1S_MM - 3090))&& (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedJPsiDecision_TOS==1)</CutString>
 			<NumberEvents>100000000</NumberEvents>
 
 			<CommonPhaseSpace>

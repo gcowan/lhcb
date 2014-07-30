@@ -8,7 +8,7 @@ name = argv[1]
 f = open(name)
 
 gen = {'gamma' :0.6654, 'deltaGamma':0.09165, 'Aperp_sq':0.2490, 'Azero_sq':0.5213, 'delta_para':3.30, 'delta_perp':3.07, 'deltaM':17.8, 'Phi_s':0.07, 'lambda':1.}
-gen = {'gamma' :0.6654, 'deltaGamma':0.00000, 'Aperp_sq':0.2490, 'Azero_sq':0.5213, 'delta_para':3.30, 'delta_perp':3.07, 'deltaM':17.8, 'Phi_s':0.07, 'lambda':1.}
+#gen = {'gamma' :0.6654, 'deltaGamma':0.00000, 'Aperp_sq':0.2490, 'Azero_sq':0.5213, 'delta_para':3.30, 'delta_perp':3.07, 'deltaM':17.8, 'Phi_s':0.07, 'lambda':1.}
 #gen = {'gamma' :0.6653, 'deltaGamma':0.0917, 'Aperp_sq':0.24883, 'Azero_sq':0.52093, 'delta_para':3.30, 'delta_perp':3.07, 'deltaM':17.8, 'Phi_s':0.07, 'lambda':1.}
 
 rows = []

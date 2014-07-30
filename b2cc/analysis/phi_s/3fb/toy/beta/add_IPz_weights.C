@@ -2,12 +2,12 @@
 	//TFile * f = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2011_all_BsJpsiPhi_DTT_20131006_minimal_truth_roel.root", "READ");
 	//TFile * f = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_all_BsJpsiPhi_DTT_20130709_minimal_truth_roel.root", "READ");
 	//TFile * f = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_all_BsJpsiPhi_DTT_20140616_minimal_truth_olivier.root", "READ");
-	TFile * f = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_DG0_minimal_truth.root", "READ");
+	TFile * f = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_minimal_truth.root", "READ");
 	TTree * ft = (TTree*)f->Get("DecayTree");
 	//TFile * g = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2011_all_BsJpsiPhi_DTT_20131006_minimal_truth_roel_with_IPz_weights.root", "RECREATE");
 	//TFile * g = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_all_BsJpsiPhi_DTT_20130709_minimal_truth_roel_with_IPz_weights.root", "RECREATE");
 	//TFile * g = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_all_BsJpsiPhi_DTT_20140616_minimal_truth_olivier_with_IPz_weights.root", "RECREATE");
-	TFile * g = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_DG0_minimal_truth_with_IPz_weights.root", "RECREATE");
+	TFile * g = TFile::Open("/Disk/speyside8/lhcb/gcowan1/MC2012_sim08e_Bs2JpsiPhi_minimal_truth_with_IPz_weights.root", "RECREATE");
 	TTree * newtree = ft->CloneTree(0); // Do no copy the data yet
 	
 	double muplus_PX;
