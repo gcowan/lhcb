@@ -158,12 +158,12 @@ void getHltAcceptance(TString const& filename, particleProperties* prop,
   RooRealVar ratio_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S = RooRealVar("ratio_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S","ratio_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S",0.9, 0., 1.);
   RooRealVar ratio_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached_S = RooRealVar("ratio_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached_S","ratio_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached_S",0.3, 0., 1.);
   //0.0000001
-  RooRealVar n_A_1_S = RooRealVar("n_A_1_S","n_A_1_S",nStart, 0., 5000000.);
-  RooRealVar n_A_2_S = RooRealVar("n_A_2_S","n_A_2_S",nStart, 0., 5000000.);
-  RooRealVar n_A_1_Reweighted_S = RooRealVar("n_A_1_Reweighted_S","n_A_1_Reweighted_S",nStart, 0., 5000000.);
-  RooRealVar n_A_2_Reweighted_S = RooRealVar("n_A_2_Reweighted_S","n_A_2_Reweighted_S",nStart, 0., 5000000.);
-  RooRealVar n_B_1_S = RooRealVar("n_B_1_S","n_B_1_S",nStart, 0., 5000000.);
-  RooRealVar n_B_2_S = RooRealVar("n_B_2_S","n_B_2_S",nStart, 0., 5000000.);  
+  RooRealVar n_A_1_S = RooRealVar("n_A_1_S","n_A_1_S",nStart, 0., 10000000.);
+  RooRealVar n_A_2_S = RooRealVar("n_A_2_S","n_A_2_S",nStart, 0., 10000000.);
+  RooRealVar n_A_1_Reweighted_S = RooRealVar("n_A_1_Reweighted_S","n_A_1_Reweighted_S",nStart, 0., 10000000.);
+  RooRealVar n_A_2_Reweighted_S = RooRealVar("n_A_2_Reweighted_S","n_A_2_Reweighted_S",nStart, 0., 10000000.);
+  RooRealVar n_B_1_S = RooRealVar("n_B_1_S","n_B_1_S",nStart, 0., 10000000.);
+  RooRealVar n_B_2_S = RooRealVar("n_B_2_S","n_B_2_S",nStart, 0., 10000000.);  
   
   RooFormulaVar n_A_2_Hlt1DiMuon_Hlt2DiMuonDetached_S = RooFormulaVar("n_A_2_Hlt1DiMuon_Hlt2DiMuonDetached_S","n_A_2_Hlt1DiMuon_Hlt2DiMuonDetached_S","n_A_1_S/ratio_Hlt1DiMuon_Hlt2DiMuonDetached_S-n_A_1_S",RooArgList(ratio_Hlt1DiMuon_Hlt2DiMuonDetached_S,n_A_1_S));
   RooFormulaVar n_A_2_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S = RooFormulaVar("n_A_2_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S","n_A_2_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S","n_A_1_Reweighted_S/ratio_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S-n_A_1_Reweighted_S",RooArgList(ratio_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_S,n_A_1_Reweighted_S));

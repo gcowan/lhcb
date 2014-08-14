@@ -7,8 +7,9 @@ SetupProject.sh DaVinci
 RAPIDFITROOT=/Home/gcowan1/software/RapidFit/trunk
 RAPIDFITROOTTMP=/Home/gcowan1/software/tmp/trunk
 BC=/Home/gcowan1/lhcb/lhcb/b2cc/analysis/phi_s/3fb/toy/angle_time_correlation
-CONFIG1=$BC/untagged_gen.xml
-CONFIG2=$BC/untagged_fit.xml
+CONFIG0=$BC/calc_acc.xml
+CONFIG1=$BC/untagged_gen_trans.xml
+CONFIG2=$BC/untagged_fit_trans.xml
 
 myID=`hostid`_$RANDOM
 workdir=/tmp/${myID}
@@ -17,9 +18,12 @@ echo "Workdir "$workdir
 cd $workdir
 
 $RAPIDFITROOTTMP/bin/fitting -f $CONFIG1 --saveOneDataSet test.root --useUUID
+$RAPIDFITROOT/bin/fitting -f $CONFIG0 --calculateAcceptanceWeights --disableAngAccHisto
+#mkdir pdfs/configdata
+mv acceptance_weights_and_histos*root acc.root
 $RAPIDFITROOT/bin/fitting -f $CONFIG2 --doPulls pulls.root --OutputLevel 1
 
-datadir=$BC/data/
+datadir=$BC/data3_AperpAperp_AparApar_dependence_calc_acc_DG0/
 mkdir -p $datadir
 cd $datadir
 

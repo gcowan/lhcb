@@ -11,9 +11,12 @@ gen = {'gamma' :0.6654, 'deltaGamma':0.09165, 'Aperp_sq':0.2490, 'Azero_sq':0.52
 #gen = {'gamma' :0.6654, 'deltaGamma':0.00000, 'Aperp_sq':0.2490, 'Azero_sq':0.5213, 'delta_para':3.30, 'delta_perp':3.07, 'deltaM':17.8, 'Phi_s':0.07, 'lambda':1.}
 #gen = {'gamma' :0.6653, 'deltaGamma':0.0917, 'Aperp_sq':0.24883, 'Azero_sq':0.52093, 'delta_para':3.30, 'delta_perp':3.07, 'deltaM':17.8, 'Phi_s':0.07, 'lambda':1.}
 
+data_uncertainty = {'gamma' :0.0027, 'deltaGamma':0.0091, 'Aperp_sq':0.0049, 'Azero_sq':0.0034, 'delta_para':0.1, 'delta_perp':0.15, 'deltaM':0.058, 'Phi_s':0.049, 'lambda':0.019}
+
 rows = []
 diff = []
 sigma = []
+sigma_data = []
 names = []
 vals = []
 errs = []
@@ -28,6 +31,7 @@ for line in f.readlines():
 		vals .append( float(l[2]) )
 		errs .append( float(l[3]) )
 		sigma.append( (float(l[2]) - gen[l[1]]) / float(l[3]) )
+		sigma_data.append( (float(l[2]) - gen[l[1]]) / data_uncertainty[l[1]] )
 		chi2_naive += sigma[-1]**2 
 	if external:
 		rows.append([float(i) for i in l])		
@@ -37,7 +41,7 @@ cov = Matrix(rows)
 vec = Matrix(diff)
 
 for i in range(len(names)):
-	print "%s \t $%.5g \\pm %.4g$ \t & \t $%+.2g$" % (names[i], vals[i], errs[i], sigma[i])
+	print "%s \t $%.5g \\pm %.4g$ \t & \t $%+.2g$ \t & \t $%+.2g$ " % (names[i], vals[i], errs[i], sigma[i], sigma_data[i])
 print vec
 print cov
 

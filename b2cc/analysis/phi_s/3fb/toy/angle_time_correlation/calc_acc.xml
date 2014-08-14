@@ -69,9 +69,9 @@
 
 		<PhysicsParameter>
 			<Name>deltaGamma</Name>
-			<Value>0.0917</Value>
+			<Value>0.0</Value>
 			<Minimum>0.01</Minimum>
-			<Maximum>0.15</Maximum>
+			<Maximum>0.75</Maximum>
 			<Type>Free</Type>
 			<Unit>ps^{-1}</Unit>
 		</PhysicsParameter>
@@ -144,31 +144,6 @@
 			<Unit>Unitless</Unit>
 		</PhysicsParameter>
 
-      <PhysicsParameter>
-                <Name>timeResolution2Fraction</Name>
-                <Value>0.</Value>
-                <Type>Fixed</Type>
-                <Unit>someUnit</Unit>
-        </PhysicsParameter>
-
-                <PhysicsParameter>
-                        <Name>timeResolution1</Name>
-                        <Value>0.001</Value>
-                        <Type>Fixed</Type>
-                </PhysicsParameter>
-
-                <PhysicsParameter>
-                        <Name>timeResolution2</Name>
-                        <Value>0.</Value>
-                        <Type>Fixed</Type>
-                </PhysicsParameter>
-
-                <PhysicsParameter>
-                        <Name>timeResolutionScale</Name>
-                        <Value>1.</Value>
-                        <Type>Fixed</Type>
-                </PhysicsParameter>
-
 	</ParameterSet>
 
 
@@ -198,7 +173,7 @@
                         <ConfigurationParameter>AngularAcceptanceIgnoreNumerator:True</ConfigurationParameter>			
 			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
 			<ConfigurationParameter>UseEventResolution:False</ConfigurationParameter>
-			<ConfigurationParameter>ResolutionModel:DoubleFixedResModel</ConfigurationParameter>
+			<ConfigurationParameter>ResolutionModel:DummyResolutionModel</ConfigurationParameter>
 		</PDF>
 	</CommonPDF>
 
@@ -213,7 +188,7 @@
 		<PhaseSpaceBoundary>
 			<Observable>
 				<Name>time</Name>
-				<Minimum>0.</Minimum>
+				<Minimum>0.3</Minimum>
 				<Maximum>14.</Maximum>
 				<Unit>ps</Unit>
 			</Observable>
@@ -242,7 +217,7 @@
 			</Observable>
 			<Observable>
 				<Name>mistag</Name>
-				<TF1>0.</TF1>
+				<TF1>0.5</TF1>
 				<Minimum>0.</Minimum>
 				<Maximum>0.5</Maximum>
 				<Unit> </Unit>
@@ -254,7 +229,7 @@
 		<CommonPDF>True</CommonPDF>
 		<DataSet>
 			<Source>File</Source>
-			<FileName>test_trans.root</FileName>
+			<FileName>test.root</FileName>
 			<NumberEvents>100000000</NumberEvents>
 
 			<CommonPhaseSpace>

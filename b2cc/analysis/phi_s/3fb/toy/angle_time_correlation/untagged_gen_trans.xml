@@ -69,9 +69,9 @@
 
 		<PhysicsParameter>
 			<Name>deltaGamma</Name>
-			<Value>0.0917</Value>
-			<Minimum>0.01</Minimum>
-			<Maximum>0.15</Maximum>
+			<Value>0.0</Value>
+			<Minimum>-0.1</Minimum>
+			<Maximum>0.75</Maximum>
 			<Type>Free</Type>
 			<Unit>ps^{-1}</Unit>
 		</PhysicsParameter>
@@ -144,31 +144,6 @@
 			<Unit>Unitless</Unit>
 		</PhysicsParameter>
 
-	<PhysicsParameter>
-		<Name>timeResolution2Fraction</Name>
-		<Value>0.</Value>
-		<Type>Fixed</Type>
-		<Unit>someUnit</Unit>
-	</PhysicsParameter>
-
-		<PhysicsParameter>
-			<Name>timeResolution1</Name>
-			<Value>0.0001</Value>
-			<Type>Fixed</Type>
-		</PhysicsParameter>
-
-		<PhysicsParameter>
-			<Name>timeResolution2</Name>
-			<Value>0.</Value>
-			<Type>Fixed</Type>
-		</PhysicsParameter>
-	
-		<PhysicsParameter>
-			<Name>timeResolutionScale</Name>
-			<Value>1.</Value>
-			<Type>Fixed</Type>
-		</PhysicsParameter>
-
 	</ParameterSet>
 
 
@@ -189,7 +164,7 @@
 		<OffSetNLL>True</OffSetNLL>
 	</FitFunction>
 
-	<NumberRepeats>20</NumberRepeats>
+	<NumberRepeats>1</NumberRepeats>
 
 	<CommonPDF>
 		<PDF>
@@ -197,7 +172,7 @@
 			<ConfigurationParameter>UseHelicityBasis:False</ConfigurationParameter>
 			<ConfigurationParameter>AngularAcceptanceIgnoreNumerator:True</ConfigurationParameter>
 			<ConfigurationParameter>UseEventResolution:False</ConfigurationParameter>
-			<ConfigurationParameter>ResolutionModel:DoubleFixedResModel</ConfigurationParameter>
+			<ConfigurationParameter>ResolutionModel:DummyResolutionModel</ConfigurationParameter>
 		</PDF>
 	</CommonPDF>
 
@@ -250,7 +225,7 @@
 		<CommonPDF>True</CommonPDF>
 		<DataSet>
 			<Source>Foam</Source>
-			<NumberEvents>15000000</NumberEvents>
+			<NumberEvents>150000</NumberEvents>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>
 

@@ -1,0 +1,192 @@
+
+[1mRooFit v3.58 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+
+RapidFit
+Framework SVN Rev:	2260M
+PDF SVN REV:		2260
+Compiled With Optional GSL Components
+
+		!!!YOU HAVE LOCAL CODE MODIFICATIONS!!!
+
+Build Date:		11:42_2014-05-26
+Built Against ROOT:	"5.99/05"
+Starting time:		Thu Aug  7 09:13:13 2014
+
+
+Current Runtime Arguments: 
+/Home/gcowan1/software/RapidFit/trunk/bin/fitting -f /Home/gcowan1/lhcb/lhcb/b2cc/analysis/phi_s/3fb/toy/lower_acceptance//untagged_fit.xml --doPulls pulls.root --OutputLevel 1 
+
+
+
+Finished Updating PDF Paths
+
+
+
+XML config file: /Home/gcowan1/lhcb/lhcb/b2cc/analysis/phi_s/3fb/toy/lower_acceptance//untagged_fit.xml loaded Successfully!
+
+Seed tag not found in config file, defaulting to TRandom3(0).
+SEED being used is:	0
+====================================================================================================================
+PDFConfigurator: Config Parameters Passed to CommonPDF
+ PDFConfigurator::Param   [ TimeAcceptanceFile : MC2012_sim08e/trigger_time_efficiency_20bins_variable.txt ]
+
+
+
+
+PDFConfigurator: Additional Options Passed to this PDF
+ PDFConfigurator::Param   [ UseHelicityBasis : True ]
+ PDFConfigurator::Param   [ AngularAcceptanceIgnoreNumerator : True ]
+ PDFConfigurator::Param   [ UseTimeAcceptance : True ]
+ PDFConfigurator::Param   [ UseEventResolution : False ]
+ PDFConfigurator::Param   [ ResolutionModel : DummyResolutionModel ]
+ PDFConfigurator::Param   [ TimeAcceptanceFile : MC2012_sim08e/trigger_time_efficiency_20bins_variable.txt ]
+Constructing PDF: Bs2JpsiPhi_Signal_v7 
+Bs2JpsiPhi_Signal_v7:: Using flat angular acceptance 
+  af1 =               1            af2 =               1            af3 =               1
+  af4 =               0            af5 =               0            af6 =               0
+  af7 =               1            af8 =               0            af9 =               0            af10 =               0
+Bs2JpsiPhi_Signal_v7:: Ignoring angular acceptance numerator 
+DummyResolutionModel:: Instance created 
+Looking For: MC2012_sim08e/trigger_time_efficiency_20bins_variable.txt
+RAPIDFITROOT defined as: /Home/gcowan1/software/RapidFit/trunk
+Opening: /Home/gcowan1/software/RapidFit/trunk/pdfs/configdata/MC2012_sim08e/trigger_time_efficiency_20bins_variable.txt
+Time Acc Slices: 20
+Sliced Acceptance is using sorted horizontal slices
+TimeAccRes:: Constructing timeAcc: using file: MC2012_sim08e/trigger_time_efficiency_20bins_variable.txt
+XMLConfigReader:: Constructed Bs2JpsiPhi_Signal_v7 PDF
+Doing a single toy study. Check this is what you expect.
+
+
+		Starting ToyStudy		1	of:	1
+Total number of events in file: 1000000
+You have applied this cut to the data: ''
+Total number of events after cut: 1000000
+Added 1000000 events from ROOT file: test.root which are consistent with the PhaseSpaceBoundary
+Time: Thu Aug  7 09:13:22 2014
+DataSet contains a total of:     1000000     events. In 1 Discrete DataSets.
+
+ **********
+ **    1 **SET PRINT           1
+ **********
+
+
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 gamma        6.65300e-01  1.50000e-05    6.00000e-01  7.50000e-01
+     2 deltaGamma   9.17000e-02  1.40000e-05    1.00000e-02  1.50000e-01
+     3 Aperp_sq     2.49000e-01  5.00000e-05    0.00000e+00  5.00000e-01
+     4 Azero_sq     5.21300e-01  8.00000e-05    0.00000e+00  8.00000e-01
+     5 delta_para   3.30000e+00  5.00000e-02   -6.30000e+00  6.30000e+00
+ **********
+ **    2 **SET ERR         0.5
+ **********
+ **********
+ **    3 **SET STR           0
+ **********
+ NOW USING STRATEGY  0: MINIMIZE THE NUMBER OF CALLS TO FUNCTION
+ **********
+ **    4 **SET NOGRADIENT
+ **********
+Using Fixed Parameters:
+Csp                      1
+F_s                      0
+Phi_s                    0.07
+deltaM                   17.8
+delta_perp               3.07
+delta_s                  0
+delta_zero               0
+lambda                   1
+mistagDeltaP0            0
+mistagDeltaP1            0
+mistagDeltaSetPoint      0
+mistagP0                 0.355
+mistagP1                 1
+mistagSetPoint           0.355
+
+Starting Fit!
+ **********
+ **    5 **MIGRAD       1e+05        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+Call: 1     NLL: 0                    minNLL: 0                    EDM: 0.5             Status: 0      START MIGRAD MINIMIZATION.  STRATEGY  0.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+Call: 2     NLL: -8.7819155831780904e-06 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.66530015      deltaMin: -8.7819155831780904e-06                    Call: 3     NLL: 8.8306380408020857e-06 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.66529985      deltaMin: 8.8306380408020857e-06                    Call: 4     NLL: -1.9362652083465548e-05 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.6653003318    deltaMin: -1.9362652083465548e-05                    Call: 5     NLL: 1.95980881461110812e-05 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.6652996682    deltaMin: 1.95980881461110812e-05                    Call: 6     NLL: 6.60433773305157956e-05 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.6653          deltaMin: 6.60433773305157956e-05                    Call: 7     NLL: -6.60349757306555318e-05 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  deltaGamma = 0.09169986      deltaMin: -6.60349757306555318e-05                    Call: 8     NLL: 0.000351907288886899039 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  deltaGamma = 0.09170074579   deltaMin: 0.000351907288886899039                    Call: 9     NLL: -0.000351684418652631336 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  deltaGamma = 0.09169925421   deltaMin: -0.000351684418652631336                    Call: 10    NLL: -0.000347079660615090546 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  deltaGamma = 0.0917          deltaMin: -0.000347079660615090546                    Call: 11    NLL: 0.000347428860787424298 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  Aperp_sq = 0.2489995       deltaMin: 0.000347428860787424298                    Call: 12    NLL: -0.000574902692538792337 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  Aperp_sq = 0.249           deltaMin: -0.000574902692538792337                    Call: 13    NLL: 0.000576273516499803407 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  Azero_sq = 0.5212992       deltaMin: 0.000576273516499803407                    Call: 14    NLL: -0.00023992490573787606 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  Azero_sq = 0.5213003336    deltaMin: -0.00023992490573787606                    Call: 15    NLL: 0.000240163269967563764 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  Azero_sq = 0.5212996664    deltaMin: 0.000240163269967563764                    Call: 16    NLL: -0.0211067571041545499 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  Azero_sq = 0.5213          deltaMin: -0.0211067571041545499                    Call: 17    NLL: 0.0213413483065441056 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  delta_para = 3.29949997      deltaMin: 0.0213413483065441056                    Call: 18    NLL: -0.0021212779282655525 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  delta_para = 3.300050001     deltaMin: -0.0021212779282655525                    Call: 19    NLL: 0.00212362383327091564 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  delta_para = 3.299949998     deltaMin: 0.00212362383327091564                     FCN=0 FROM MIGRAD    STATUS=INITIATE       18 CALLS          19 TOTAL
+                     EDM= unknown      STRATEGY= 0      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  gamma        6.65300e-01   1.50000e-05   2.01694e-04  -4.36615e+00
+   2  deltaGamma   9.17000e-02   1.40000e-05   2.02854e-04   3.25551e+01
+   3  Aperp_sq     2.49000e-01   5.00000e-05   2.00002e-04  -1.73626e+02
+   4  Azero_sq     5.21300e-01   8.00000e-05   2.09883e-04  -2.74242e+02
+   5  delta_para   3.30000e+00   5.00000e-02   9.31724e-03  -2.27798e+02
+                               ERR DEF= 0.5
+Call: 20    NLL: -0.753700913839138842 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.6653274556    deltaMin: -0.753700913839138842                    Call: 21    NLL: -1.07818886577623729 minNLL: 0                    EDM: 0.5             Status: 0      Trying:  gamma = 0.6653182057    deltaMin: -1.07818886577623729                    Call: 22    NLL: -1.07836768059092503 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  gamma = 0.6653187989    deltaMin: -0.000178814814687733303                    Call: 23    NLL: -1.0780092998637274  minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  gamma = 0.6653176124    deltaMin: 0.000179565912509893622                    Call: 24    NLL: -1.0777097486341134  minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  gamma = 0.6653182057    deltaMin: 0.000479117142123897111                    Call: 25    NLL: -1.07866723033789924 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  deltaGamma = 0.0909172843    deltaMin: -0.000478364561661948073                    Call: 26    NLL: -1.07798888753948408 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  deltaGamma = 0.09091865727   deltaMin: 0.000199978236753217686                    Call: 27    NLL: -1.07838809503789346 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  Aperp_sq = 0.2493289692    deltaMin: -0.000199229261656164169                    Call: 28    NLL: -1.07789972672855061 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  Aperp_sq = 0.2493297032    deltaMin: 0.000289139047686681749                    Call: 29    NLL: -1.07847725152022988 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  Azero_sq = 0.5215221778    deltaMin: -0.00028838574399259187                    Call: 30    NLL: -1.07811611752955461 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  Azero_sq = 0.5215227705    deltaMin: 7.27482466826856466e-05                    Call: 31    NLL: -1.07826026555020071 minNLL: -1.07818886577623729 EDM: 0.5             Status: 0      Trying:  delta_para = 3.329917882     deltaMin: -7.13997739634208983e-05                    Call: 32    NLL: -1.36488001442880247 minNLL: -1.07818886577623729 EDM: 1.035752253     Status: 0      Trying:  gamma = 0.665443186     deltaMin: -0.286691148652565175                    Call: 33    NLL: -1.39131311333834162 minNLL: -1.07818886577623729 EDM: 1.035752253     Status: 0      Trying:  gamma = 0.6654943185    deltaMin: -0.31312424756210433                    Call: 34    NLL: -1.39147451413214451 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  gamma = 0.6654949687    deltaMin: -0.000161400793802890519                    Call: 35    NLL: -1.39115081030584697 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  gamma = 0.6654936682    deltaMin: 0.000162303032494648392                    Call: 36    NLL: -1.39141676166813522 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  gamma = 0.6654943185    deltaMin: -0.000103648329793593064                    Call: 37    NLL: -1.39120855809248045 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  deltaGamma = 0.08962074058   deltaMin: 0.000104555245861170931                    Call: 38    NLL: -1.39160071377322758 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  deltaGamma = 0.08962224773   deltaMin: -0.000287600434885959544                    Call: 39    NLL: -1.39102461213633344 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  Aperp_sq = 0.2491952858    deltaMin: 0.000288501202008184521                    Call: 40    NLL: -1.39100781041930688 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  Aperp_sq = 0.2491960913    deltaMin: 0.000305302919034744491                    Call: 41    NLL: -1.3916175134863682  minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  Azero_sq = 0.5213160983    deltaMin: -0.000304400148026573447                    Call: 42    NLL: -1.39130109269755398 minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  Azero_sq = 0.5213167469    deltaMin: 1.20206407876466415e-05                    Call: 43    NLL: -1.3913241798312006  minNLL: -1.39131311333834162 EDM: 1.035752253     Status: 0      Trying:  delta_para = 3.335848834     deltaMin: -1.10664928589798706e-05                    Call: 44    NLL: -1.5135340809619322  minNLL: -1.39131311333834162 EDM: 0.3064630297    Status: 1      Trying:  gamma = 0.6656116356    deltaMin: -0.122220967623590582                    Call: 45    NLL: -1.57848726716621002 minNLL: -1.39131311333834162 EDM: 0.3064630297    Status: 1      Trying:  gamma = 0.6657801005    deltaMin: -0.187174153827868395                    Call: 46    NLL: -1.57838082795400148 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  gamma = 0.6657807824    deltaMin: 0.000106439212208542244                    Call: 47    NLL: -1.57859271451213701 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  gamma = 0.6657794187    deltaMin: -0.00010544734592699001                    Call: 48    NLL: -1.57832260911425948 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  gamma = 0.6657801005    deltaMin: 0.000164658051950539175                    Call: 49    NLL: -1.57865093472446105 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  deltaGamma = 0.08913957134   deltaMin: -0.000163667558251034961                    Call: 50    NLL: -1.57870123706400722 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  deltaGamma = 0.08914114837   deltaMin: -0.000213969897797205988                    Call: 51    NLL: -1.57827230845947675 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  Aperp_sq = 0.2495379299    deltaMin: 0.000214958706733270333                    Call: 52    NLL: -1.57858629552394358 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  Aperp_sq = 0.2495387747    deltaMin: -9.9028357733565997e-05                    Call: 53    NLL: -1.57838724686685072 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  Azero_sq = 0.5208567358    deltaMin: 0.000100020299359293574                    Call: 54    NLL: -1.57830968860745458 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  Azero_sq = 0.5208574157    deltaMin: 0.000177578558755442373                    Call: 55    NLL: -1.57866380245722926 minNLL: -1.57848726716621002 EDM: 0.3064630297    Status: 1      Trying:  delta_para = 3.339280562     deltaMin: -0.000176535291019241924                    Call: 56    NLL: -1.6880783709940328  minNLL: -1.57848726716621002 EDM: 0.1571807765    Status: 1      Trying:  gamma = 0.6658226652    deltaMin: -0.109591103827822778                    Call: 57    NLL: -1.71336598991812039 minNLL: -1.57848726716621002 EDM: 0.1571807765    Status: 1      Trying:  gamma = 0.6658537897    deltaMin: -0.134878722751910374                    Call: 58    NLL: -1.71338193708821507 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  gamma = 0.6658544932    deltaMin: -1.59471700946767214e-05                    Call: 59    NLL: -1.71334898743654485 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  gamma = 0.6658530863    deltaMin: 1.70024815755454028e-05                    Call: 60    NLL: -1.7133419470286011  minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  gamma = 0.6658537897    deltaMin: 2.40428895192934533e-05                    Call: 61    NLL: -1.71338897288917913 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  deltaGamma = 0.08835591403   deltaMin: -2.29829710587381442e-05                    Call: 62    NLL: -1.71347196308247796 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  deltaGamma = 0.08835754423   deltaMin: -0.000105973164357564542                    Call: 63    NLL: -1.71325896135986966 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  Aperp_sq = 0.2501045378    deltaMin: 0.000107028558250732431                    Call: 64    NLL: -1.71347451676061269 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  Aperp_sq = 0.2501054106    deltaMin: -0.000108526842492295827                    Call: 65    NLL: -1.71325640606183605 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  Azero_sq = 0.5206574086    deltaMin: 0.000109583856284345416                    Call: 66    NLL: -1.71346254071917237 minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  Azero_sq = 0.52065811      deltaMin: -9.65508010519755544e-05                    Call: 67    NLL: -1.7132685241154082  minNLL: -1.71336598991812039 EDM: 0.1571807765    Status: 1      Trying:  delta_para = 3.328385525     deltaMin: 9.74658027121932946e-05                    Call: 68    NLL: -1.72530416126588015 minNLL: -1.71336598991812039 EDM: 0.02029938528   Status: 1      Trying:  gamma = 0.665888822     deltaMin: -0.0119381713477597629                    Call: 69    NLL: -1.72531695418336106 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  gamma = 0.6658895275    deltaMin: -1.27929174809082724e-05                    Call: 70    NLL: -1.72529030625837621 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  gamma = 0.6658881166    deltaMin: 1.38550075039489684e-05                    Call: 71    NLL: -1.72530737111078736 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  gamma = 0.665888822     deltaMin: -3.2098449072037738e-06                    Call: 72    NLL: -1.72529988929134781 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  deltaGamma = 0.088186759     deltaMin: 4.27197453234384739e-06                    Call: 73    NLL: -1.7252955699144028  minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  deltaGamma = 0.08818839059   deltaMin: 8.59135147734946258e-06                    Call: 74    NLL: -1.72531169191764278 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  Aperp_sq = 0.250216072     deltaMin: -7.53065176262168734e-06                    Call: 75    NLL: -1.72530144343047454 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  Aperp_sq = 0.2502169472    deltaMin: 2.71783540561898462e-06                    Call: 76    NLL: -1.72530581779402326 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  Azero_sq = 0.5206716432    deltaMin: -1.65652814310135454e-06                    Call: 77    NLL: -1.72529638810356367 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  Azero_sq = 0.520672346     deltaMin: 7.77316231648228495e-06                    Call: 78    NLL: -1.72531084321799355 minNLL: -1.72530416126588015 EDM: 0.02029938528   Status: 1      Trying:  delta_para = 3.329842649     deltaMin: -6.68195211339650541e-06                    Call: 79    NLL: -1.72542593225451846 minNLL: -1.72530416126588015 EDM: 0.0002070394468 Status: 1      Trying:  gamma = 0.6658956179    deltaMin: -0.000121770988638303379                    Call: 80    NLL: -1.72542532078194633 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  gamma = 0.6658963231    deltaMin: 6.11472572131788183e-07                    Call: 81    NLL: -1.72542548318923217 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  gamma = 0.6658949128    deltaMin: 4.49065286289851429e-07                    Call: 82    NLL: -1.72542531921555664 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  gamma = 0.6658956179    deltaMin: 6.13038961816414485e-07                    Call: 83    NLL: -1.72542548384496541 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  deltaGamma = 0.08819766451   deltaMin: 4.48409553044371023e-07                    Call: 84    NLL: -1.72542535741077963 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  deltaGamma = 0.08819929533   deltaMin: 5.74843738831987139e-07                    Call: 85    NLL: -1.72542544611009419 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  Aperp_sq = 0.2502089567    deltaMin: 4.86144424272083597e-07                    Call: 86    NLL: -1.72542541252234827 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  Aperp_sq = 0.2502098321    deltaMin: 5.19732170189968201e-07                    Call: 87    NLL: -1.72542539102850867 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  Azero_sq = 0.5206741439    deltaMin: 5.41226009787010298e-07                    Call: 88    NLL: -1.72542550234907388 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  Azero_sq = 0.5206748466    deltaMin: 4.29905444576661466e-07                    Call: 89    NLL: -1.72542530317719844 minNLL: -1.72542593225451846 EDM: 0.0002070394468 Status: 1      Trying:  delta_para = 3.329723682     deltaMin: 6.29077320013493591e-07                     MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-1.72543 FROM MIGRAD    STATUS=CONVERGED      88 CALLS          89 TOTAL
+                     EDM=1.93869e-08    STRATEGY= 0  ERROR MATRIX UNCERTAINTY   4.8 per cent
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  gamma        6.65896e-01   8.12506e-04   9.12874e-05   8.57328e-03
+   2  deltaGamma   8.81993e-02   2.56268e-03   1.56860e-04   3.50889e-03
+   3  Aperp_sq     2.50210e-01   1.38941e-03  -2.84604e-05   1.26655e-02
+   4  Azero_sq     5.20675e-01   9.35537e-04   6.55721e-06  -5.83247e-03
+   5  delta_para   3.32975e+00   2.79445e-02  -2.23106e-05  -2.11975e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+  6.602e-07 -1.089e-06  5.071e-07 -2.741e-07 -2.056e-06 
+ -1.089e-06  6.570e-06 -2.425e-06  1.555e-06  3.956e-06 
+  5.071e-07 -2.425e-06  1.930e-06 -7.505e-07 -1.483e-05 
+ -2.741e-07  1.555e-06 -7.505e-07  8.752e-07  2.467e-07 
+ -2.056e-06  3.956e-06 -1.483e-05  2.467e-07  7.809e-04 
+ERR MATRIX APPROXIMATE
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5
+        1  0.53832   1.000 -0.523  0.449 -0.361 -0.091
+        2  0.78631  -0.523  1.000 -0.681  0.648  0.055
+        3  0.79054   0.449 -0.681  1.000 -0.577 -0.382
+        4  0.68658  -0.361  0.648 -0.577  1.000  0.009
+        5  0.49787  -0.091  0.055 -0.382  0.009  1.000
+ ERR MATRIX APPROXIMATE
+
+Final NLL: -1.72542593225452		Status: 1		Thu Aug  7 09:15:21 2014
+
+
+ **********
+ **    6 **HESSE       1e+05        0.01
+ **********
+Call: 90    NLL: -1.72542593225451846 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  delta_para = 3.329748807     deltaMin: 0                                       Call: 91    NLL: -1.72542532078194633 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  gamma = 0.6658963231    deltaMin: 6.11472572131788183e-07                    Call: 92    NLL: -1.72542548318923217 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  gamma = 0.6658949128    deltaMin: 4.49065286289851429e-07                    Call: 93    NLL: -1.72542531921555664 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  gamma = 0.6658956179    deltaMin: 6.13038961816414485e-07                    Call: 94    NLL: -1.72542548384496541 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  deltaGamma = 0.08819766451   deltaMin: 4.48409553044371023e-07                    Call: 95    NLL: -1.72542535741077963 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  deltaGamma = 0.08819929533   deltaMin: 5.74843738831987139e-07                    Call: 96    NLL: -1.72542544611009419 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  Aperp_sq = 0.2502089567    deltaMin: 4.86144424272083597e-07                    Call: 97    NLL: -1.72542541252234827 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  Aperp_sq = 0.2502098321    deltaMin: 5.19732170189968201e-07                    Call: 98    NLL: -1.72542539102850867 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  Azero_sq = 0.5206741439    deltaMin: 5.41226009787010298e-07                    Call: 99    NLL: -1.72542550234907388 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  Azero_sq = 0.5206748466    deltaMin: 4.29905444576661466e-07                    Call: 100   NLL: -1.72542530317719844 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 1      Trying:  delta_para = 3.329723682     deltaMin: 6.29077320013493591e-07                    Call: 101   NLL: -1.72542439142434567 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  gamma = 0.6658963231    deltaMin: 1.54083017278594525e-06                    Call: 102   NLL: -1.72542487646189713 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  deltaGamma = 0.08819929533   deltaMin: 1.0557926213294877e-06                    Call: 103   NLL: -1.72542425458713922 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  gamma = 0.6658956179    deltaMin: 1.67766737924068821e-06                    Call: 104   NLL: -1.72542480104456786 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  gamma = 0.6658963231    deltaMin: 1.13120995060000951e-06                    Call: 105   NLL: -1.72542517564060205 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  gamma = 0.6658956179    deltaMin: 7.5661391640835518e-07                    Call: 106   NLL: -1.72542452662139034 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  deltaGamma = 0.08819929533   deltaMin: 1.40563312811536889e-06                    Call: 107   NLL: -1.72542489087119222 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  gamma = 0.6658963231    deltaMin: 1.04138332623904262e-06                    Call: 108   NLL: -1.72542467765931207 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  gamma = 0.6658956179    deltaMin: 1.25459520639026323e-06                    Call: 109   NLL: -1.7254243977841579  minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  deltaGamma = 0.08819929533   deltaMin: 1.53447036055354147e-06                    Call: 110   NLL: -1.72542478648652775 minNLL: -1.72542593225451846 EDM: 1.93869155e-08  Status: 3      Trying:  Aperp_sq = 0.2502098321    deltaMin: 1.14576799070675861e-06                     COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-1.72543 FROM HESSE     STATUS=OK             21 CALLS         110 TOTAL
+                     EDM=3.01921e-08    STRATEGY= 0      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  gamma        6.65896e-01   8.12381e-04   9.47171e-06  -1.21692e-01
+   2  deltaGamma   8.81993e-02   2.56506e-03   2.34589e-05   1.17402e-01
+   3  Aperp_sq     2.50210e-01   1.39648e-03   3.50162e-06   8.39329e-04
+   4  Azero_sq     5.20675e-01   9.37839e-04   1.84260e-06   3.06462e-01
+   5  delta_para   3.32975e+00   2.83428e-02   4.69800e-06   5.56870e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+  6.600e-07 -1.091e-06  5.087e-07 -2.755e-07 -2.119e-06 
+ -1.091e-06  6.583e-06 -2.445e-06  1.558e-06  4.525e-06 
+  5.087e-07 -2.445e-06  1.950e-06 -7.525e-07 -1.549e-05 
+ -2.755e-07  1.558e-06 -7.525e-07  8.795e-07  1.825e-07 
+ -2.119e-06  4.525e-06 -1.549e-05  1.825e-07  8.033e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5
+        1  0.53820   1.000 -0.524  0.448 -0.362 -0.092
+        2  0.78699  -0.524  1.000 -0.683  0.647  0.062
+        3  0.79349   0.448 -0.683  1.000 -0.575 -0.391
+        4  0.68618  -0.362  0.647 -0.575  1.000  0.007
+        5  0.50785  -0.092  0.062 -0.391  0.007  1.000
+Minuit finished: 		Status: 3		Thu Aug  7 09:15:49 2014
+
+
+Minimised!
+
+Any Fit Results and Projection Outputs are Stored in: 
+
+RapidFit
+Ending time: Thu Aug  7 09:15:50 2014
+
+Goodbye :)
