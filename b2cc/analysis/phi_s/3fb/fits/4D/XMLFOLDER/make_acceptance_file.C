@@ -1,5 +1,16 @@
 {
 	vector<double> weights;
+	// MC2012 + MC2011 reweigthed weights (nominal for fit)
+  	weights.push_back(+1.);
+	weights.push_back(+1.0514);
+	weights.push_back(+1.0532);
+	weights.push_back(-0.0006);
+	weights.push_back(+0.0001);
+	weights.push_back(-0.0003);
+	weights.push_back(+1.0155);
+	weights.push_back(+0.0007);
+	weights.push_back(-0.0004);
+	weights.push_back(+0.0008);
 	/* MC2012 DG=0 from Sevda
   	weights.push_back(+0.977304);
 	weights.push_back(+1.02467);
@@ -48,8 +59,8 @@
 	weights.push_back(-0.00011787661);
 	weights.push_back(-0.0015717352);
 	*/
-	/* MC2012 sim08e with trigger bin1
- 	*/
+	// MC2012 sim08e with trigger bin1
+	/*
 	if(false){
 	weights.push_back(0.97332);
 	weights.push_back(1.02809);
@@ -61,8 +72,8 @@
 	weights.push_back(-0.00010);
 	weights.push_back(0.00046);
 	weights.push_back(-0.00464);
-	}/* MC2012 sim08e with trigger bin1
- 	*/
+	}
+	// MC2012 sim08e with trigger bin1
 	if(false){
 	weights.push_back(0.97424);
 	weights.push_back(1.02786);
@@ -75,8 +86,7 @@
 	weights.push_back(0.00149);
 	weights.push_back(0.00015);
 	}
-	/* MC2012 sim08e with trigger bin1
- 	*/
+	// MC2012 sim08e with trigger bin1
 	if(false){
 	weights.push_back(0.97535);
 	weights.push_back(1.02498);
@@ -89,8 +99,7 @@
 	weights.push_back(0.00065);
 	weights.push_back(-0.00149);
 	}
-	/* MC2012 sim08e with trigger bin1
- 	*/
+	// MC2012 sim08e with trigger bin1
 	if(false){
 	weights.push_back(0.97487);
 	weights.push_back(1.02490);
@@ -116,6 +125,7 @@
 	weights.push_back(0.00004);
 	weights.push_back(-0.00609);
 	}
+	*/
 	TFile * f = TFile::Open("acceptance_weights_and_histos_MC2012_sim08e_reco_angles_true_time_with_trigger_bin5.root", "RECREATE");
 	TTree * tree = new TTree("tree","tree");
 	tree->Branch("weights", "std::vector<double>", &weights);

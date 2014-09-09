@@ -20,7 +20,7 @@ export RAPIDFITROOT=/Home/gcowan1/software/RapidFit/trunk
 $RAPIDFITROOT/bin/fitting -f $CONFIG1 --saveOneDataSet test.root --useUUID
 $RAPIDFITROOT/bin/fitting -f $CONFIG2 --doPulls pulls.root --OutputLevel 1
 
-datadir=$BC/data1_with_lower_acc
+datadir=$BC/data1
 mkdir -p $datadir
 cd $datadir
 

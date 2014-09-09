@@ -16,17 +16,17 @@ mkdir -p $workdir
 echo "Workdir "$workdir
 cd $workdir
 
-datadir=$BC/50bin_gen_20bin_fit_test/
+datadir=$BC/all_time_200bin_fixed_gen_50bin_variable_fit/
 mkdir -p $datadir
 echo `hostname` > $datadir/${myID}_jobRunning
 
 export RAPIDFITROOT=/Home/gcowan1/software/RapidFit/trunk
-$RAPIDFITROOT/bin/fitting -f $CONFIG1 --saveOneDataSet test.root --useUUID | tee stdout_gen
-$RAPIDFITROOT/bin/fitting -f $CONFIG2 --doPulls pulls.root --OutputLevel 1 | tee stdout_fit 
+$RAPIDFITROOT/bin/fitting -f $CONFIG1 --saveOneDataSet test.root --useUUID | tee gen_stdout
+$RAPIDFITROOT/bin/fitting -f $CONFIG2 --doPulls pulls.root --OutputLevel 1 | tee fit_stdout 
 
 cd $datadir
 
 cp -f  $workdir/pulls.root ${myID}_pulls.root
-cp -f  $workdir/stdout_gen ${myID}_stdout_gen
-cp -f  $workdir/stdout_fit ${myID}_stdout_fit
+cp -f  $workdir/gen_stdout ${myID}_gen_stdout
+cp -f  $workdir/fit_stdout ${myID}_fit_stdout
 #rm -rf $workdir
