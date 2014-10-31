@@ -1,3 +1,11 @@
+# Greig Cowan, 31/10/14
+'''
+Compute the uncertainty on the effective width
+of a double Gaussian, using the measurements of the
+widths of the two Gaussian and their relative fraction.
+Takes into account the correlation between the parameters.
+'''
+
 from sympy import *
 
 s1 = Symbol('s1')
