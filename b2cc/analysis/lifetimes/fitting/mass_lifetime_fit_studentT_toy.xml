@@ -1,0 +1,255 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>SignalFraction</Name>      // Fraction of first Gaussian
+<Value>0.63</Value>
+<Minimum>0.</Minimum>
+<Maximum>1.</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>s</Name>      // Gaussian width in MeV
+<Value>7.2</Value>
+<Minimum>4.0</Minimum>
+<Maximum>10.0</Maximum>
+<Type>Free</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>n</Name>      // Gaussian width in MeV
+<Value>14.4</Value>
+<Minimum>-10.1</Minimum>
+<Maximum>100.0</Maximum>
+<Type>Free</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>mu</Name>
+<Value>5278.5</Value>
+<Minimum>5260</Minimum>
+<Maximum>5290</Maximum>
+<Type>Free</Type>
+<Unit>MeV/c^{2}</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>tau</Name>           
+<Minimum>1.4</Minimum>
+<Maximum>1.6</Maximum>
+<Value>1.459</Value>                   
+<Type>Free</Type>
+<Unit>ps</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution2Fraction</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution3Fraction</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution1</Name>     
+<Value>0.045</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution2</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolution3</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeOffset</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+
+<PhysicsParameter>
+<Name>timeResolutionScale1</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+
+<PhysicsParameter>
+<Name>timeResolutionScale2</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>timeResolutionScale3</Name>     
+<Value>0.</Value>                      
+<Type>Fixed</Type>
+<Unit>unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>alphaM_pr</Name>      // exponent
+<Value>0.0016</Value>
+<Minimum>-0.01</Minimum>
+<Maximum>0.01</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+// LL lifetimes
+<PhysicsParameter>
+<Name>fractionLL1</Name>          // Fraction of first exponential
+<Value>0.9921</Value>
+<Minimum>0.8</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>tauLL1</Name>        // First exponent
+<Value>0.177</Value>
+<Minimum>0.01</Minimum>
+<Maximum>1.5</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>tauLL2</Name>        //Second exponent
+<Value>1.41</Value>
+<Minimum>0.9</Minimum>
+<Maximum>2.8</Maximum>
+<Type>Free</Type>
+<Unit>Unitless</Unit>
+</PhysicsParameter>
+
+</ParameterSet>
+
+
+//==========================================
+// Specify which minimiser to use.
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+<Threads>8</Threads>
+<SetIntegratorTest>True</SetIntegratorTest>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+
+<ToFit>
+
+<NormalisedSumPDF>
+<FractionName>SignalFraction</FractionName>
+		<ProdPDF>
+		<PDF>
+			<Name>Exponential</Name>
+			<ConfigurationParameter>UseNumericalIntegration:False</ConfigurationParameter>
+			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
+			<ConfigurationParameter>UseEventResolution:False</ConfigurationParameter>
+		</PDF>
+		<PDF>
+			<Name>StudentT</Name>
+		</PDF>
+		</ProdPDF>
+		<ProdPDF>
+		<PDF>
+			<Name>DoubleExponential</Name>
+			<ConfigurationParameter>UseNumericalIntegration:False</ConfigurationParameter>
+			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
+			<ConfigurationParameter>UseEventResolution:False</ConfigurationParameter>
+		</PDF>
+		<PDF>
+			<Name>Bs2JpsiPhiMassBkg</Name>
+			<ConfigurationParameter>UseNumericalIntegration:False</ConfigurationParameter>
+		</PDF>
+		</ProdPDF>
+</NormalisedSumPDF>
+
+<DataSet>
+<Source>Foam</Source>
+<NumberEvents>4000</NumberEvents>
+
+<PhaseSpaceBoundary>
+
+<Observable>
+<Name>mass</Name>
+<Minimum>5300</Minimum> 
+<Maximum>5450</Maximum>
+<Unit>MeV/c^{2}</Unit>
+</Observable>
+
+<Observable>
+<Name>time</Name>
+<Minimum>0.3</Minimum> 
+<Maximum>14.0</Maximum>
+<Unit>ps</Unit>
+</Observable>
+
+</PhaseSpaceBoundary>
+</DataSet>
+</ToFit>
+
+<Output>
+	<ComponentProjection>
+	                <Name>mass</Name>
+	                <XTitle>m(J/#psi #eta) [MeV/#it{c}^{2}]</XTitle>
+			<CompNames>Total:Signal:Background</CompNames>
+           		<ColorKey>1:16:12</ColorKey>
+			<StyleKey>1:1:4</StyleKey>
+			<WidthKey>3:3:3</WidthKey>
+                        <DataBins>50</DataBins>
+                        <LogY>False</LogY>
+                        <AddLHCb>True</AddLHCb>
+			<DrawPull>True</DrawPull>
+	</ComponentProjection>
+	<ComponentProjection>
+	                <Name>time</Name>
+			<XTitle>Decay time [ps]</XTitle>
+			<CompNames>Total:Signal:Background</CompNames>
+           		<ColorKey>1:16:12</ColorKey>
+			<StyleKey>1:1:4</StyleKey>
+			<WidthKey>3:3:3</WidthKey>
+	                <LogY>True</LogY>
+                        <AddLHCb>True</AddLHCb>
+			<DrawPull>True</DrawPull>
+	</ComponentProjection>
+</Output>
+
+</RapidFit>
+
