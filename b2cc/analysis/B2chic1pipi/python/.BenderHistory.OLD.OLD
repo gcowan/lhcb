@@ -1,0 +1,77 @@
+ls
+"This is the new IPython notebook"
+ls
+def f(x):
+    """My function
+    x : parameter"""
+    
+    return x+1
+
+print "f(3) = ", f(3)
+# Position your cursor after the ( and hit the Tab key:
+list()
+%connect_info
+plot(rand(100))
+ls('/Event')
+ls('/Event/AllStreams')
+ls('/Event/Strip')
+ls('/Event/MC')
+ls('/Event/Strip')
+ls('/Event/AllStreams/Phys')
+ls('/Event/AllStreams/Phys/')
+ls('/Event/AllStreams/Phys')
+ls('/Event/AllStreams')
+ls('/Event/Strip/Phys')
+ls('/Event/Strip')
+ls('/Event')
+ls('/Event/AllStreams')
+ls('/Event/AllStreams/Phys')
+ls('/Event/Strip')
+ls('/Event')
+ls('/Event/MyStream')
+ls('/Event/MyStream/pPhys')
+ls('/Event/MyStream/pPhys/Particles')
+b=get('/Event/MyStream/pPhys/Particles')
+b
+b.name
+ls('/Event/Strip')
+B, evt = seekForData("/Event/MyStream/Phys/b2DpMuXB2DMuNuXLine/Particles")
+B
+Lb, evt = seekForData("/Event/MyStream/Phys/b2LcMuXB2DMuNuXLine/Particles")
+evt
+Lb
+Ds, evt = seekForData('/Event/Phys/b2DsMuXB2DMuNuXLine/Particles' )
+Ds
+ls('/Event')
+run(1)
+ls('/Event')
+reverse()
+reverse(1000)
+reverse
+ls('/Event')
+ls('/Event/Strip')
+ls('/Event/Strip/pPhys')
+ls('/Event/MC/')
+ls('/Event/MC')
+ls('/Event/Strip')
+ls('/Event/Strip/pPhys')
+ls('/Event')
+ls('/Event/Strip')
+ls('/Event/AllStreams')
+ls('/Event/AllStreams/pPhys')
+ls('/Event/AllStreams/pPhys/Particles')
+ls('/Event/AllStreams/')
+reps = get('/Event/Strip/Phys/DecReports')
+reports = reps.decReports()
+print reports
+print reports.keys()
+if "SelB2ChicPiPiForPsiX0" in reports.keys(): print "hi"
+run(1)
+reps = get('/Event/Strip/Phys/DecReports')
+print reports.keys()
+Ds, evt = seekForData('/Event/AllStreams/Phys/SelB2ChicPiPiForPsiX0/Particles' )
+Ds
+evt
+seekStripDecision(".*B2ChicPiPi.*")
+seekStripDecision(".*DiMuon.*")
+seekStripDecision(".*Chic.*")

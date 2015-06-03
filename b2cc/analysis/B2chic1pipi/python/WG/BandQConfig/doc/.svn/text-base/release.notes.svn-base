@@ -1,0 +1,205 @@
+! $Id$ 
+! -----------------------------------------------------------------------------
+! Package     : WG/BandQConfig
+! Responsible : Vanya Belyaev
+! Purpose     : Configurations for various WG-productions 
+! -----------------------------------------------------------------------------
+!                   $Revision$
+! Last modification $Date$
+!                by $Author$
+! -----------------------------------------------------------------------------
+
+! ========================== 2014-05-21 WG/BandQConfig v8r0 ===================
+
+! 2014-05-13 - Vanya Belyaev
+ - add missing line 
+
+! 2014-05-13 - Vanya Belyaev
+ - prepare for B&Q WG-production #8 
+   - add modes with chi_c1 
+
+
+! ========================== 2014-03-07 WG/BandQConfig v7r1 ===================
+
+! 2014-03-12 - Vanya Belyaev
+
+ - add the limit of #maxcandidates for PsiX-streams:
+    
+    a.MaxCandidates          = 2000
+    a.StopAtMaxCandidates    = True 
+    a.StopIncidentType       = 'ExceedsCombinatoricsLimit'
+
+  
+! ========================== 2014-03-07 WG/BandQConfig v7r0 ===================
+
+! 2014-03-07 - Vanya Belyaev
+ - remove ( chi_b -> upsilon gamma )
+ - tag for run as v7 
+
+! 2014-02-18 - Vanya Belyaev
+ - prepare new version 
+
+
+! ========================== 2013-12-22 WG/BandQConfig v6r0 ===================
+
+! 2013-12-19 - Vanya Belyaev
+ - new verison 
+
+! ========================== 2013-09-01 WG/BandQConfig v5r0 ===================
+
+! 2013-09-01 - Vanya Belyaev
+
+ - prepare new version:
+
+   Kaons, pions and protons:
+
+      - filter from AllNoPIDs<XXX> 
+      - using PROBNN-pid variables 
+      - use tight fiducial volume 
+      - use PT-cut of 200MeV 
+
+! ========================== 2013-04-29 WG/BandQConfig v4r0p1 =================
+
+  fix problem with logger 
+
+! ========================== 2013-04-26 WG/BandQConfig v4r0 ===================
+
+   add B-> psi(') pi(pi) eta(')/omega modes
+
+   use new stripping selections.
+
+   need DaVinci v33r3p2 (at least)
+
+! 2013-04-09 - Vanya Belyaev
+
+ - prepare code for version-4 
+
+   use latest stripping
+
+   use local fix 
+
+   a top of stripping add modes following modes 
+
+     1. B & B 
+     2. B & C  
+     3. B & dimu
+     4. B & W 
+     5. B -> psi(')    pi (pi)  eta(')/opmega
+ 
+! ========================== 2013-02-23 WG/BandQConfig v3r0 ===================
+
+! 2013-02-23 - Vanya Belyaev
+ - add the third output file BOTTOM.MDST for Y/chi_b studies 
+
+ - rename main script:
+
+for 2k+11: 
+
+   gaudirun.py  $BANDQCONFIGROOT/scripts/BandQ.py $BANDQCONFIGROOT/scripts/DataType-2011.py  the_file_with_input_data.py
+
+for 2k+12: 
+
+   gaudirun.py  $BANDQCONFIGROOT/scripts/BandQ.py $BANDQCONFIGROOT/scripts/DataType-2012.py  the_file_with_input_data.py
+
+
+! 2012-12-20 - Marco Clemencic
+
+ - Added environment XML file for future use with CMake.
+
+! ========================== 2012-12-18 WG/BandQConfig v2r2 ===================
+
+! 2012-12-18 - Vanya Belyaev 
+
+ - add new files to define data type (thanks to Chris Jones for the kind advice)
+
+from now to run WG-productuion one needs to use the pair of files:
+
+for 2k+11: 
+
+   gaudirun.py  $BANDQCONFIGROOT/scripts/BandQ_B2PsiX.py $BANDQCONFIGROOT/scripts/DataType-2011.py  the_file_with_input_data.py
+
+for 2k+12: 
+
+   gaudirun.py  $BANDQCONFIGROOT/scripts/BandQ_B2PsiX.py $BANDQCONFIGROOT/scripts/DataType-2012.py  the_file_with_input_data.py
+
+
+! ========================== 2012-11-23 WG/BandQConfig v2r1 ===================
+
+! 2012-11-23 - Vanya Belyaev
+	
+ - fix the mass window for PsiX0 
+	
+! ========================== 2012-11-23 WG/BandQConfig v2r0 ===================
+
+! 2012-11-23 - Vanya Belyaev
+ - prepare verison 2 of WG-proecssing 
+
+! ========================== 2012-10-09 WG/BandQConfig v1r3p1 =================
+
+! 2012-10-09 - Vanya Belyaev
+
+ - fix the name of seldstwriter 
+
+
+! ========================== 2012-10-08 WG/BandQConfig v1r3 ===================
+
+! 2012-10-08 - Vanya Belyaev
+
+ - add proper ParticleCombiner to gain almost factor of 2 
+
+
+! ========================== 2012-10-08 WG/BandQConfig v1r2 ===================
+
+! 2012-10-08 - Vanya Belyaev
+
+ - remove 6pi modes 
+
+! ========================== 2012-10-07 WG/BandQConfig v1r1p1 =================
+
+! 2012-10-07 - Vanya Belyaev
+
+ - the version to be checked by Production/Grid expert 
+
+! ========================== 2012-10-07 WG/BandQConfig v1r1 ===================
+
+! 2012-10-07 - Vanya Belyaev
+
+ - the version to be checked by Production/Grid expert 
+
+
+! 2012-10-07 - Vanya Belyaev
+
+  Additional lines :
+ 
+   - B+ -> psi (K*+ -> K+ pi0 ) for photon efficiency (included into PSIX0) 
+   - B  -> psi C
+ 
+  Overall configuration: 
+   
+     Input :  DIMUON.DST
+
+  Outputs :
+
+   - BandQ.PSIX.mdst
+   - BandQ.PSIX0.mdst
+
+
+! ========================== 2012-10-04 WG/BandQConfig v1r0 ===================
+
+! 2012-09-17 - Vanya Belyaev
+
+ - the first import 
+
+   Contains the script to produce the coherent selection of :
+
+	   B -> psi(')  ( n*K + m*pi )     0<= n; 0<=m ;  1<= n,m <= 6 
+     B -> psi(')  ( eta, eta', omega )
+
+  the output uDSTs are :
+
+      - BandQ.PSIX.mdst
+      - BandQ.PSIX0.mdst
+
+! -----------------------------------------------------------------------------
+! The END 
+! -----------------------------------------------------------------------------
