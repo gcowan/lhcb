@@ -25,9 +25,7 @@
 #include <string>
 #include "TMatrixDSym.h"
 #include <vector>
-//using std::cout;
-//using std::endl;
-//using namespace RooStats;
+
 using namespace RooFit;
 using namespace std;
 
@@ -75,18 +73,18 @@ void plot_resolution_sim_2g(){
 	RooArgList *fitArgs = new RooArgList(*time, *mdau1, *hlt2_unbiased, *sigmat, *sweight);
 	TCut cut1 = "(hlt2_unbiased==1)";
 
-	time->setRange("res",-0.5, 0.5);
-	time->setRange("long",-1.0, 3.0);
+	time->setRange("res",-0.4, 0.4);
+	time->setRange("long",-1.0, 4.0);
 
-	RooDataSet * data1 = new RooDataSet("data1", "all input data", tree, *fitArgs, cut1, "sweight_bkg");
-	//RooDataSet * data2 = new RooDataSet("data2", "all input data", tree, RooArgList(*sigmat));
+	//RooDataSet * data1 = new RooDataSet("data1", "all input data", tree, *fitArgs, cut1, "sweight_bkg");
+	RooDataSet * data1 = new RooDataSet("data1", "all input data", tree, *fitArgs, cut1);
 
 	// number of entries in each bin
 	Double_t entries2 = data1->numEntries();
 	cout << entries2 << endl;
 
-	RooRealVar *mean_g1 = new RooRealVar("g1 #mu","mean of g1",0.00);//,-0.1, 0.1);
-	RooRealVar *mean_g2 = new RooRealVar("g2 #mu","mean of g2",0.00);//,-0.1, 0.1);
+	RooRealVar *mean_g1 = new RooRealVar("g1 #mu","mean of g1",0.00,-0.1, 0.1);
+	RooRealVar *mean_g2 = new RooRealVar("g2 #mu","mean of g2",0.00,-0.1, 0.1);
 	RooRealVar *sf1 = new RooRealVar("sf1", "sf1", 1.5, 0.1, 2.);
 	RooRealVar *sf2 = new RooRealVar("sf2", "sf2", 5.0, 2.0, 10.);
 	RooRealVar *cf1 = new RooRealVar("cf1", "cf1", 0.010, -0.1, 0.1);
@@ -113,15 +111,8 @@ void plot_resolution_sim_2g(){
 	RooAddPdf *total_bdc1 = new RooAddPdf("total_bdc1", "total_bdc1", RooArgList(*bdc12, *bdc1),RooArgList(*frac_tau2)); 
 	RooAddPdf *total1 = new RooAddPdf("total1", "total1", RooArgList(*gausswide, *total_bdc1, *res1),RooArgList(*frac_gwide1,*frac_bdc1)); 
 
-	/* an alternative way of doing it
-	   RooDataHist * expHistDterr = data2->binnedClone();
-	   RooHistPdf * pdfErr = new RooHistPdf("pdfErr","pdfErr", *sigmat, *expHistDterr);
-	   RooProdPdf * model = new RooProdPdf("model","model", *pdfErr, RooFit::Conditional( *res1, *time));
-	   */
-
 	gROOT->ProcessLine(".x ~/lhcb/lhcbStyle.C");
 	RooFitResult *fitresult = total1->fitTo(*data1,Save(kTRUE), NumCPU(6),SumW2Error(kTRUE), ConditionalObservables(*sigmat)); 
-	//RooFitResult *fitresult = gauss12->fitTo(*data1,Save(kTRUE), NumCPU(6),SumW2Error(kTRUE), ConditionalObservables(*sigmat)); 
 
 	RooPlot* frame1 = time->frame(Bins(60),Title("Prompt decay time1"), Range("res")) ;
 
@@ -131,7 +122,7 @@ void plot_resolution_sim_2g(){
 
 	RooHist* hpull1 = frame1->pullHist();
 	RooPlot* timepull1 = time->frame(Title("Pull Distribution"), Bins(60), Range("res")) ;
-	timepull1->addPlotable((RooPlotable*)hpull1,"P") ;
+	//timepull1->addPlotable(hpull1,"P") ;
 	TAxis * xachse = timepull1->GetXaxis(); TAxis * yachse = timepull1->GetYaxis();
 	xachse->SetTitleFont (132);
 	yachse->SetTitleFont (132);
@@ -150,7 +141,6 @@ void plot_resolution_sim_2g(){
 	TPad* pad2 = new TPad("pad2","This is pad2",0.05,0.0,0.95,0.2);
 	pad1->Draw();
 	pad2->Draw();
-	gPad->SetLogy();
 	pad1->cd() ; gPad->SetLeftMargin(0.15) ; frame1->GetYaxis()->SetTitleOffset(1) ; frame1->Draw() ;
 	pad2->cd() ; gPad->SetLeftMargin(0.15) ; timepull1->GetYaxis()->SetTitleOffset(1) ; timepull1->Draw() ;
 	c->SaveAs("plot_data_sim_2g.pdf");
@@ -163,7 +153,7 @@ void plot_resolution_sim_2g(){
 
 	RooHist* hpull2 = frame2->pullHist();
 	RooPlot* timepull2 = time->frame(Title("Pull Distribution"), Bins(60), Range("long")) ;
-	timepull2->addPlotable((RooPlotable*)hpull2,"P") ;
+	//timepull2->addPlotable(hpull2,"P") ;
 	TAxis * xachse2 = timepull2->GetXaxis(); TAxis * yachse2 = timepull2->GetYaxis();
 	xachse2->SetTitleFont (132);
 	yachse2->SetTitleFont (132);
@@ -182,7 +172,6 @@ void plot_resolution_sim_2g(){
 	TPad* pad22 = new TPad("pad22","This is pad2",0.05,0.0,0.95,0.2);
 	pad12->Draw();
 	pad22->Draw();
-	pad12->SetLogy();
 	pad12->cd() ; gPad->SetLeftMargin(0.15) ; frame2->GetYaxis()->SetTitleOffset(1) ; frame2->Draw() ;
 	pad22->cd() ; gPad->SetLeftMargin(0.15) ; timepull2->GetYaxis()->SetTitleOffset(1) ; timepull2->Draw() ;
 	c2->SaveAs("plot_data_sim_2g_wide.pdf");
