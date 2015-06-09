@@ -32,6 +32,12 @@ class HistosAndTuples(Algo):
 
 	self.bkg = self.tool( cpp.IBackgroundCategory,  'BackgroundCategory')
 
+        ## get magnetic field service:
+        imagSvc = self.svc( cpp.ILHCbMagnetSvc , 'MagneticFieldSvc' )
+        if not imagSvc :
+            raise RuntimeError , 'Unable to locate Magnetic Field Service '
+        self.imagSvc = imagSvc
+
         return sc
 
     def finalize ( self ) :
@@ -107,7 +113,10 @@ class HistosAndTuples(Algo):
 	    dtf_piminus_PY_chic2P_constr = DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )
 	    dtf_piminus_PZ_chic2P_constr = DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )
 	    dtf_piminus_PE_chic2P_constr = DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )
-	    
+	  
+	    polarity = -1 if self.imagSvc.isDown() else 1 
+	    tup.column( 'polarity', polarity )
+ 
     	    tup.column_float( 'm_b_DTF_jpsi_chic1_constr'     , dtf_b_mass_chic1P_constr ( p ) / GeV )
     	    tup.column_float( 'm_b_DTF_jpsi_chic2_constr'     , dtf_b_mass_chic2P_constr ( p ) / GeV )
     	    tup.column_float( 'ctau_b_DTF'     , dtf_ctau ( p ) )
