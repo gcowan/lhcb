@@ -46,6 +46,9 @@ LIBS       += $(ROOTLIBS) -lHtml -lThread -lMinuit -lMathCore -lMinuit2 -lRooSta
 fit_timeresolution_data_bins : fit_timeresolution_data_bins.C
 	$(CXX) $(CXXFLAGS) $(LIBS) fit_timeresolution_data_bins.C -o fit_timeresolution_data_bins
 
+plot_resolution_sim_2g_with_offset : plot_resolution_sim_2g_with_offset.C RooGaussModelWithOffset.cxx
+	$(CXX) $(CXXFLAGS) $(LIBS) plot_resolution_sim_2g_with_offset.C RooGaussModelWithOffset.cxx -o plot_resolution_sim_2g_with_offset
+
 clean   :
 	$(RM) $(GARBAGE)
 

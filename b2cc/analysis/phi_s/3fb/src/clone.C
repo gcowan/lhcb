@@ -45,10 +45,16 @@ void clone() {
 	//chain->Add("/tmp/Bs_downMC2012_Sim08e_pythia8_DTT.root");
 	//chain->Add("/tmp/Bs_upMC2012_Sim08e_pythia6_DTT.root");
 	//chain->Add("/tmp/Bs_downMC2012_Sim08e_pythia8_DTT.root");
-	chain->Add("/tmp/BsdG0_upMC2012_Sim08e_pythia6_DTT.root");
-	chain->Add("/tmp/BsdG0_upMC2012_Sim08e_pythia8_DTT.root");
-	chain->Add("/tmp/BsdG0_downMC2012_Sim08e_pythia6_DTT.root");
-	chain->Add("/tmp/BsdG0_downMC2012_Sim08e_pythia8_DTT.root");
+	//chain->Add("/tmp/BsdG0_upMC2012_Sim08e_pythia6_DTT.root");
+	//chain->Add("/tmp/BsdG0_upMC2012_Sim08e_pythia8_DTT.root");
+	//chain->Add("/tmp/BsdG0_downMC2012_Sim08e_pythia6_DTT.root");
+	//chain->Add("/tmp/BsdG0_downMC2012_Sim08e_pythia8_DTT.root");
+	chain->Add("root://eoslhcb.cern.ch//eos/lhcb/grid/user/lhcb/user/o/ooleroy/MC/2012/BsJpsiPhi_downMC2012_Sim08e_pythia6_DTT.root");
+	chain->Add("root://eoslhcb.cern.ch//eos/lhcb/grid/user/lhcb/user/o/ooleroy/MC/2012/BsJpsiPhi_upMC2012_Sim08e_pythia6_DTT.root");
+	chain->Add("root://eoslhcb.cern.ch//eos/lhcb/grid/user/lhcb/user/o/ooleroy/MC/2012/BsJpsiPhi_downMC2012_Sim08e_pythia8_DTT.root");
+	chain->Add("root://eoslhcb.cern.ch//eos/lhcb/grid/user/lhcb/user/o/ooleroy/MC/2012/BsJpsiPhi_upMC2012_Sim08e_pythia8_DTT.root");
+
+	std::cout << "Total number of events to process: " << chain->GetEntries() << std::endl;
 	
 	int B_s0_BKGCAT;
 	double B_s0_ENDVERTEX_X;

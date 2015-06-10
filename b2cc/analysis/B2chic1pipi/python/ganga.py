@@ -5,7 +5,7 @@ import sys
 
 year = sys.argv[1]
 
-script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/B2chicpipi/analysis/python/HistosAndTuples_'+ year +'.py'
+script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_'+ year +'.py'
 
 job_name = 'B2chicpipi_data' + str(year)
 print job_name

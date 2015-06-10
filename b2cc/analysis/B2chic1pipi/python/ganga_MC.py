@@ -9,9 +9,9 @@ mode = sys.argv[2]
 if mode not in ['norm', 'signal_Bd', 'signal_Bs']: sys.exit()
 
 if mode == 'norm':
-	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/B2chicpipi/analysis/python/HistosAndTuples_MC_'+ year +'_norm.py'
+	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_MC_'+ year +'_norm.py'
 else:
-	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/B2chicpipi/analysis/python/HistosAndTuples_MC_'+ year +'.py'
+	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_MC_'+ year +'.py'
 
 job_name = 'MC' + str(year) + mode
 print job_name
