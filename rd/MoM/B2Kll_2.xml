@@ -1,0 +1,64 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>H_2</Name>      // Gaussian width in MeV
+<Value>1.</Value>
+<Minimum>.0</Minimum>
+<Maximum>10.0</Maximum>
+<Type>Free</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+</ParameterSet>
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+<Threads>8</Threads>
+<SetIntegratorTest>True</SetIntegratorTest>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+
+<ToFit>
+
+<PDF>
+	<Name>B2Kll</Name>
+</PDF>
+
+<DataSet>
+<Source>Foam</Source>
+<NumberEvents>1000</NumberEvents>
+
+<PhaseSpaceBoundary>
+
+<Observable>
+<Name>cosThetaL</Name>
+<Minimum>-1.</Minimum> 
+<Maximum>1.</Maximum>
+<Unit> </Unit>
+</Observable>
+
+<Observable>
+<Name>q_sq</Name>
+<Minimum>0.1</Minimum>
+<Maximum>19.0</Maximum>
+<Unit>GeV^{2}/c^{4}</Unit>
+</Observable>
+
+</PhaseSpaceBoundary>
+</DataSet>
+</ToFit>
+
+</RapidFit>
+

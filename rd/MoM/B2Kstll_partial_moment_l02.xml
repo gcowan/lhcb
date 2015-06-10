@@ -1,0 +1,106 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>G000</Name>      // Gaussian width in MeV
+<Value>1</Value>
+<Minimum>0.0</Minimum>
+<Maximum>10.0</Maximum>
+<Type>Free</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>G001</Name>      // Gaussian width in MeV
+<Value>0.05</Value>
+<Minimum>0.0</Minimum>
+<Maximum>10.0</Maximum>
+<Type>Free</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>G002</Name>      // Gaussian width in MeV
+<Value>0.1</Value>
+<Minimum>0.0</Minimum>
+<Maximum>10.0</Maximum>
+<Type>Free</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>G003</Name>      // Gaussian width in MeV
+<Value>0.</Value>
+<Minimum>-1.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>G004</Name>      // Gaussian width in MeV
+<Value>0.</Value>
+<Minimum>-1.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+</ParameterSet>
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+<Threads>8</Threads>
+<SetIntegratorTest>True</SetIntegratorTest>
+<WeightName>D002</WeightName>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+
+
+<ToFit>
+<PDF>
+	<Name>B2Kll</Name>
+</PDF>
+
+<DataSet>
+    <Source>File</Source>
+    <FileName>moments_2.root</FileName>
+<NumberEvents>100000</NumberEvents>
+
+<PhaseSpaceBoundary>
+<Observable>
+<Name>cosThetaL</Name>
+<Minimum>-1.</Minimum> 
+<Maximum>1.</Maximum>
+<Unit> </Unit>
+</Observable>
+<Observable>
+<Name>D002</Name>
+<Minimum>-1000.</Minimum> 
+<Maximum>1000.</Maximum>
+<Unit> </Unit>
+</Observable>
+</PhaseSpaceBoundary>
+
+</DataSet>
+</ToFit>
+
+<Output>
+    <ComponentProjection>
+        <Name>cosThetaL</Name>
+        <DataBins>40</DataBins>
+    </ComponentProjection>
+</Output>
+
+</RapidFit>
+

@@ -1,0 +1,83 @@
+<RapidFit>
+<ParameterSet>
+
+<PhysicsParameter>
+<Name>g1</Name>      // Gaussian width in MeV
+<Value>0.05</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Free</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>g2</Name>      // Gaussian width in MeV
+<Value>0.1</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Free</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>g3</Name>      // Gaussian width in MeV
+<Value>0.0</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+
+<PhysicsParameter>
+<Name>g4</Name>      // Gaussian width in MeV
+<Value>0.0</Value>
+<Minimum>0.0</Minimum>
+<Maximum>1.0</Maximum>
+<Type>Fixed</Type>
+<Unit> </Unit>
+</PhysicsParameter>
+</ParameterSet>
+
+<Minimiser>
+<MinimiserName>Minuit</MinimiserName>
+<MaxSteps>100000</MaxSteps>
+<GradTolerance>0.0001</GradTolerance>
+<Quality>1</Quality>
+</Minimiser>
+
+<FitFunction>
+<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+<Threads>8</Threads>
+<SetIntegratorTest>True</SetIntegratorTest>
+</FitFunction>
+
+<NumberRepeats>1</NumberRepeats>
+
+//==========================================
+// Specify the fit
+
+
+<ToFit>
+<PDF>
+	<Name>B2Kll</Name>
+</PDF>
+
+<DataSet>
+    <Source>File</Source>
+    <FileName>toy.root</FileName>
+<NumberEvents>10000</NumberEvents>
+
+<PhaseSpaceBoundary>
+<Observable>
+<Name>cosThetaL</Name>
+<Minimum>-1.</Minimum> 
+<Maximum>1.</Maximum>
+<Unit> </Unit>
+</Observable>
+</PhaseSpaceBoundary>
+
+</DataSet>
+</ToFit>
+
+</RapidFit>
+
