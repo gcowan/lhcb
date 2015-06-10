@@ -9,6 +9,7 @@ from GaudiKernel.SystemOfUnits import GeV
 ## import everything from bender 
 from Bender.Main import *
 import BenderTools.Fill
+import BenderTools.TisTos
 # =============================================================================
 ## optional logging
 # =============================================================================
@@ -38,10 +39,27 @@ class HistosAndTuples(Algo):
             raise RuntimeError , 'Unable to locate Magnetic Field Service '
         self.imagSvc = imagSvc
 
+	## set up some TisTos
+        triggers = {}
+        triggers['DiMuon'] = {}
+
+        lines            = {}
+        lines ['DiMuon'] = {}
+        lines ['DiMuon'] ['L0TOS'  ] = 'L0(Muon|DiMuon).*Decision'
+        lines ['DiMuon'] ['L0TIS'  ] = 'L0(Hadron|Muon|DiMuon|Photon|Electron)Decision'
+        lines ['DiMuon'] ['Hlt1TOS'] = 'Hlt1(DiMuon|SingleMuonHighPT|MuonTrack).*Decision'
+        lines ['DiMuon'] ['Hlt1TIS'] = 'Hlt1TrackAll.*Decision'
+        lines ['DiMuon'] ['Hlt2TOS'] = 'Hlt2(DiMuon|SingleMuonHighPT).*Decision'
+        lines ['DiMuon'] ['Hlt2TIS'] = 'Hlt2(Charm|Topo|Single|Express|Inc|Tri).*Decision'
+
+        sc = self.tisTos_initialize ( triggers , lines )
+        if sc.isFailure() : return sc
+
         return sc
 
     def finalize ( self ) :
         self.fill_finalize  ()
+        self.tisTos_finalize()
         return Algo.finalize ( self )
 
     ## the main 'analysis' method 
@@ -158,6 +176,8 @@ class HistosAndTuples(Algo):
 
             tup.column_float( 'm_pipi'  , M23 ( p ) / GeV )
             tup.column_float( 'pi0_veto_gamma'  , pi0_veto_gamma( p ) )
+	    
+	    self.tisTos(p, tup, 'trig_b_', self.lines['DiMuon'], verbose = True)	
 	    
             tup.write() 
 

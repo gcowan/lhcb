@@ -4,16 +4,14 @@
 import sys
 
 year = sys.argv[1]
-polarity = sys.argv[2]
-mode = sys.argv[3]
+mode = sys.argv[2]
 
-if polarity not in ['MagUp', 'MagDown']: sys.exit()
 if mode not in ['norm', 'signal_Bd', 'signal_Bs']: sys.exit()
 
 if mode == 'norm':
-	script='/afs/cern.ch/user/g/gcowan/lhcb/b2cc/B2chicpipi/python/HistosAndTuples_MC_'+ year +'_norm.py'
+	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/B2chicpipi/analysis/python/HistosAndTuples_MC_'+ year +'_norm.py'
 else:
-	script='/afs/cern.ch/user/g/gcowan/lhcb/b2cc/B2chicpipi/python/HistosAndTuples_MC_'+ year +'.py'
+	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/B2chicpipi/analysis/python/HistosAndTuples_MC_'+ year +'.py'
 
 job_name = 'MC' + str(year) + mode
 print job_name
@@ -29,18 +27,17 @@ BK_locations = []
 
 if year == '2011' and mode == 'signal_Bd':
 	BK_locations = [
-	  '/MC/2011/Beam3500GeV-' + str(year) + '-' + polarity + '-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
-	 ,'/MC/2011/Beam3500GeV-' + str(year) + '-' + polarity + '-Nu2-Pythia8/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	  '/MC/2011/Beam3500GeV-2011-MagDown-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	 ,'/MC/2011/Beam3500GeV-2011-MagDown-Nu2-Pythia8/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	 ,'/MC/2011/Beam3500GeV-2011-MagUp-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	 ,'/MC/2011/Beam3500GeV-2011-MagUp-Nu2-Pythia8/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
 	]
-if year == '2012' and mode =='signal_Bd' and polarity == 'MagDown':
+if year == '2012' and mode =='signal_Bd':
 	BK_locations = [
-	  '/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
-	 ,'/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
-	]
-if year == '2012' and mode =='signal_Bd' and polarity == 'MagUp':
-	BK_locations = [
-	  '/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
-	 ,'/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	  '/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	 ,'/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	 ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
+	 ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/11244215/ALLSTREAMS.DST'
 	]
 
 if year == '2011' and mode == 'signal_Bs':
@@ -60,18 +57,17 @@ if year == '2012' and mode =='signal_Bs':
 
 if year == '2011' and mode == 'norm':
 	BK_locations = [
-	  '/MC/2011/Beam3500GeV-' + str(year) + '-' + polarity + '-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
-	 ,'/MC/2011/Beam3500GeV-' + str(year) + '-' + polarity + '-Nu2-Pythia8/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	  '/MC/2011/Beam3500GeV-2011-MagDown-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	 ,'/MC/2011/Beam3500GeV-2011-MagDown-Nu2-Pythia8/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	 ,'/MC/2011/Beam3500GeV-2011-MagUp-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	 ,'/MC/2011/Beam3500GeV-2011-MagUp-Nu2-Pythia8/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
 	]
-if year == '2012' and mode =='norm' and polarity == 'MagDown':
+if year == '2012' and mode =='norm':
 	BK_locations = [
-	  '/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
-	 ,'/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
-	]
-if year == '2012' and mode =='norm' and polarity == 'MagUp':
-	BK_locations = [
-	  '/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
-	 ,'/MC/2012/Beam4000GeV-' + str(year) + '-' + polarity + '-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	  '/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	 ,'/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	 ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia6/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
+	 ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
 	]
 
 data = LHCbDataset()

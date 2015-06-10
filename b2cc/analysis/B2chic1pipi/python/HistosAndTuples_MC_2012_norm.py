@@ -9,6 +9,7 @@ from GaudiKernel.SystemOfUnits import GeV
 ## import everything from bender 
 from Bender.Main import *
 import BenderTools.Fill
+import BenderTools.TisTos
 # =============================================================================
 ## optional logging
 # =============================================================================
@@ -32,10 +33,33 @@ class HistosAndTuples(Algo):
 
 	self.bkg = self.tool( cpp.IBackgroundCategory,  'BackgroundCategory')
 
+        ## get magnetic field service:
+        imagSvc = self.svc( cpp.ILHCbMagnetSvc , 'MagneticFieldSvc' )
+        if not imagSvc :
+            raise RuntimeError , 'Unable to locate Magnetic Field Service '
+        self.imagSvc = imagSvc
+
+	## set up some TisTos
+        triggers = {}
+        triggers['DiMuon'] = {}
+
+        lines            = {}
+        lines ['DiMuon'] = {}
+        lines ['DiMuon'] ['L0TOS'  ] = 'L0(Muon|DiMuon).*Decision'
+        lines ['DiMuon'] ['L0TIS'  ] = 'L0(Hadron|Muon|DiMuon|Photon|Electron)Decision'
+        lines ['DiMuon'] ['Hlt1TOS'] = 'Hlt1(DiMuon|SingleMuonHighPT|MuonTrack).*Decision'
+        lines ['DiMuon'] ['Hlt1TIS'] = 'Hlt1TrackAll.*Decision'
+        lines ['DiMuon'] ['Hlt2TOS'] = 'Hlt2(DiMuon|SingleMuonHighPT).*Decision'
+        lines ['DiMuon'] ['Hlt2TIS'] = 'Hlt2(Charm|Topo|Single|Express|Inc|Tri).*Decision'
+
+        sc = self.tisTos_initialize ( triggers , lines )
+        if sc.isFailure() : return sc
+
         return sc
 
     def finalize ( self ) :
         self.fill_finalize  ()
+        self.tisTos_finalize()
         return Algo.finalize ( self )
 
     ## the main 'analysis' method 
@@ -107,7 +131,10 @@ class HistosAndTuples(Algo):
 	    dtf_piminus_PY_chic2P_constr = DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )
 	    dtf_piminus_PZ_chic2P_constr = DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )
 	    dtf_piminus_PE_chic2P_constr = DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )
-	    
+	  
+	    polarity = -1 if self.imagSvc.isDown() else 1 
+	    tup.column( 'polarity', polarity )
+ 
     	    tup.column_float( 'm_b_DTF_jpsi_chic1_constr'     , dtf_b_mass_chic1P_constr ( p ) / GeV )
     	    tup.column_float( 'm_b_DTF_jpsi_chic2_constr'     , dtf_b_mass_chic2P_constr ( p ) / GeV )
     	    tup.column_float( 'ctau_b_DTF'     , dtf_ctau ( p ) )
@@ -149,6 +176,8 @@ class HistosAndTuples(Algo):
 
             tup.column_float( 'm_pipi'  , M23 ( p ) / GeV )
             tup.column_float( 'pi0_veto_gamma'  , pi0_veto_gamma( p ) )
+	    
+	    self.tisTos(p, tup, 'trig_b_', self.lines['DiMuon'], verbose = True)	
 	    
             tup.write() 
 
