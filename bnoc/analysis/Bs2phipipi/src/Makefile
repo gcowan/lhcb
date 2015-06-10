@@ -43,6 +43,9 @@ endif
 ##Libraries
 LIBS       += $(ROOTLIBS) -lHtml -lThread -lMinuit -lMathCore -lMinuit2 -lRooStats -lRooFit -lRooFitCore -lFoam #-lProof #-lboost_thread #-lMathMore
 
+eff : eff.C
+	$(CXX) $(CXXFLAGS) $(LIBS) eff.C -o eff
+
 plot_legendre_moments_simple : plot_legendre_moments_simple.C
 	$(CXX) $(CXXFLAGS) $(LIBS) plot_legendre_moments_simple.C -o plot_legendre_moments_simple
 

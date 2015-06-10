@@ -1,0 +1,459 @@
+<RapidFit>
+
+	//================================================
+	// Formal Parameters to be fitted or fixed
+
+	<ParameterSet>
+
+
+
+		<PhysicsParameter>
+			<Name>F_s</Name>
+			<Value>0.0</Value>
+			<Minimum>0.</Minimum>
+			<Maximum>0.5</Maximum>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>delta_s</Name>
+			<Value>8.8e-01</Value>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>Csp</Name>
+			<Value>1.0</Value>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		// True Physics Parameters for signal
+
+		<PhysicsParameter>
+			<Name>gamma</Name>
+			<Value>0.66</Value>
+			<Minimum>0.6</Minimum>
+			<Maximum>0.75</Maximum>
+			<Type>Free</Type>
+			<Unit>ps^{-1}</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>deltaGamma</Name>
+			<Value>0.09</Value>
+			<Minimum>0.01</Minimum>
+			<Maximum>0.18</Maximum>
+			<Type>Free</Type>
+			<Unit>ps^{-1}</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>Aperp_sq</Name>
+			<Value>0.15</Value>
+			<Minimum>0.</Minimum>
+			<Maximum>0.5</Maximum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>Azero_sq</Name>
+			<Value>0.59</Value>
+			<Type>Free</Type>
+			<Minimum>0.</Minimum>
+			<Maximum>0.8</Maximum>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>delta_para</Name>
+			<Value>2.4</Value>
+			<StepSize>0.05</StepSize>
+			<Maximum>6.3</Maximum>
+			<Minimum>-6.3</Minimum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>delta_perp</Name>
+			<Value>-0.2</Value>
+			<Minimum>-6.3</Minimum>
+			<Maximum>6.3</Maximum>
+			<StepSize>0.05</StepSize>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>delta_zero</Name>
+			<Value>0.0</Value>
+			<Minimum>-3.3</Minimum>
+			<Maximum>3.3</Maximum>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>deltaM</Name>
+			<Value>1.77655e+01</Value>
+			<Type>Free</Type>
+			<Unit>ps-1</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>Phi_s</Name>
+			<Value>-0.035</Value>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>lambda</Name>
+			<Value>1.0</Value>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		//..................................
+		// Detector Parameters
+
+		// Resolution Model
+		<PhysicsParameter>
+			<Name>timeResolutionScale</Name>
+			<Value>1.8</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+
+
+		// Mistag parameters
+
+		// Mistag calibration
+		<PhysicsParameter>
+			<Name>mistagP1_OS</Name>
+			<Value>1.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagP0_OS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagSetPoint_OS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP1_OS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP0_OS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaSetPoint_OS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+
+		// Mistag calibration
+		<PhysicsParameter>
+			<Name>mistagP1_SS</Name>
+			<Value>1.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagP0_SS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagSetPoint_SS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP1_SS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP0_SS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaSetPoint_SS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>beta</Name>
+			<Value>0.0</Value>
+			<Unit> </Unit>
+			<Type>Fixed</Type>
+		</PhysicsParameter>
+
+	</ParameterSet>
+
+
+	//==========================================
+	// Specify which minimiser to use.
+
+	<Minimiser>
+		<MinimiserName>Minuit</MinimiserName>
+		<MaxSteps>100000</MaxSteps>
+		<GradTolerance>0.01</GradTolerance>
+		<Quality>0</Quality>
+		#<ConfigureMinimiser>MinosErrors</ConfigureMinimiser>
+		#<ConfigureMinimiser>NoHesse</ConfigureMinimiser>
+	</Minimiser>
+
+	<FitFunction>
+		<WeightName>sWeight</WeightName>
+		<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+		<Threads>16</Threads>
+		<SetIntegratorTest>False</SetIntegratorTest>
+		#<NormaliseWeights>True</NormaliseWeights>
+		<OffSetNLL>True</OffSetNLL>
+	</FitFunction>
+
+	<NumberRepeats>1</NumberRepeats>
+
+	//==========================================
+	// Specify the fit
+
+	//...................................
+	// This applies a constraint on deltaM
+	<ToFit>
+		<ConstraintFunction>
+			<ExternalConstraint>
+				<Name>deltaM</Name>
+				<Value>17.768</Value>
+				<Error>0.024</Error>
+			</ExternalConstraint>
+		</ConstraintFunction>
+	</ToFit>
+
+	// This applies a constraint on mistag scale
+#	<ToFit>
+#		<ConstraintFunction>
+#		#	<ExternalConstraint>
+#				<Name>mistagP1_OS</Name>
+#				<Value>0.982</Value>
+#				<Error>0.035</Error>
+#			</ExternalConstraint>
+#			<ExternalConstraint>
+#				<Name>mistagP0_OS</Name>
+#				<Value>0.0062</Value>
+#				<Error>0.0044</Error>
+#			</ExternalConstraint>
+#			<ExternalConstraint>
+#				<Name>mistagDeltaP0_OS</Name>
+#				<Value>0.014</Value>
+#				<Error>0.0012</Error>
+#			</ExternalConstraint>
+#			<ExternalConstraint>
+#				<Name>mistagDeltaP1_OS</Name>
+#				<Value>0.066</Value>
+#				<Error>0.012</Error>
+#			</ExternalConstraint>
+#		</ConstraintFunction>
+#	</ToFit>
+
+
+#	<ToFit>
+#		<ConstraintFunction>
+#			<ExternalConstraint>
+#				<Name>mistagP1_SS</Name>
+#				<Value>0.976</Value>
+#				<Error>0.18</Error>
+#			</ExternalConstraint>
+#			<ExternalConstraint>
+#				<Name>mistagP0_SS</Name>
+#				<Value>0.005</Value>
+#				<Error>0.005</Error>
+#			</ExternalConstraint>
+#			<ExternalConstraint>
+#				<Name>mistagDeltaP0_SS</Name>
+#				<Value>-0.0158</Value>
+#				<Error>0.0014</Error>
+#			</ExternalConstraint>
+#			<ExternalConstraint>
+#				<Name>mistagDeltaP1_SS</Name>
+#				<Value>0.007</Value>
+#				<Error>0.0111</Error>
+#			</ExternalConstraint>
+#		</ConstraintFunction>
+#	</ToFit>
+
+	//===============================================================================================
+	//===============================================================================================
+	//===============================================================================================
+	//===============================================================================================
+	// The commonpdf and phase space to all segments
+
+	<CommonPDF>
+		<PDF>
+			<Name>Bs2JpsiPhi_Signal_v8</Name>
+			<ConfigurationParameter>UseHelicityBasis:True</ConfigurationParameter>
+			<ConfigurationParameter>AngularAcceptanceFile:2014-3fbAnalysis/angAccWeights_psi2s_2011.root</ConfigurationParameter>
+			<ConfigurationParameter>AngularAcceptanceIgnoreNumerator:True</ConfigurationParameter>
+			<ConfigurationParameter>UseTimeAcceptance:True</ConfigurationParameter>
+			<ConfigurationParameter>UseEventResolution:True</ConfigurationParameter>
+			<ConfigurationParameter>useNewMistagModel:True</ConfigurationParameter>
+			<ConfigurationParameter>ResolutionModel:ResolutionModel</ConfigurationParameter>
+			<ConfigurationParameter>useMultiplePhis:False</ConfigurationParameter>
+		</PDF>
+	</CommonPDF>
+
+	<CommonPhaseSpace>
+		<PhaseSpaceBoundary>
+			<Observable>
+				<Name>time</Name>
+				<Minimum>0.3</Minimum>
+				<Maximum>14.0</Maximum>
+				<Unit>ps</Unit>
+			</Observable>
+			<Observable>
+				<Name>helcosthetaK</Name>
+				<Minimum>-1.0</Minimum>
+				<Maximum>1.0</Maximum>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>helphi</Name>
+				<TF1>(helphi+TMath::Pi()-(helphi>0.)*(2.*TMath::Pi()))</TF1>
+				<Minimum>-3.1416</Minimum>
+				<Maximum>3.1416</Maximum>
+				<Unit>rad</Unit>
+			</Observable>
+			<Observable>
+				<Name>helcosthetaL</Name>
+				<Minimum>-1.0</Minimum>
+				<Maximum>1.0</Maximum>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>tagdecision_os</Name>
+				<TF1>tagdecision_os_cb</TF1>
+				<Value>1.</Value>
+				<Value>0.</Value>
+				<Value>-1.</Value>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>tagdecision_ss</Name>
+				<TF1>tagdecision_ss_nn</TF1>
+				<Value>1.</Value>
+				<Value>0.</Value>
+				<Value>-1.</Value>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>tagomega_os</Name>
+				<TF1>tagomega_os_cb</TF1>
+				<Minimum>0.</Minimum>
+				<Maximum>0.5</Maximum>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>tagomega_ss</Name>
+				<TF1>tagomega_ss_nn</TF1>
+				<Minimum>0.</Minimum>
+				<Maximum>0.5</Maximum>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>eventResolution</Name>
+				<TF1>sigmat</TF1>
+				<Minimum>0.0</Minimum>
+				<Maximum>0.12</Maximum>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>sWeight</Name>
+				<TF1>track_weight</TF1>
+				<Minimum>-100000</Minimum>
+				<Maximum>100000</Maximum>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>unbiased</Name>
+				<TF1>triggerDecisionUnbiased</TF1>
+				<Value>0.0</Value>
+				<Value>1.0</Value>
+				<Unit> </Unit>
+			</Observable>
+			<Observable>
+				<Name>biased</Name>
+				<TF1>triggerDecisionBiasedExcl</TF1>
+				<Value>0.0</Value>
+				<Value>1.0</Value>
+				<Unit> </Unit>
+			</Observable>
+		</PhaseSpaceBoundary>
+	</CommonPhaseSpace>
+
+
+
+	//===============================================================================================
+	//===============================================================================================
+	//===============================================================================================
+	//===============================================================================================
+	<ToFit>
+		<CommonPDF>True</CommonPDF>
+		<PDFConfigurator>
+			<ConfigurationParameter>TimeAcceptanceFile:2014-3fbAnalysis/time_acc_unbiased_2011.txt</ConfigurationParameter>
+		</PDFConfigurator>
+		<DataSet>
+			<Source>File</Source>
+			<FileName>$HOME/Bs2Psi2SPhi/fit/data_files/MC2011_psi2s_output_weight.root</FileName>
+			<CutString>triggerDecisionUnbiased==1&&bkgcat==0</CutString>
+			<NumberEvents>1000000000</NumberEvents>
+
+			<CommonPhaseSpace>
+			</CommonPhaseSpace>
+
+		</DataSet>
+	</ToFit>
+	<ToFit>
+		<CommonPDF>True</CommonPDF>
+		<PDFConfigurator>
+			<ConfigurationParameter>TimeAcceptanceFile:2014-3fbAnalysis/time_acc_biased_2011.txt</ConfigurationParameter>
+		</PDFConfigurator>
+		<DataSet>
+			<Source>File</Source>
+			<FileName>$HOME/Bs2Psi2SPhi/fit/data_files/MC2011_psi2s_output_weight.root</FileName>
+			<CutString>triggerDecisionBiasedExcl==1&&bkgcat==0</CutString>
+			<NumberEvents>1000000000</NumberEvents>
+
+			<CommonPhaseSpace>
+			</CommonPhaseSpace>
+
+		</DataSet>
+	</ToFit>
+
+
+</RapidFit>
+
+

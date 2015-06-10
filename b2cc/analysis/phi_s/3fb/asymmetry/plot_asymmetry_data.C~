@@ -1,0 +1,121 @@
+{
+	TFile * f = TFile::Open("../data/fitNTuple_peakBkg_2011_2012_Reco14_TOS_20140822_with_IPz_weights_v2.root");
+	TTree * t = (TTree*)f->Get("DecayTree");
+
+	const int bins(8);
+	const double tmin(0.3);
+	const double tmax(14.0);
+	const double dms(17.7);
+	TH1D * B_mod    = new TH1D("B_mod", "B", bins, 0., 0.35);
+	TH1D * Bbar_mod = new TH1D("Bbar_mod", "Bbar", bins, 0., 0.35);
+	TH1D * B_even    = new TH1D("B_even", "B", bins, tmin, tmax);
+	TH1D * Bbar_even = new TH1D("Bbar_even", "Bbar", bins, tmin, tmax);
+	TH1D * B_mod_even    = new TH1D("B_mod_even", "B", bins, 0., 0.35);
+	TH1D * Bbar_mod_even = new TH1D("Bbar_mod_even", "Bbar", bins, 0., 0.35);
+	TH1D * B_odd    = new TH1D("B_odd", "B", bins, tmin, tmax);
+	TH1D * Bbar_odd = new TH1D("Bbar_odd", "Bbar", bins, tmin, tmax);
+	TH1D * B_mod_odd    = new TH1D("B_mod_odd", "B", bins, 0., 0.35);
+	TH1D * Bbar_mod_odd = new TH1D("Bbar_mod_odd", "Bbar", bins, 0., 0.35);
+	TH1D * asym_even = new TH1D("asym_even", "asym", bins, 0., 0.35);
+	TH1D * asym_odd = new TH1D("asym_odd", "asym", bins, 0., 0.35);
+	TH1D * asym = new TH1D("asym", "asym", bins, 0., 0.35);
+	TH1D * asym_tot = new TH1D("asym_tot", "asym", bins, 0., 0.35);
+	B_mod->Sumw2();
+	Bbar_mod->Sumw2();
+	B_even->Sumw2();
+	Bbar_even->Sumw2();
+	B_mod_even->Sumw2();
+	Bbar_mod_even->Sumw2();
+	B_odd->Sumw2();
+	Bbar_odd->Sumw2();
+	B_mod_odd->Sumw2();
+	Bbar_mod_odd->Sumw2();
+	asym_even->Sumw2();
+	asym_odd->Sumw2();
+	asym->Sumw2();
+	asym_tot->Sumw2();
+
+	B_mod->SetMarkerStyle(2);
+	Bbar_mod->SetMarkerStyle(2);
+	B_even->SetMarkerStyle(2);
+	Bbar_even->SetMarkerStyle(2);
+	B_mod_even->SetMarkerStyle(2);
+	Bbar_mod_even->SetMarkerStyle(2);
+	B_odd->SetMarkerStyle(2);
+	Bbar_odd->SetMarkerStyle(2);
+	B_mod_odd->SetMarkerStyle(2);
+	Bbar_mod_odd->SetMarkerStyle(2);
+	asym_even->SetMarkerStyle(2);
+	asym_odd->SetMarkerStyle(2);
+	asym->SetMarkerStyle(2);
+	asym_tot->SetMarkerStyle(2);
+
+	double mistagToUse;
+	double mistag;
+	double mistagss;
+	int tagToUse;
+	int tag;
+	int tagss;
+	double Btime;
+	double sigmat;
+	double cosTheta_sq;
+	double helcosthetaL;
+	double helphi;
+	double sWeights_ipatia;
+	double time_dilution(0.);
+	double tagging_dilution(0.);
+	double weight(0.);
+	double weight_even(0.);
+	double weight_odd(0.);
+	t->SetBranchAddress("tagomega_os_cb", &mistag ) ;
+	t->SetBranchAddress("tagomega_ss_nn", &mistagss ) ;
+	t->SetBranchAddress("tagdecision_os_cb", &tag ) ;
+	t->SetBranchAddress("tagdecision_ss_nn", &tagss ) ;
+	t->SetBranchAddress("time", &Btime ) ;
+	t->SetBranchAddress("sigmat", &sigmat ) ;
+	t->SetBranchAddress("sWeights_ipatia", &sWeights_ipatia ) ;
+	t->SetBranchAddress("helcosthetaL", &helcosthetaL ) ;
+	t->SetBranchAddress("helphi", &helphi ) ;
+
+	const int nentries = t->GetEntries();
+	for (int i = 0; i < nentries; i++)
+	{
+		t->GetEntry(i);
+		if( (tag !=0 ) && (tagss == 0) ) {
+			tagToUse = tag;
+			mistagToUse = mistag;
+		}
+		else if( (tag == 0) && (tagss != 0) ) {
+			tagToUse = tagss ;
+			mistagToUse = mistagss ;
+		}
+		else if( (tag != 0) && (tag != 0) ) {
+			tagToUse = mistag<mistagss ? tag : tagss;
+			mistagToUse = mistag<mistagss ? mistag : mistagss;
+		}
+		else {
+			tagToUse = 0;
+			mistagToUse = 0.5;
+		}
+		time_dilution = exp(-17.70*17.70*sigmat*sigmat/2.);
+		tagging_dilution = (1-2*mistagToUse);
+		cosTheta_sq = (1.-helcosthetaL*helcosthetaL)*sin(helphi)*sin(helphi);
+		weight = sWeights_ipatia;//*time_dilution*tagging_dilution;
+		weight_even = (5.*cosTheta_sq - 1.0) ; // 1.63 ;   //Even
+		weight_odd  = (2.- 5.*cosTheta_sq ) ; // / 1.53 ;     //Odd
+		
+		if ( tag > 0 ) {
+			B_even   ->Fill(Btime, weight*weight_even);
+			B_odd    ->Fill(Btime, weight*weight_odd);
+			B_mod_even->Fill(fmod(Btime, (2*TMath::Pi()/17.70)), weight*weight_even);
+			B_mod_odd ->Fill(fmod(Btime, (2*TMath::Pi()/17.70)), weight*weight_odd);
+		}
+		if ( tag < 0 ) {
+			Bbar_even->Fill(Btime, weight*weight_even);
+			Bbar_odd ->Fill(Btime, weight*weight_odd);
+			Bbar_mod_even->Fill(fmod(Btime, (2*TMath::Pi()/17.70)), weight*weight_even);
+			Bbar_mod_odd ->Fill(fmod(Btime, (2*TMath::Pi()/17.70)), weight*weight_odd);
+		}
+	}
+
+}
