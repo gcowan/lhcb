@@ -1,14 +1,14 @@
 {
-	TFile * f = TFile::Open("small_toy.root");
+	TFile * f = TFile::Open("toy.root");
 	TFile * g = TFile::Open("large_toy.root");
 	TTree * ft = (TTree*)f->Get("dataNTuple");
 	TTree * gt = (TTree*)g->Get("dataNTuple");
 
-	const int n_m23(7);
+	const int n_m23(6);
 	const int n_cosTheta1(2);
 	const int n_cosTheta2(2);
 	const int n_phi(2);
-	const double m23_bins[n_m23+1] = {0.64, 0.84, 0.94, 1.04, 1.24, 1.34, 1.44, 1.68};
+	const double m23_bins[n_m23+1] = {0.64, 0.87, 0.97, 1.07, 1.27, 1.47, 1.68};
 	const double cosTheta1_bins[n_cosTheta1+1] = {-1., 0., 1.};
 	const double cosTheta2_bins[n_cosTheta2+1] = {-1., 0., 1.};
 	const double phi_bins[n_phi+1] = {-3.14159, 0., 3.14159};
@@ -16,6 +16,7 @@
 	double n(0.);
 	double x(0.);
 	double chi2(0.);
+	double pearson_chi2(0.);
 
 	const int n_data = ft->GetEntries();
 	const int n_toy  = gt->GetEntries();
@@ -40,6 +41,7 @@
 					x = gt->GetEntries(cut)*n_data/double(n_toy);
 					if ( n < 1 ) n = 0.00001;
 					chi2 += 2.*(x - n + n*log(n/x));
+					pearson_chi2 += (x-n)*(x-n)/x;
 					cout << cut << endl;
 					cout << "bin: " << i << " n " << n << " x " << x << " chi2 " << chi2 << endl;
 				}
@@ -51,8 +53,8 @@
 	cout << chi2 << " " << ndof << endl;
 
 	TFile * outFile = TFile::Open("chi2.root","RECREATE");
-	TNtuple * tup = new TNtuple("tuple", "tuple", "chi2:ndof");
-	tup->Fill(chi2, ndof);
+	TNtuple * tup = new TNtuple("tuple", "tuple", "chi2:ndof:pearson_chi2");
+	tup->Fill(chi2, ndof, pearson_chi2);
 	tup->Write();
 	outFile->Close();
 }

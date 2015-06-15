@@ -16,8 +16,8 @@ int main()
 {
     gROOT->ProcessLine(".x ~/lhcb/lhcbStyle.C");
     //Set up efficiency
-    static const int l_max = 6;
-    static const int i_max = 4;
+    static const int l_max = 2;
+    static const int i_max = 2;
     static const int k_max = 2;
     static const int j_max = 2;
     double c[l_max+1][i_max+1][k_max+1][j_max+1];
@@ -35,6 +35,65 @@ int main()
             }
         }
     }
+
+	// Bs efficiency
+	c[0][0][0][0] = 0.190436;// +- 0.000003;
+	c[0][0][0][1] = -0.000805;// +- 0.000007;
+	c[0][0][0][2] = 0.006609;// +- 0.000007;
+	c[0][0][1][1] = 0.002799;// +- 0.000007;
+	c[0][0][1][2] = -0.000126;// +- 0.000007;
+	c[0][0][2][2] = 0.006394;// +- 0.000007;
+	c[0][1][0][0] = -0.018081;// +- 0.000012;
+	c[0][1][0][1] = -0.002133;// +- 0.000012;
+	c[0][1][0][2] = -0.003026;// +- 0.000012;
+	c[0][1][1][1] = -0.000991;// +- 0.000012;
+	c[0][1][1][2] = 0.005612;// +- 0.000012;
+	c[0][1][2][2] = 0.003032;// +- 0.000012;
+	c[0][2][0][0] = -0.048005;// +- 0.000015;
+	c[0][2][0][1] = 0.004255;// +- 0.000016;
+	c[0][2][0][2] = 0.005039;// +- 0.000016;
+	c[0][2][1][1] = -0.000790;// +- 0.000015;
+	c[0][2][1][2] = 0.000236;// +- 0.000015;
+	c[0][2][2][2] = -0.003310;// +- 0.000015;
+	c[1][0][0][0] = 0.028022;// +- 0.000015;
+	c[1][0][0][1] = 0.001951;// +- 0.000015;
+	c[1][0][0][2] = -0.003592;// +- 0.000015;
+	c[1][0][1][1] = -0.000999;// +- 0.000015;
+	c[1][0][1][2] = 0.002400;// +- 0.000015;
+	c[1][0][2][2] = 0.008856;// +- 0.000015;
+	c[1][1][0][0] = 0.046359;// +- 0.000025;
+	c[1][1][0][1] = 0.002633;// +- 0.000025;
+	c[1][1][0][2] = 0.003984;// +- 0.000025;
+	c[1][1][1][1] = -0.001046;// +- 0.000024;
+	c[1][1][1][2] = 0.016059;// +- 0.000024;
+	c[1][1][2][2] = 0.006096;// +- 0.000025;
+	c[1][2][0][0] = 0.036591;// +- 0.000032;
+	c[1][2][0][1] = 0.007403;// +- 0.000033;
+	c[1][2][0][2] = 0.011290;// +- 0.000034;
+	c[1][2][1][1] = 0.006795;// +- 0.000032;
+	c[1][2][1][2] = -0.005211;// +- 0.000032;
+	c[1][2][2][2] = -0.008533;// +- 0.000033;
+	c[2][0][0][0] = 0.009822;// +- 0.000020;
+	c[2][0][0][1] = 0.001300;// +- 0.000020;
+	c[2][0][0][2] = -0.002539;// +- 0.000021;
+	c[2][0][1][1] = 0.005795;// +- 0.000020;
+	c[2][0][1][2] = 0.000852;// +- 0.000020;
+	c[2][0][2][2] = -0.005574;// +- 0.000020;
+	c[2][1][0][0] = 0.000689;// +- 0.000033;
+	c[2][1][0][1] = 0.004604;// +- 0.000033;
+	c[2][1][0][2] = -0.003658;// +- 0.000034;
+	c[2][1][1][1] = -0.009699;// +- 0.000032;
+	c[2][1][1][2] = 0.009891;// +- 0.000032;
+	c[2][1][2][2] = -0.003647;// +- 0.000033;
+	c[2][2][0][0] = 0.020384;// +- 0.000044;
+	c[2][2][0][1] = 0.004512;// +- 0.000044;
+	c[2][2][0][2] = 0.014787;// +- 0.000045;
+	c[2][2][1][1] = 0.002289;// +- 0.000043;
+	c[2][2][1][2] = -0.001272;// +- 0.000043;
+	c[2][2][2][2] = 0.003469;// +- 0.000045;
+
+	/*
+        // Bd efficiency
 
     c[0][0][0][0] = 0.070537;// +- 0.000042
     c[0][0][0][2] = 0.003374;// +- 0.000108
@@ -71,13 +130,13 @@ int main()
     c[5][0][0][0] = -0.003132;// +- 0.000446
     c[6][0][0][0] = 0.004619;// +- 0.000485
     c[6][1][0][0] = -0.005224;// +- 0.000822
-
+	*/
     double min(0.64);//0.633);
     double max(1.68);// Bs
     //double max(1.59);// Bd
-    const int nbins(40);
+    const int nbins(15);
 
-    const int numMoments(6);
+    const int numMoments(9);
     TH1D histos_tot[numMoments];
     TH1D histos_bkg[numMoments];
     TH1D histos_sig[numMoments];
@@ -98,11 +157,12 @@ int main()
         histos_sig[i].Sumw2();
     }
 
-    TFile * f_data = TFile::Open("../data/tighter_cut/selected_candidates_with_correct_angles.root");
+    TFile * f_data = TFile::Open("/Disk/speyside8/lhcb/gcowan1/Z4430/B_s0/data/tighter_cut/selected_candidates_with_correct_angles.root");
     TTree * t_data = (TTree*)f_data->Get("tuple");
     //TFile * f_mc   = TFile::Open("../fits/K892_K21430_NR_sFit_tight_data/test.root");
     //TFile * f_mc   = TFile::Open("../fits/K892_NR_sFit_tight_data/test.root");
-    TFile * f_mc   = TFile::Open("../fits/K892_K01430_NR_sFit_tight_data/test.root");
+    TFile * f_mc   = TFile::Open("toy_no_bkg_no_eff.root");
+    //TFile * f_mc   = TFile::Open("toy_with_bkg_no_eff.root");
     TTree * t_mc   = (TTree*)f_mc  ->Get("dataNTuple");
 
     Float_t         m23;
@@ -112,6 +172,9 @@ int main()
     Float_t         Bs_sig_sw;
     Float_t         Bd_sig_sw;
     Float_t         B_s0_Mass_JpsiConstr;
+    Float_t         pionID;	    
+    Float_t         mlb;	    
+    Float_t         Kplus_ProbNNp;	    
 
     TBranch        *b_m23;   //!
     TBranch        *b_phi;   //!
@@ -120,6 +183,9 @@ int main()
     TBranch        *b_Bs_sig_sw;   //!
     TBranch        *b_Bd_sig_sw;   //!
     TBranch        *b_B_s0_Mass_JpsiConstr;   //!
+    TBranch	   *b_pionID;
+    TBranch	   *b_mlb;
+    TBranch	   *b_Kplus_ProbNNp;
 
     t_data->SetBranchAddress("m23", &m23, &b_m23);
     t_data->SetBranchAddress("phi", &phi, &b_phi);
@@ -128,7 +194,9 @@ int main()
     t_data->SetBranchAddress("Bs_sig_sw", &Bs_sig_sw, &b_Bs_sig_sw);
     t_data->SetBranchAddress("Bd_sig_sw", &Bd_sig_sw, &b_Bd_sig_sw);
     t_data->SetBranchAddress("B_s0_Mass_JpsiConstr", &B_s0_Mass_JpsiConstr, &b_B_s0_Mass_JpsiConstr);
-
+    t_data->SetBranchAddress("pionID", &pionID, &b_pionID);
+    t_data->SetBranchAddress("mlb", &mlb, &b_mlb);
+    t_data->SetBranchAddress("Kplus_ProbNNp", &Kplus_ProbNNp, &b_Kplus_ProbNNp);
     double         m23_mc;
     double         phi_mc;
     double         cosTheta2_mc;
@@ -155,9 +223,9 @@ int main()
         {
             for ( int i = 0; i < i_max+1; i++ )
             {
-                for ( int k = 0; k < 3; k++ )
+                for ( int k = 0; k < k_max+1; k++ )
                 {
-                    for ( int j = 0; j < 3; j+=2 ) // limiting the loop here to only look at terms we need
+                    for ( int j = 0; j < j_max+1; j++ ) // limiting the loop here to only look at terms we need
                     {
                         if (j < k) continue; // must have l >= k
                         Q_l  = gsl_sf_legendre_Pl     (l,    m23_mapped);
@@ -175,13 +243,15 @@ int main()
 
         for (int i = 0; i < numMoments; i++)
         {
+	//if (pionID > 0){
             double p = gsl_sf_legendre_Pl(i, cosTheta2)/angularAcc;
             //if (B_s0_Mass_JpsiConstr > 5300.) histos_tot[i].Fill(m23/1000., p*Bs_sig_sw);
             //if (B_s0_Mass_JpsiConstr > 5320. && B_s0_Mass_JpsiConstr < 5400.) histos_tot[i].Fill(m23/1000., p);
-            //if (B_s0_Mass_JpsiConstr > 5250. && B_s0_Mass_JpsiConstr < 5300.) histos_tot[i].Fill(m23/1000., p);
+            //if (B_s0_Mass_JpsiConstr>5350&&5380>B_s0_Mass_JpsiConstr && !(Kplus_ProbNNp > 0.3 && 15>TMath::Abs(mlb-5620))) histos_tot[i].Fill(m23/1000., p);
             //else if (B_s0_Mass_JpsiConstr > 5400.) histos_bkg[i].Fill(m23/1000., p);
             histos_tot[i].Fill(m23/1000., p*Bs_sig_sw);
-        }
+        //}
+	}
     }
 
     // Now get them for the MC
@@ -194,27 +264,29 @@ int main()
         }
     }
 
-    histos_bkg->Scale(n_data/float(n_mc));
+	
+    for (int i = 0; i < numMoments; i++)
+    	histos_bkg[i].Scale(n_data/float(n_mc));
 
     gStyle->SetOptStat(0);
     TCanvas * can = new TCanvas();
     TLine *l = new TLine(min,0.,max,0.);
-    can->Divide(2,3);
+    can->Divide(3,3);
     for ( int i = 0; i < numMoments; i++)
     {
         can->cd(i+1);
         sprintf(buffer, "<P_{%d}^{U}>", i);
-        //histos_tot[i].Draw();
-        histos_bkg[i].Draw();//"same");
-        //histos_tot[i].GetYaxis()->SetTitle(buffer);
-        //histos_tot[i].GetXaxis()->SetTitle("m(K^{+}#pi^{#font[122]{-}}) [GeV/#it{c}^{2}]");
+        histos_tot[i].Draw();
+        histos_bkg[i].Draw("same");
+        histos_tot[i].GetYaxis()->SetTitle(buffer);
+        histos_tot[i].GetXaxis()->SetTitle("m(K^{+}#pi^{#font[122]{-}}) [GeV/#it{c}^{2}]");
         can->Update();
         l->Draw();
     }
-    can->SaveAs("moments_weighted_mKpi.pdf");
+    can->SaveAs("moments_toy.pdf");
 
     TCanvas * can2 = new TCanvas();
-    can2->Divide(2,3);
+    can2->Divide(3,3);
     for ( int i = 0; i < numMoments; i++)
     {
         can2->cd(i+1);

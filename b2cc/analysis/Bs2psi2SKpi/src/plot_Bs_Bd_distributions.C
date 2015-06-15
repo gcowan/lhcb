@@ -1,0 +1,64 @@
+{
+	TFile * f = TFile::Open("../data/tighter_cut/selected_candidates_with_correct_angles.root");
+	TTree * t = (TTree*)f->Get("tuple");
+	TH1D * h00 = new TH1D("h00","h0",25, 600, 1680);
+	TH1D * h01 = new TH1D("h01","h0",25, 600, 1680);
+	TH1D * h02 = new TH1D("h02","h0",25, 600, 1680);
+	h00->SetMinimum(0);
+	h00->GetXaxis()->SetTitle("m_{K#pi}");
+	h01->Sumw2();	
+	h02->Sumw2();	
+	h02->SetLineColor(kRed);	
+	h02->SetMarkerColor(kRed);	
+	TH1D * h10 = new TH1D("h10","h0",15, -1, 1);
+	TH1D * h11 = new TH1D("h11","h0",15, -1, 1);
+	TH1D * h12 = new TH1D("h12","h0",15, -1, 1);
+	h10->SetMinimum(0);
+	h10->SetMaximum(90);
+	h10->GetXaxis()->SetTitle("cos#theta_{#mu}");
+	h11->Sumw2();	
+	h12->Sumw2();	
+	h12->SetLineColor(kRed);	
+	h12->SetMarkerColor(kRed);	
+	TH1D * h20 = new TH1D("h20","h0",10, -TMath::Pi(), TMath::Pi());
+	TH1D * h21 = new TH1D("h21","h0",10, -TMath::Pi(), TMath::Pi());
+	TH1D * h22 = new TH1D("h22","h0",10, -TMath::Pi(), TMath::Pi());
+	h20->SetMinimum(0);
+	h20->SetMaximum(90);
+	h20->GetXaxis()->SetTitle("#phi");
+	h21->Sumw2();	
+	h22->Sumw2();	
+	h22->SetLineColor(kRed);	
+	h22->SetMarkerColor(kRed);	
+	TH1D * h30 = new TH1D("h30","h0",10, -1, 1);
+	TH1D * h31 = new TH1D("h31","h0",10, -1, 1);
+	TH1D * h32 = new TH1D("h32","h0",10, -1, 1);
+	h30->SetMinimum(0);
+	h30->SetMaximum(90);
+	h30->GetXaxis()->SetTitle("cos#theta_{K}");
+	h31->Sumw2();	
+	h32->Sumw2();	
+	h32->SetLineColor(kRed);	
+	h32->SetMarkerColor(kRed);	
+
+
+	TCanvas * c = new TCanvas("c","c",1200, 1200);
+	c->Divide(2,2);
+	c->cd(1);
+	t->Draw("m23>>h00","Bd_sig_sw/(0.908/0.0123)");
+	t->Draw("m23>>h01","Bs_sig_sw","same");
+	//t->Draw("m23>>h02","B_s0_Mass_JpsiConstr>5390","same");
+	c->cd(2);
+	t->Draw("cosTheta1>>h10","Bd_sig_sw/(0.908/0.0123)");
+	t->Draw("cosTheta1>>h11","Bs_sig_sw","same");
+	//t->Draw("cosTheta1>>h12","B_s0_Mass_JpsiConstr>5390","same");
+	c->cd(3);
+	t->Draw("phi>>h20","Bd_sig_sw/(0.908/0.0123)");
+	t->Draw("phi>>h21","Bs_sig_sw","same");
+	//t->Draw("phi>>h22","B_s0_Mass_JpsiConstr>5390","same");
+	c->cd(4);
+	t->Draw("cosTheta2>>h30","Bd_sig_sw/(0.908/0.0123)");
+	t->Draw("cosTheta2>>h31","Bs_sig_sw","same");
+	//t->Draw("cosTheta2>>h32","B_s0_Mass_JpsiConstr>5390","same");
+	
+}
