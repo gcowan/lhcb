@@ -1,12 +1,12 @@
 # Script to create DaVinci Job
-# Greig Cowan 
+# Greig Cowan
 
 import sys
 
 year = sys.argv[1]
 mode = sys.argv[2]
 
-if mode not in ['norm', 'signal_Bd', 'signal_Bs']: sys.exit()
+if mode not in ['norm', 'signal_Bd', 'signal_Bs', 'background_Bd']: sys.exit()
 
 if mode == 'norm':
 	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_MC_'+ year +'_norm.py'
@@ -25,6 +25,12 @@ DV.events = -1
 
 BK_locations = []
 
+if year == '2011' and mode == 'background_Bd':
+    # Bd -> chic(1,2)K* reflection
+	BK_locations = [
+	  '/MC/2011/Beam3500GeV-2011-MagDown-Nu2-EmNoCuts/Sim05c/Trig0x40760037Flagged/Reco12a/Stripping17NoPrescalingFlagged/11244203/ALLSTREAMS.DST'
+	, '/MC/2011/Beam3500GeV-2011-MagUp-Nu2-EmNoCuts/Sim05c/Trig0x40760037Flagged/Reco12a/Stripping17NoPrescalingFlagged/11244203/ALLSTREAMS.DST'
+	]
 if year == '2011' and mode == 'signal_Bd':
 	BK_locations = [
 	  '/MC/2011/Beam3500GeV-2011-MagDown-Nu2-Pythia6/Sim08g/Digi13/Trig0x40760037/Reco14c/Stripping20r1NoPrescalingFlagged/11244215/ALLSTREAMS.DST'

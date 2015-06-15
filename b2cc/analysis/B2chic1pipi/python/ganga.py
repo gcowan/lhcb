@@ -1,5 +1,5 @@
 # Script to create DaVinci Job
-# Greig Cowan 
+# Greig Cowan
 
 import sys
 
@@ -19,30 +19,30 @@ DV.events = -1
 
 BK_locations = []
 
-if year == '2011': 
-	BK_locations = [
-	 '/LHCb/Collision11/Beam3500GeV-VeloClosed-MagDown/Real Data/Reco14/Stripping20r1/WGBandQSelection9/90000000/PSIX.MDST'
-	,'/LHCb/Collision11/Beam3500GeV-VeloClosed-MagUp/Real Data/Reco14/Stripping20r1/WGBandQSelection9/90000000/PSIX.MDST'
-	]
-if year == '2012': 
-	BK_locations = [
-	 '/LHCb/Collision12/Beam4000GeV-VeloClosed-MagDown/Real Data/Reco14/Stripping20/WGBandQSelection9/90000000/PSIX.MDST'
-	,'/LHCb/Collision12/Beam4000GeV-VeloClosed-MagUp/Real Data/Reco14/Stripping20/WGBandQSelection9/90000000/PSIX.MDST'
-	]
+if year == '2011':
+    BK_locations = [
+     '/LHCb/Collision11/Beam3500GeV-VeloClosed-MagDown/Real Data/Reco14/Stripping20r1/WGBandQSelection9/90000000/PSIX.MDST'
+    ,'/LHCb/Collision11/Beam3500GeV-VeloClosed-MagUp/Real Data/Reco14/Stripping20r1/WGBandQSelection9/90000000/PSIX.MDST'
+    ]
+if year == '2012':
+    BK_locations = [
+     '/LHCb/Collision12/Beam4000GeV-VeloClosed-MagDown/Real Data/Reco14/Stripping20/WGBandQSelection9/90000000/PSIX.MDST'
+    ,'/LHCb/Collision12/Beam4000GeV-VeloClosed-MagUp/Real Data/Reco14/Stripping20/WGBandQSelection9/90000000/PSIX.MDST'
+    ]
 
 data = LHCbDataset()
 bk = BKQuery()
 
 for path in BK_locations:
-	bk.path = path
-	tmp = bk.getDataset()
-	print path, len(tmp.files)
-	if len(tmp.files) > 0:
-		data.extend( tmp )
+    bk.path = path
+    tmp = bk.getDataset()
+    print path, len(tmp.files)
+    if len(tmp.files) > 0:
+        data.extend( tmp )
 
 import sys
 if len(data.files) < 1:
-	sys.exit()
+    sys.exit()
 
 j = Job(
   name           = job_name,
