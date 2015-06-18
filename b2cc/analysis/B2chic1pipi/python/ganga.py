@@ -4,8 +4,12 @@
 import sys
 
 year = sys.argv[1]
+mode = sys.argv[2]
 
-script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_'+ year +'.py'
+end = '.py'
+if mode == 'norm': end = '_norm.py'
+
+script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_'+ year + end
 
 job_name = 'B2chicpipi_data' + str(year)
 print job_name
