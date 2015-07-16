@@ -6,7 +6,7 @@ import sys
 year = sys.argv[1]
 mode = sys.argv[2]
 
-if mode not in ['norm', 'signal_Bd', 'signal_Bs', 'background_Bd']: sys.exit()
+if mode not in ['norm', 'signal_Bd', 'signal_Bs', 'background_Bd', 'Bu_JpsiX', 'Bd_JpsiX', 'Bs_JpsiX', 'Lb_JpsiX']: sys.exit()
 
 if mode == 'norm':
 	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/B2chic1pipi/python/HistosAndTuples_MC_'+ year +'_norm.py'
@@ -76,6 +76,38 @@ if year == '2012' and mode =='norm':
 	 ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia8/Sim08g/Digi13/Trig0x409f0045/Reco14c/Stripping20NoPrescalingFlagged/13244202/ALLSTREAMS.DST'
 	]
 
+if year == '2012' and mode == 'Bu_JpsiX':
+    BK_locations = [
+      '/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia6/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/12442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia8/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/12442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia6/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/12442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia8/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/12442001/ALLSTREAMS.DST'
+    ]
+
+if year == '2012' and mode == 'Bd_JpsiX':
+    BK_locations = [
+      '/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia6/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/11442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia8/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/11442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia6/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/11442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia8/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/11442001/ALLSTREAMS.DST'
+    ]
+
+if year == '2012' and mode == 'Bs_JpsiX':
+    BK_locations = [
+      '/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia6/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/13442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagDown-Nu2.5-Pythia8/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/13442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia6/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/13442001/ALLSTREAMS.DST'
+      ,'/MC/2012/Beam4000GeV-2012-MagUp-Nu2.5-Pythia8/Sim08a/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/13442001/ALLSTREAMS.DST'
+    ]
+
+if year == '2011' and mode == 'Lb_JpsiX':
+    BK_locations = [
+      '/MC/2011/Beam3500GeV-2011-MagDown-Nu2-EmNoCuts/Sim05/Trig0x40760037Flagged/Reco12a/Stripping17NoPrescalingFlagged/15442001/ALLSTREAMS.DST'
+      ,'/MC/2011/Beam3500GeV-2011-MagUp-Nu2-EmNoCuts/Sim05/Trig0x40760037Flagged/Reco12a/Stripping17NoPrescalingFlagged/15442001/ALLSTREAMS.DST'
+    ]
+
+
+
 data = LHCbDataset()
 bk = BKQuery()
 
@@ -93,7 +125,7 @@ if len(data.files) < 1:
 j = Job(
   name           = job_name,
   application    = DV,
-  splitter       = SplitByFiles(filesPerJob = 3),
+  splitter       = SplitByFiles(filesPerJob = 10),
   inputdata      = data,
   outputfiles     = [LocalFile("*.root")],
   do_auto_resubmit = True,
