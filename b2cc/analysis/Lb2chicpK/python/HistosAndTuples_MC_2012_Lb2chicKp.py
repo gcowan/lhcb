@@ -271,7 +271,7 @@ def configure ( inputdata        ,    ## the list of input files
     ## import DaVinci
     from Configurables import DaVinci
     ## delegate the actual configuration to DaVinci
-    dv = DaVinci ( DataType      = '2011'        ,
+    dv = DaVinci ( DataType      = '2012'        ,
                    InputType     = 'DST'         ,
                     Simulation	 = True		 ,
                     Lumi		 = False	 ,
