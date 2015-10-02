@@ -12,8 +12,15 @@ clean :
 
 objects : bin/apply_BDT_weights.o
 
+bin/apply_Bu2Kee_selection.o : src/apply_Bu2Kee_selection.C
+	$(CXX) $(CXXFLAGS) $(ROOTFLAGS) -c $< -o $@
+
+apply_Bu2Kee_selection : bin/apply_Bu2Kee_selection.o 
+	$(CXX) $(CXXFLAGS) $(ROOTFLAGS) -o $@ $^
+
 bin/apply_BDT_weights.o : src/apply_BDT_weights.C
 	$(CXX) $(CXXFLAGS) $(ROOTFLAGS) -c $< -o $@
 
 apply_BDT_weights : bin/apply_BDT_weights.o 
 	$(CXX) $(CXXFLAGS) $(ROOTFLAGS) -o $@ $^
+
