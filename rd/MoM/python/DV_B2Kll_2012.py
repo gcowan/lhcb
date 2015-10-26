@@ -128,6 +128,8 @@ triglist = [
 	,"Hlt2TopoE4BodyBBDTDecision"
 	,"Hlt2MuonFromHLT1Decision"
 	,"Hlt2DiMuonDecision"
+	,"Hlt2DiMuonDetachedDecision"
+	,"Hlt2DiMuonDetachedHeavyDecision"
 	,"Hlt2DiMuonLowMassDecision"
 	,"Hlt2DiMuonJPsiDecision"
 	,"Hlt2DiMuonJPsiHighPTDecision"
