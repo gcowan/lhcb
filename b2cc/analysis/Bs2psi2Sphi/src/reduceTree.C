@@ -20,7 +20,8 @@ void reduceTree(){
 
     // -- define tuple file name, tuple name and cuts to apply
     // -- and also the name of the output file
-    const std::string filename = "/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/Bs2psi2Sphi_MC2012_subsample.root";
+    //const std::string filename = "/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/Bs2psi2Sphi_MC2012_subsample.root";
+    const std::string filename = "/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/Bs2psi2Sphi.root";
     const std::string treename("psi_Tuple/DecayTree");
     const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1)";
     const std::string outFilename("/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTree.root");
@@ -43,6 +44,9 @@ void reduceTree(){
     tree->SetBranchStatus("B_s0_LOKI_DTF_CHI2NDOF",1);
     tree->SetBranchStatus("B_s0_IPCHI2_OWNPV",1);
     tree->SetBranchStatus("B_s0_TRUEID",1);
+    tree->SetBranchStatus("B_s0_ThetaL",1);
+    tree->SetBranchStatus("B_s0_ThetaK",1);
+    tree->SetBranchStatus("B_s0_Phi",1);
     tree->SetBranchStatus("Kplus_PIDK",1);
     tree->SetBranchStatus("Kminus_PIDK",1);
     tree->SetBranchStatus("B_s0_Hlt1DiMuonHighMassDecision_TOS",1);
@@ -70,15 +74,20 @@ void reduceTree(){
 
     double B_s0_LOKI_DTF_CTAU, B_s0_LOKI_DTF_CTAUERR;
     int B_s0_TRUEID;
+    double B_s0_ThetaL, B_s0_ThetaK, B_s0_Phi;
     double helphi, helcosthetaK, helcosthetaL; 
     double Kplus_PX, Kplus_PY, Kplus_PZ, Kplus_PE;
     double Kminus_PX, Kminus_PY, Kminus_PZ, Kminus_PE;
     double muplus_PX, muplus_PY, muplus_PZ, muplus_PE;
     double muminus_PX, muminus_PY, muminus_PZ, muminus_PE;
+    double phi, costhetaK, costhetaL;
 
     rTree1->SetBranchAddress("B_s0_LOKI_DTF_CTAU", &B_s0_LOKI_DTF_CTAU);
     rTree1->SetBranchAddress("B_s0_LOKI_DTF_CTAUERR", &B_s0_LOKI_DTF_CTAUERR);
     rTree1->SetBranchAddress("B_s0_TRUEID", &B_s0_TRUEID);
+    rTree1->SetBranchAddress("B_s0_ThetaL", &B_s0_ThetaL);
+    rTree1->SetBranchAddress("B_s0_ThetaK", &B_s0_ThetaK);
+    rTree1->SetBranchAddress("B_s0_Phi", &B_s0_Phi);
     rTree1->SetBranchAddress("Kplus_PX", &Kplus_PX);
     rTree1->SetBranchAddress("Kplus_PY", &Kplus_PY);
     rTree1->SetBranchAddress("Kplus_PZ", &Kplus_PZ);
@@ -105,16 +114,19 @@ void reduceTree(){
     rTree2->Branch("helcosthetaK", &helcosthetaK, "helcosthetaK/D");
     rTree2->Branch("helcosthetaL", &helcosthetaL, "helcosthetaL/D");
     rTree2->Branch("helphi", &helphi, "helphi/D");
+    rTree2->Branch("costhetaK", &costhetaK, "costhetaK/D");
+    rTree2->Branch("costhetaL", &costhetaL, "costhetaL/D");
+    rTree2->Branch("phi", &phi, "phi/D");
 
-    int percentCounter = 1;
+    int percentCounter = 0;
 
     for(int i = 0; i < rTree1->GetEntries(); ++i){
 
         const int percent = (int)(rTree1->GetEntries()/100.0);
 
         if( i == percent*percentCounter ){
-            std::cout << percentCounter << " %" << std::endl;
-            percentCounter++;
+            std::cout << percentCounter << " %\r" << std::flush;
+            percentCounter += 1;
         }
 
         rTree1->GetEntry(i);
@@ -128,10 +140,13 @@ void reduceTree(){
         TLorentzVector pPsi   = pMplus + pMminus;
 
         calculate_angles(pMplus, pMminus, pKminus, pKplus
-            , helcosthetaK
-            , helcosthetaL
-            , helphi);
+            , costhetaK
+            , costhetaL
+            , phi);
 
+        helphi = B_s0_Phi;
+        helcosthetaL = cos(B_s0_ThetaL);
+        helcosthetaK = cos(B_s0_ThetaK);
         rTree2->Fill();
         //std::cout << mass << std::endl;   
     }
