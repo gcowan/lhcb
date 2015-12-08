@@ -110,7 +110,7 @@
 			<Minimum>-6.3</Minimum>
 			<Maximum>6.3</Maximum>
 			<StepSize>0.05</StepSize>
-			<Type>Free</Type>
+			<Type>Fixed</Type>
 			<Unit>Unitless</Unit>
 		</PhysicsParameter>
 
@@ -220,7 +220,7 @@
 	<FitFunction>
 		<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
 		<Threads>8</Threads>
-		<SetIntegratorTest>False</SetIntegratorTest>
+		<SetIntegratorTest>True</SetIntegratorTest>
 		<WeightName>weight</WeightName>
 		<OffSetNLL>True</OffSetNLL>
 	</FitFunction>
@@ -232,7 +232,7 @@
 			<Name>Bs2JpsiPhi_Signal_v7</Name>
 			<ConfigurationParameter>UseHelicityBasis:True</ConfigurationParameter>
                         <ConfigurationParameter>AngularAcceptanceIgnoreNumerator:True</ConfigurationParameter>			
-			<ConfigurationParameter>UseTimeAcceptance:False</ConfigurationParameter>
+			<ConfigurationParameter>UseTimeAcceptance:True</ConfigurationParameter>
 			<ConfigurationParameter>UseEventResolution:True</ConfigurationParameter>
 			<ConfigurationParameter>ResolutionModel:Phis2012ResolutionModel</ConfigurationParameter>
 		</PDF>
@@ -292,9 +292,9 @@
 			</Observable>
 			<Observable>
 				<Name>weight</Name>
-				<TF1>1.</TF1>
+				#<TF1>1.</TF1>
 				#<TF1>B_velo_eff_weight_with_trigger</TF1>	
-				#<TF1>timeWeight</TF1>	
+                <TF1>weight_dimuon_trigger</TF1>	
 				<Minimum>0</Minimum>
 				<Maximum>10</Maximum>
 				<Unit> </Unit>
@@ -305,19 +305,53 @@
 	<ToFit>
 		<CommonPDF>True</CommonPDF>
                 <PDFConfigurator>
-                    <ConfigurationParameter>AngularAcceptanceFile:acceptance_weights_and_histos_MC2012_sim08e_reco_angles_true_time_with_trigger.root</ConfigurationParameter>
-                    <ConfigurationParameter>TimeAcceptanceFile:trigger_time_efficiency_50bins.txt</ConfigurationParameter>
+                    <ConfigurationParameter>AngularAcceptanceFile:ferguson/acceptance_weights_and_histos_2012_12102015.root</ConfigurationParameter>
+                    #<ConfigurationParameter>TimeAcceptanceFile:2013-3fbAnalysis/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted.txt</ConfigurationParameter>
+                    #<ConfigurationParameter>TimeAcceptanceFile:ferguson/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_sel.txt</ConfigurationParameter>
+                    <ConfigurationParameter>TimeAcceptanceFile:MC2012_Hlt2DiMuonDetachedPsi2S_efficiency_40bins.txt</ConfigurationParameter>
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
             <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTree.root</FileName>
 			<NumberEvents>1000000000</NumberEvents>
-
+            <CutString>(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1)</CutString>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>
 
 		</DataSet>
 	</ToFit>
+
+	<ToFit>
+        <CommonPDF>True</CommonPDF>
+                <PDFConfigurator>
+                    <ConfigurationParameter>AngularAcceptanceFile:ferguson/acceptance_weights_and_histos_2012_12102015.root</ConfigurationParameter>
+                    #<ConfigurationParameter>TimeAcceptanceFile:2013-3fbAnalysis/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached.txt</ConfigurationParameter>
+                    #<ConfigurationParameter>TimeAcceptanceFile:ferguson/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1TrackAndTrackMuonExcl_Hlt2DiMuonDetached_sel.txt</ConfigurationParameter>
+                    <ConfigurationParameter>TimeAcceptanceFile:MC2012_biased_efficiency_40bins.txt</ConfigurationParameter>
+                </PDFConfigurator>
+		<DataSet>
+			<Source>File</Source>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTree.root</FileName>
+			<NumberEvents>0</NumberEvents>
+            <CutString>(B_s0_Hlt1TrackMuonDecision_TOS==1 || B_s0_Hlt1TrackAllL0Decision_TOS==1) && (B_s0_Hlt1DiMuonHighMassDecision_TOS==0) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1)</CutString>
+			<CommonPhaseSpace>
+			</CommonPhaseSpace>
+
+		</DataSet>
+	</ToFit>
+
+    <Output>
+            <ComponentProjection>
+            <Name>time</Name>
+            <XTitle>t [ps]</XTitle>
+            <LogY>True</LogY>
+            <DrawPulls>True</DrawPulls>
+            <Ymin>1</Ymin>
+            <DataBins>80</DataBins>
+            <ColorKey>2</ColorKey>
+        </ComponentProjection> 
+    </Output>
+
 
 </RapidFit>
 
