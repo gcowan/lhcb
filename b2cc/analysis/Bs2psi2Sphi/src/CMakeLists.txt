@@ -15,3 +15,7 @@ TARGET_LINK_LIBRARIES( plot_resolution_sim_2g_with_offset.exe
 ADD_EXECUTABLE ( reduceTree.exe ${PROJECT_SOURCE_DIR}/src/reduceTree.C )
 TARGET_LINK_LIBRARIES( reduceTree.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
 
+ADD_EXECUTABLE ( fit_lifetime_efficiency.exe ${PROJECT_SOURCE_DIR}/src/fit_lifetime_efficiency.C )
+TARGET_LINK_LIBRARIES( fit_lifetime_efficiency.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
+
+

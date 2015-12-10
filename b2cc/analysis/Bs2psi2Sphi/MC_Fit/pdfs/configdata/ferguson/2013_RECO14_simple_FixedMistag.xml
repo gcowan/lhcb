@@ -1,0 +1,281 @@
+<RapidFit>
+
+	//================================================
+	// Formal Parameters to be fitted or fixed
+
+	<ParameterSet>
+
+
+
+		<PhysicsParameter>
+			<Name>F_s</Name>
+			<Value>0.01</Value>
+			<Minimum>0.</Minimum>
+			<Maximum>0.5</Maximum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>delta_s</Name>
+			<Value>0.8</Value>
+			<Minimum>-6.3</Minimum>
+			<Maximum>6.3</Maximum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>Csp</Name>
+			<Value>1.0</Value>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		// True Physics Parameters for signal
+
+		<PhysicsParameter>
+			<Name>gamma</Name>
+			<Value>0.6602</Value>
+			<Minimum>0.0</Minimum>
+			<Maximum>2.0</Maximum>
+			<Type>Free</Type>
+			<Unit>ps^{-1}</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>deltaGamma</Name>
+			<Value>0.0805</Value>
+			<Minimum>-0.1</Minimum>
+			<Maximum>0.3</Maximum>
+			<Type>Free</Type>
+			<Unit>ps^{-1}</Unit>
+			<BlindString>BsDGsCombinationPsi</BlindString>
+			<BlindScale>0.02</BlindScale>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>Aperp_sq</Name>
+			<Value>0.2531</Value>
+			<Minimum>0.</Minimum>
+			<Maximum>0.5</Maximum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>Azero_sq</Name>
+			<Value>0.52107</Value>
+			<Type>Free</Type>
+			<Minimum>0.</Minimum>
+			<Maximum>0.8</Maximum>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>delta_para</Name>
+			<Value>3.27</Value>
+			<Maximum>6.3</Maximum>
+			<Minimum>-6.3</Minimum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>delta_perp</Name>
+			<Value>3.18</Value>
+			<Minimum>-6.3</Minimum>
+			<Maximum>6.3</Maximum>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>delta_zero</Name>
+			<Value>0.0</Value>
+			<Minimum>-3.3</Minimum>
+			<Maximum>3.3</Maximum>
+			<Type>Fixed</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>deltaM</Name>
+			<Value>17.768</Value>
+			<Type>Free</Type>
+			<Unit>ps-1</Unit>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>Phi_s</Name>
+			<Value>0.0</Value>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+			<BlindString>BsPhisCombinationPsi</BlindString>
+			<BlindScale>0.2</BlindScale>
+		</PhysicsParameter>
+
+		<PhysicsParameter>
+			<Name>lambda</Name>
+			<Value>1.0</Value>
+			<Type>Free</Type>
+			<Unit>Unitless</Unit>
+		</PhysicsParameter>
+
+
+		//..................................
+		// Detector Parameters
+
+		// Mistag parameters
+		<PhysicsParameter>
+			<Name>timeResolutionScale</Name>
+			#<Value>1.</Value>
+			<Value>1.26195</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>timeResolutionScale2</Name>
+			<Value>1.90343</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>timeResolutionOffset</Name>
+			<Value>0.00341147</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>timeResolutionOffset2</Name>
+			<Value>0.0297015</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>timeResFraction</Name>
+			<Value>0.82089</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+
+		// Mistag calibration
+		<PhysicsParameter>
+			<Name>mistagP1_OS</Name>
+			#<Value>0.</Value>
+			<Value>0.982</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagP0_OS</Name>
+			<Value>0.3776</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagSetPoint_OS</Name>
+			<Value>0.3714</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP1_OS</Name>
+			#<Value>0.0</Value>
+			<Value>0.066</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP0_OS</Name>
+			#<Value>0.0</Value>
+			<Value>0.0140</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaSetPoint_OS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+
+		// Mistag calibration
+		<PhysicsParameter>
+			<Name>mistagP1_SS</Name>
+			#<Value>0.</Value>
+			<Value>0.976</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagP0_SS</Name>
+			<Value>0.4449</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagSetPoint_SS</Name>
+			<Value>0.4399</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP1_SS</Name>
+			#<Value>0.00</Value>
+			<Value>0.007</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaP0_SS</Name>
+			#<Value>0.0</Value>
+			<Value>-0.0159</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+		<PhysicsParameter>
+			<Name>mistagDeltaSetPoint_SS</Name>
+			<Value>0.0</Value>
+			<Type>Fixed</Type>
+			<Unit> </Unit>
+		</PhysicsParameter>
+
+	</ParameterSet>
+
+
+	//==========================================
+	// Specify which minimiser to use.
+
+	<Minimiser>
+		<MinimiserName>Minuit</MinimiserName>
+		<MaxSteps>100000</MaxSteps>
+		<GradTolerance>0.1</GradTolerance>
+		<Quality>0</Quality>
+		#<ConfigureMinimiser>MinosErrors</ConfigureMinimiser>
+		#<ConfigureMinimiser>NoHesse</ConfigureMinimiser>
+	</Minimiser>
+
+	<FitFunction>
+		<WeightName>sWeight</WeightName>
+		<FunctionName>NegativeLogLikelihoodThreaded</FunctionName>
+		<Threads>16</Threads>
+		<SetIntegratorTest>False</SetIntegratorTest>
+		<NormaliseWeights>True</NormaliseWeights>
+		<OffSetNLL>True</OffSetNLL>
+	</FitFunction>
+
+
+	<NumberRepeats>1</NumberRepeats>
+	<Output>
+	#<Projection>time</Projection>
+	#<Projection>helphi</Projection>
+	#<Projection>helcosthetaK</Projection>
+	#<Projection>helcosthetaL</Projection>
+	<Scan>                                                                                                                                 
+	<Name>Phi_s</Name>                                                                                                                     
+	<Minimum>-1.0</Minimum>
+	<Maximum>1.0</Maximum>
+	<Points>100</Points>                                                                                                                   
+	</Scan>
+	</Output>
+</RapidFit>
+
