@@ -12,9 +12,10 @@
 #include "TFile.h"
 #include "TMath.h"
 #include "TGraphErrors.h"
-#include "Functions.h"
+#include "functions.h"
 //#include "haofei.h"
 #include "RooRealVar.h"
+#include "RooExponential.h"
 #include "RooRelBreitWigner.h"
 
 void PhaseHaofei(const int mode, const int nEvtToGen, const std::string path) {
@@ -39,6 +40,13 @@ void PhaseHaofei(const int mode, const int nEvtToGen, const std::string path) {
     RooRealVar m3("m3","m3",3.6, 3.8);
     RooRelBreitWigner* bw = createPhiMassPdf(m1);
 
+    RooRealVar lt("lt","lt",0.,1e-10);
+    RooRealVar bsGamma("bsGamma","bsGamma",1./1.51e-12);
+    RooExponential* bslifetime = new RooExponential("bslifetime","",lt,bsGamma);
+
+    // generate Bs lifetime datasets
+    RooDataSet *bslifetimedata = bslifetime->generate(RooArgSet(lt),100000) ;
+
     // generate phi datasets
     RooDataSet *phidata = bw->generate(RooArgSet(m1),100000) ;
 
@@ -48,6 +56,8 @@ void PhaseHaofei(const int mode, const int nEvtToGen, const std::string path) {
 
     TH1F *h1 = new TH1F("h1","h1", 100, 5150, 5550);
     h1->Sumw2();
+    TH1F *h2 = new TH1F("mcorr","mcorr", 200, 0, 5500);
+    h2->Sumw2();
     TH1F *dh1 = new TH1F("dh1","dh1", 100, 0., 5000.);
     dh1->Sumw2();
     TH1F *dh2 = new TH1F("dh2","dh2", 100, 1000., 2000.);
@@ -113,6 +123,26 @@ void PhaseHaofei(const int mode, const int nEvtToGen, const std::string path) {
         ++nselected;
         //}
         // std::cout << pipi.P() << std::endl;
+        
+	//get flight distance of Bs in lab frame
+        Double_t flighttime = pick(bslifetimedata,ran,std::string("lt"))*Bs.Gamma();
+        Double_t bsFD = Bs.Beta()*flighttime*3.e8;
+
+	TVector3 flight = Bs.Vect().Unit();
+	flight.SetMag(bsFD);
+
+	//smear for secondary vertex resolution (for now assume 0.02mm for x and y and 0.2mm for z)
+	//TODO should be pT dependent
+	TVector3 smearedFlight = flight + TVector3(ran.Gaus(0.,0.00002),ran.Gaus(0.,0.00002),ran.Gaus(0.,0.0002));
+	Double_t angle = flight.Angle(phi.Vect());
+	Double_t sangle = smearedFlight.Angle(sphi.Vect());
+
+	//construct the corrected mass
+	Double_t ptMiss = sphi.Rho()*TMath::Sin(sangle);
+	Double_t mPhi2  = sphi.M2();
+	Double_t mCorr = TMath::Sqrt(mPhi2 + ptMiss*ptMiss) + ptMiss;
+
+        h2->Fill(mCorr*1000);
     } //event loop	
 
     TCanvas* can1 = new TCanvas("can","can", 800,600); 
@@ -136,6 +166,10 @@ void PhaseHaofei(const int mode, const int nEvtToGen, const std::string path) {
     dh4->Draw("HISTO");
     can5->Update();
 
+    TCanvas* can6 = new TCanvas("can6","can6", 800,600); 
+    h2->Draw("HISTO");
+    can6->Update();
+
     std::cout << "Generated " << ngenerated << std::endl;
     std::cout << "Selected " << nselected << std::endl;
 
@@ -147,6 +181,7 @@ void PhaseHaofei(const int mode, const int nEvtToGen, const std::string path) {
     dh3->Write(); 
     dh4->Write(); 
     h1->Write();  
+    h2->Write();  
     output->Close();
 
 }
