@@ -18,6 +18,9 @@ TARGET_LINK_LIBRARIES( reduceTree.exe dl Core RooFit RooFitCore RooStats RIO Net
 ADD_EXECUTABLE ( find_multiple_candidates.exe ${PROJECT_SOURCE_DIR}/src/find_multiple_candidates.C )
 TARGET_LINK_LIBRARIES( find_multiple_candidates.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
 
+ADD_EXECUTABLE ( multi_cand.exe ${PROJECT_SOURCE_DIR}/src/multi_cand.C )
+TARGET_LINK_LIBRARIES( multi_cand.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
+
 ADD_EXECUTABLE ( fit_lifetime_efficiency.exe ${PROJECT_SOURCE_DIR}/src/fit_lifetime_efficiency.C )
 TARGET_LINK_LIBRARIES( fit_lifetime_efficiency.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
 
