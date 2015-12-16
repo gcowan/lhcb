@@ -54,7 +54,7 @@ private:
   Double_t dhds() const;
   Double_t fFunction(Double_t X) const;
 
-  //ClassDef(RooGounarisSakurai,0) // Gounaris Sakurai PDF
+  ClassDef(RooGounarisSakurai,0) // Gounaris Sakurai PDF
 };
 
 #endif

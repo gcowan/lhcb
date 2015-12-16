@@ -26,7 +26,7 @@
 #include "RooAbsReal.h"
 #include "RooRealVar.h"
 
-//ClassImp(RooGounarisSakurai)
+ClassImp(RooGounarisSakurai)
 
 //---------------------------------------------------------------------------
 RooGounarisSakurai::RooGounarisSakurai(const char *name, const char *title,

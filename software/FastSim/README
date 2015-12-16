@@ -10,16 +10,18 @@ for acceptance studies).
 * Cuts can be made on daughter particle properties.
 * There are tools to swap mass hypothesis.
 
-To start look at PhaseHaofei.C . This generates Bs->phipipi and applies Haofeis cuts.
+Now moved to using CMake to compile a binary. To build do the following:
 
-To run in ROOT do the following:
+mkdir build
+cd build
+cmake ..
+make
 
-  .L RooRelBreitWigner.C+
-  .L functions.h+
-  .L PhaseHaofei.C+
+To run the binary do
 
-   PhaseHaofei()
+src/FastSim.exe 0 10000 ../rootfiles
 
 TODO
 
-Switch to using CMake in order to compile code properly.
+Make the code more generic to allow different decays to be easily configured.
+
