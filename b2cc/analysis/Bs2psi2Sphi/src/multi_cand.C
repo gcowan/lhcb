@@ -16,17 +16,18 @@
 
 using namespace std;
 
-void find_multiple_candidates(const char * fileName, const char * treePath, const unsigned int verbose = 0){ 
+void find_multiple_candidates(const char * fileName, const char * treePath, const char * cuts, const unsigned int verbose = 0){ 
     TFile* file = TFile::Open( fileName );
     if( !file ) std::cout << "file " << fileName << " does not exist" << std::endl;
 
     TTree* tree = (TTree*)file->Get( treePath );
     if( !tree ) std::cout << "tree " << treePath << " does not exist" << std::endl;
 
-    unsigned int n = tree->GetEntries();
+    unsigned int n = tree->GetEntries(cuts);
+    std::cout << "Applying cuts " << cuts << std::endl;
     std::cout << "Total number of selected candidates " << n << std::endl;
 
-    tree->Draw("runNumber:eventNumber", "", "goff");
+    tree->Draw("runNumber:eventNumber", cuts, "goff");
     double * listOfRunNumbers   = tree->GetV1(); 
     double * listOfEventNumbers = tree->GetV2(); 
 
@@ -58,10 +59,11 @@ void find_multiple_candidates(const char * fileName, const char * treePath, cons
 
 int main(int argc, const char * argv[])
 {
-    if ( argc != 4 ) return 1;
+    if ( argc != 5 ) return 1;
     const char * fileName = argv[1];
     const char * treePath = argv[2];
-    const unsigned int verbose = atoi(argv[3]);
+    const char * cuts = argv[3];
+    const unsigned int verbose = atoi(argv[4]);
     find_multiple_candidates(fileName, treePath, verbose);  
     return 0;
 }
