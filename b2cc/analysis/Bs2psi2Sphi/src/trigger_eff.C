@@ -1,8 +1,12 @@
 {
     TFile * f = TFile::Open("../data/Bs2psi2Sphi.root");
     TTree * DecayTree = (TTree*)f->Get("psi_Tuple/DecayTree");
+    //TFile * f = TFile::Open("../data/ferguson/MC2012_psi2s_corrv2.root");
+    //TTree * DecayTree = (TTree*)f->Get("DecayTree");
+    //TFile * f = TFile::Open("../data/ferguson/MC2012_psi2s.root");
+    //TTree * DecayTree = (TTree*)f->Get("DecayTree");
     
-    TFile * f1 = TFile::Open("../data/Bs2psi2Sphi_Toy_Sample.root");
+    TFile * f1 = TFile::Open("../data/ferguson/Bs2Psi2SPhi_gen_2.root");
     TTree * toy_data = (TTree*)f1->Get("dataNTuple");
 
     const int nbins(40);
@@ -30,12 +34,22 @@
     toy_den->Sumw2();
     toy_rat->Sumw2();
 
-    const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1) && B_s0_BKGCAT<70 && B_s0_LOKI_DTF_CTAU/0.2997>0.3 && B_s0_LOKI_DTF_CTAU/0.2997<14.";
+    
+    const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1) && B_s0_BKGCAT<70 && B_s0_LOKI_DTF_CTAU/0.2997>0.3 && B_s0_LOKI_DTF_CTAU/0.2997<14.&&B_s0_BKGCAT==0";
 
-    const std::string cuts_control = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonPsi2SDecision_TOS==1) && B_s0_BKGCAT<70 && B_s0_LOKI_DTF_CTAU/0.2997>0.3 && B_s0_LOKI_DTF_CTAU/0.2997<14.";
+    const std::string cuts_control = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonPsi2SDecision_TOS==1) && B_s0_BKGCAT<70 && B_s0_LOKI_DTF_CTAU/0.2997>0.3 && B_s0_LOKI_DTF_CTAU/0.2997<14.&&B_s0_BKGCAT==0";
+    
+    /*
+    const std::string cuts = "(30. > TMath::Abs(phi_1020_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1) && B_s0_BKGCAT<70 && B_s0_LOKI_DTF_CTAU/0.2997>0.3 && B_s0_LOKI_DTF_CTAU/0.2997<14.";
 
+    const std::string cuts_control = "(30. > TMath::Abs(phi_1020_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)&&(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonPsi2SDecision_TOS==1) && B_s0_BKGCAT<70 && B_s0_LOKI_DTF_CTAU/0.2997>0.3 && B_s0_LOKI_DTF_CTAU/0.2997<14.";
+    */
+    //const std::string cuts = "(triggerDecisionUnbiased==1 && triggerDecisionUnbiasedPrescaled==1)";
+    //const std::string cuts_control = "triggerDecisionUnbiasedPrescaled==1";
     DecayTree->Draw("B_s0_LOKI_DTF_CTAU/0.2997>>num",(cuts + "&&" + cuts_control).c_str());
     DecayTree->Draw("B_s0_LOKI_DTF_CTAU/0.2997>>den", cuts_control.c_str() );
+    //DecayTree->Draw("time>>num",(cuts + "&&" + cuts_control).c_str());
+    //DecayTree->Draw("time>>den", cuts_control.c_str() );
     toy_data->Draw("time>>toy_den");
 
     rat->Divide(num, den, 1, 1, "b");

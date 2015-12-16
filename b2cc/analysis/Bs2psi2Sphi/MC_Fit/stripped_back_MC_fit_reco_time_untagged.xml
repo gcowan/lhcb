@@ -292,7 +292,7 @@
 			</Observable>
 			<Observable>
 				<Name>weight</Name>
-				#<TF1>1.</TF1>
+                #<TF1>1.</TF1>
 				#<TF1>B_velo_eff_weight_with_trigger</TF1>	
                 <TF1>weight_dimuon_trigger</TF1>	
 				<Minimum>0</Minimum>
@@ -312,9 +312,8 @@
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
-            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTree.root</FileName>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeUnbiased.root</FileName>
 			<NumberEvents>1000000000</NumberEvents>
-            <CutString>(B_s0_Hlt1DiMuonHighMassDecision_TOS==1) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1)</CutString>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>
 
@@ -331,9 +330,8 @@
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
-            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTree.root</FileName>
-			<NumberEvents>0</NumberEvents>
-            <CutString>(B_s0_Hlt1TrackMuonDecision_TOS==1 || B_s0_Hlt1TrackAllL0Decision_TOS==1) && (B_s0_Hlt1DiMuonHighMassDecision_TOS==0) && (B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1)</CutString>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeExclBiased.root</FileName>
+			<NumberEvents>0000000</NumberEvents>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>
 

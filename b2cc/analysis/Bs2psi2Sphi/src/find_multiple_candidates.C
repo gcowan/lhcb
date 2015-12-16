@@ -16,14 +16,15 @@
 
 using namespace std;
 
-void reduceTree(){ 
+void find_multiple_candidates(){ 
 
     // -- define tuple file name, tuple name and cuts to apply
     // -- and also the name of the output file
     const std::string filename = "/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/Bs2psi2Sphi.root";
     const std::string treename("psi_Tuple/DecayTree");
-    const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && B_s0_BKGCAT < 70";
-    const std::string outFilename("/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTree.root");
+    //const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && (B_s0_BKGCAT == 0 || B_s0_BKGCAT == 50) && B_s0_Hlt1DiMuonHighMassDecision_TOS==1 && B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1 && B_s0_LOKI_DTF_CTAU/0.299792458 > 0.3 && B_s0_LOKI_DTF_CTAU/0.299792458 < 14.";
+    const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && (B_s0_BKGCAT == 0 || B_s0_BKGCAT == 50) && B_s0_Hlt1DiMuonHighMassDecision_TOS==0 && (B_s0_Hlt1TrackMuonDecision_TOS==1 || B_s0_Hlt1TrackAllL0Decision_TOS==1) && B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1 && B_s0_LOKI_DTF_CTAU/0.299792458 > 0.3 && B_s0_LOKI_DTF_CTAU/0.299792458 < 14.";
+    const std::string outFilename("/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeExclBiased.root");
 
 
     TFile* file = TFile::Open( filename.c_str() );
@@ -72,14 +73,47 @@ void reduceTree(){
     tree->SetBranchStatus("muminus_PY",1);
     tree->SetBranchStatus("muminus_PZ",1);
     tree->SetBranchStatus("muminus_PE",1);
+    tree->SetBranchStatus("eventNumber",1);
+    tree->SetBranchStatus("runNumber",1);
 
     // -- this file is just here to make the 'CopyTree' happy
     TFile* dummyFile = new TFile("/tmp/dummy.root","RECREATE");
     TTree* rTree1 = tree->CopyTree( cuts.c_str() );
+    unsigned int n = rTree1->GetEntries();
+    std::cout << "Total number of selected candidates " << n << " " << rTree1->GetEntries(cuts.c_str()) << std::endl;
+
+    rTree1->Draw("runNumber:eventNumber:B_s0_LOKI_DTF_CTAU/0.2997:B_s0_LOKI_DTF_CHI2NDOF", "", "goff");
+    double * listOfRunNumbers   = rTree1->GetV1(); 
+    double * listOfEventNumbers = rTree1->GetV2(); 
+    double * listOfDecayTimes   = rTree1->GetV3(); 
+    double * listOfDTFCHI2NDOF  = rTree1->GetV4(); 
+
+    unsigned int totalNumberOfDuplicates(0);
+    unsigned int numberOfCandidatesInThisEvent(1);
+    unsigned int numberOfCandidates[n];
+    std::fill(numberOfCandidates, numberOfCandidates+n, 1);
+    unsigned int i, j, offset;
+    for (i = 0; i < n; i += offset)
+    {
+        for (j = i + 1; j < n; ++j)
+        {
+            if ((UInt_t(listOfRunNumbers[i]) == UInt_t(listOfRunNumbers[j])) && (ULong64_t(listOfEventNumbers[i]) == ULong64_t(listOfEventNumbers[j])) )
+            {
+                //printf("Found a duplicate of %u\t %lli\t %u\t %u\t %g %g\t %g %g\n", UInt_t(listOfRunNumbers[i]), ULong64_t(listOfEventNumbers[j]), i, j, listOfDecayTimes[i], listOfDecayTimes[j], listOfDTFCHI2NDOF[i], listOfDTFCHI2NDOF[j]);
+                numberOfCandidates[i] = numberOfCandidates[i] + 1;
+            }
+        }
+        offset = numberOfCandidates[i];
+        totalNumberOfDuplicates += numberOfCandidates[i] - 1;
+    }
+
+    std::cout << "Number of duplicates " << totalNumberOfDuplicates << std::endl;
+    std::cout << "Fraction of duplicates " << double(totalNumberOfDuplicates)/n << std::endl;
 
     double B_s0_LOKI_DTF_CTAU, B_s0_LOKI_DTF_CTAUERR;
     int B_s0_TRUEID, B_s0_BKGCAT;
-    ULong64_t totCandidates;
+    ULong64_t eventNumber;
+    UInt_t runNumber;
     double B_s0_ENDVERTEX_X, B_s0_ENDVERTEX_Y;
     double B_s0_ThetaL, B_s0_ThetaK, B_s0_Phi;
     double helphi, helcosthetaK, helcosthetaL; 
@@ -102,7 +136,8 @@ void reduceTree(){
 
     rTree1->SetBranchAddress("B_s0_LOKI_DTF_CTAU", &B_s0_LOKI_DTF_CTAU);
     rTree1->SetBranchAddress("B_s0_LOKI_DTF_CTAUERR", &B_s0_LOKI_DTF_CTAUERR);
-    rTree1->SetBranchAddress("totCandidates", &totCandidates);
+    rTree1->SetBranchAddress("eventNumber", &eventNumber);
+    rTree1->SetBranchAddress("runNumber", &runNumber);
     rTree1->SetBranchAddress("B_s0_TRUEID", &B_s0_TRUEID);
     rTree1->SetBranchAddress("B_s0_BKGCAT", &B_s0_BKGCAT);
     rTree1->SetBranchAddress("B_s0_ThetaL", &B_s0_ThetaL);
@@ -138,7 +173,9 @@ void reduceTree(){
     rTree2->Branch("B_s0_LOKI_DTF_CTAUERR", &B_s0_LOKI_DTF_CTAUERR, "B_s0_LOKI_DTF_CTAUERR/D");
     rTree2->Branch("B_s0_BKGCAT", &B_s0_BKGCAT, "B_s0_BKGCAT/I");
     rTree2->Branch("B_s0_TRUEID", &B_s0_TRUEID, "B_s0_TRUEID/I");
-    rTree2->Branch("totCandidates", &totCandidates, "totCandidates/I");
+    rTree2->Branch("numberOfCandidatesInThisEvent", &numberOfCandidatesInThisEvent, "numberOfCandidatesInThisEvent/I");
+    rTree2->Branch("eventNumber", &eventNumber, "eventNumber/I");
+    rTree2->Branch("runNumber", &runNumber, "runNumber/I");
     rTree2->Branch("helcosthetaK", &helcosthetaK, "helcosthetaK/D");
     rTree2->Branch("helcosthetaL", &helcosthetaL, "helcosthetaL/D");
     rTree2->Branch("helphi", &helphi, "helphi/D");
@@ -198,7 +235,7 @@ void reduceTree(){
         }
     }
 
-    for(int i = 0; i < rTree1->GetEntries(); ++i){
+    for(unsigned int i = 0; i < rTree1->GetEntries(); ++i){
 
         const int percent = (int)(rTree1->GetEntries()/100.0);
 
@@ -261,17 +298,18 @@ void reduceTree(){
         if ( PT_mp1 > PT_mm1 ) weight_track_trigger = 1./(eff_mm_off*eff_mp    *eff_km*eff_kp);
         else                   weight_track_trigger = 1./(eff_mm    *eff_mp_off*eff_km*eff_kp);
 
+        numberOfCandidatesInThisEvent = numberOfCandidates[i];
         rTree2->Fill();
-        //std::cout << mass << std::endl;   
     }
     rTree2->Print();
     rTree2->Write();
     rFile->Save();
-
+    delete dummyFile;
 }
 
 int main(int argc, const char * argv[])
 {
-    reduceTree();  
+    if ( argc != 1 ) return 1;
+    find_multiple_candidates();  
     return 0;
 }
