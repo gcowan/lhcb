@@ -242,7 +242,6 @@
 		<PhaseSpaceBoundary>
 			<Observable>
 				<Name>time</Name>
-		                <TF1>B_s0_LOKI_DTF_CTAU/0.299792458</TF1>
 				<Minimum>0.3</Minimum>
 				<Maximum>14.0</Maximum>
 				<Unit>ps</Unit>
@@ -270,7 +269,7 @@
 			</Observable>
 			<Observable>
 				<Name>tag</Name>
-				<TF1>0*B_s0_TRUEID/531.</TF1>
+				<TF1>0*trueid/531.</TF1>
 				<Value>1.</Value>
 				<Value>0.</Value>
 				<Value>-1.</Value>
@@ -285,7 +284,7 @@
 			</Observable>
 			<Observable>
 				<Name>eventResolution</Name>
-				<TF1>B_s0_LOKI_DTF_CTAUERR/0.299792458</TF1>
+				<TF1>sigmat</TF1>
 				<Minimum>0.0</Minimum>
 				<Maximum>0.12</Maximum>
 				<Unit> </Unit>
@@ -308,12 +307,16 @@
                     <ConfigurationParameter>AngularAcceptanceFile:ferguson/acceptance_weights_and_histos_2012_12102015.root</ConfigurationParameter>
                     #<ConfigurationParameter>TimeAcceptanceFile:2013-3fbAnalysis/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted.txt</ConfigurationParameter>
                     #<ConfigurationParameter>TimeAcceptanceFile:ferguson/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_sel.txt</ConfigurationParameter>
-                    <ConfigurationParameter>TimeAcceptanceFile:MC2012_Hlt2DiMuonDetachedPsi2S_efficiency_40bins.txt</ConfigurationParameter>
+                    #<ConfigurationParameter>TimeAcceptanceFile:MC2012_ferguson_tuple_unbiased_efficiency_40bins.txt</ConfigurationParameter>
+                    <ConfigurationParameter>TimeAcceptanceFile:MC2012_ferguson_tuple_unbiased_efficiency_40bins.txt</ConfigurationParameter>
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
-            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeUnbiased.root</FileName>
-            #<CutString>(5000000. > B_s0_LOKI_DTF_CHI2NDOF) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)</CutString>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/ferguson/noonecand/output_ntupleB_MC_2012.root</FileName>
+            #<FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/ferguson/noonecand/MC2012_psi2s_allcuts.root</FileName>
+            <NTuplePath>DecayTree</NTuplePath>
+            #<CutString>sel_cleantail==1 && sel_clonecut==1 && sel_qualitycut==1 && sel_daughter1==1 && 60>bkgcat && triggerDecisionUnbiased_2012==1</CutString>
+            <CutString>60>bkgcat && triggerDecisionUnbiased_2012==1</CutString>
             <NumberEvents>1000000000</NumberEvents>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>
@@ -331,7 +334,9 @@
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
-            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeExclBiased.root</FileName>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/ferguson/noonecand/MC2012_psi2s_allcuts.root</FileName>
+            <NTuplePath>DecayTree</NTuplePath>
+            <CutString>triggerDecisionBiasedExcl_2012==1</CutString>
 			<NumberEvents>0000000</NumberEvents>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>

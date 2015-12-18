@@ -78,7 +78,7 @@
 
 		<PhysicsParameter>
 			<Name>Aperp_sq</Name>
-			<Value>0.16</Value>
+			<Value>0.25</Value>
 			<Minimum>0.</Minimum>
 			<Maximum>0.5</Maximum>
 			<Type>Free</Type>
@@ -87,7 +87,7 @@
 
 		<PhysicsParameter>
 			<Name>Azero_sq</Name>
-			<Value>0.601</Value>
+			<Value>0.51</Value>
 			<Type>Free</Type>
 			<Minimum>0.</Minimum>
 			<Maximum>0.8</Maximum>
@@ -96,7 +96,7 @@
 
 		<PhysicsParameter>
 			<Name>delta_para</Name>
-			<Value>2.5</Value>
+			<Value>3.3</Value>
 			<StepSize>0.05</StepSize>
 			<Maximum>6.3</Maximum>
 			<Minimum>-6.3</Minimum>
@@ -106,7 +106,7 @@
 
 		<PhysicsParameter>
 			<Name>delta_perp</Name>
-			<Value>-0.17</Value>
+			<Value>3.07</Value>
 			<Minimum>-6.3</Minimum>
 			<Maximum>6.3</Maximum>
 			<StepSize>0.05</StepSize>
@@ -132,7 +132,7 @@
 
 		<PhysicsParameter>
 			<Name>Phi_s</Name>
-			<Value>-0.04</Value>
+			<Value>0.07</Value>
 			<Type>Fixed</Type>
 			<Unit>Unitless</Unit>
 		</PhysicsParameter>
@@ -147,8 +147,8 @@
 		<PhysicsParameter>
 			<Name>sfBarOffset</Name>
 			#<Value>1.2789</Value>
-			<Value>1.2412</Value> #MC2011
-			#<Value>1.2795</Value> #MC2012
+			#<Value>1.2412</Value> #MC2011
+			<Value>1.2795</Value> #MC2012
 			<Type>Fixed</Type>
 			<Unit> </Unit>
 		</PhysicsParameter>
@@ -156,8 +156,8 @@
 		<PhysicsParameter>
 			<Name>sfBarSlope</Name>
 			#<Value>1.11</Value>
-			<Value>1.96</Value> #MC2011
-			#<Value>1.06</Value> #MC2012
+			#<Value>1.96</Value> #MC2011
+			<Value>1.06</Value> #MC2012
 			<Type>Fixed</Type>
 			<Unit> </Unit>
 		</PhysicsParameter>
@@ -165,8 +165,8 @@
 		<PhysicsParameter>
 			<Name>sfSigmaOffset</Name>
 			#<Value>0.2338</Value>
-			<Value>0.2512</Value> #MC2011
-			#<Value>0.2344</Value> #MC2012
+			#<Value>0.2512</Value> #MC2011
+			<Value>0.2344</Value> #MC2012
 			<Type>Fixed</Type>
 			<Unit> </Unit>
 		</PhysicsParameter>
@@ -174,8 +174,8 @@
 		<PhysicsParameter>
 			<Name>sfSigmaSlope</Name>
 			#<Value>3.02</Value>
-			<Value>3.14</Value> #MC2011
-			#<Value>2.89</Value> #MC2012
+			#<Value>3.14</Value> #MC2011
+			<Value>2.89</Value> #MC2012
 			<Type>Fixed</Type>
 			<Unit> </Unit>
 		</PhysicsParameter>
@@ -183,8 +183,8 @@
 		<PhysicsParameter>
 			<Name>sigmaBar</Name>
 			#<Value>0.033</Value>
-			<Value>0.0329</Value> #MC2011
-			#<Value>0.03355</Value> #MC2012
+			#<Value>0.0329</Value> #MC2011
+			<Value>0.03355</Value> #MC2012
 			<Type>Fixed</Type>
 			<Unit> </Unit>
 		</PhysicsParameter>
@@ -192,8 +192,8 @@
 		<PhysicsParameter>
 			<Name>timeResFraction</Name>
 			#<Value>0.174</Value>
-			<Value>0.180</Value> #MC2011
-			#<Value>0.170</Value> #MC2012
+			#<Value>0.180</Value> #MC2011
+			<Value>0.170</Value> #MC2012
 			<Type>Fixed</Type>
 			<Unit> </Unit>
 		</PhysicsParameter>
@@ -242,7 +242,6 @@
 		<PhaseSpaceBoundary>
 			<Observable>
 				<Name>time</Name>
-		                <TF1>B_s0_LOKI_DTF_CTAU/0.299792458</TF1>
 				<Minimum>0.3</Minimum>
 				<Maximum>14.0</Maximum>
 				<Unit>ps</Unit>
@@ -270,7 +269,7 @@
 			</Observable>
 			<Observable>
 				<Name>tag</Name>
-				<TF1>0*B_s0_TRUEID/531.</TF1>
+				<TF1>0*trueid/531.</TF1>
 				<Value>1.</Value>
 				<Value>0.</Value>
 				<Value>-1.</Value>
@@ -285,7 +284,7 @@
 			</Observable>
 			<Observable>
 				<Name>eventResolution</Name>
-				<TF1>B_s0_LOKI_DTF_CTAUERR/0.299792458</TF1>
+				<TF1>sigmat</TF1>
 				<Minimum>0.0</Minimum>
 				<Maximum>0.12</Maximum>
 				<Unit> </Unit>
@@ -306,14 +305,13 @@
 		<CommonPDF>True</CommonPDF>
                 <PDFConfigurator>
                     <ConfigurationParameter>AngularAcceptanceFile:ferguson/acceptance_weights_and_histos_2012_12102015.root</ConfigurationParameter>
-                    #<ConfigurationParameter>TimeAcceptanceFile:2013-3fbAnalysis/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted.txt</ConfigurationParameter>
-                    #<ConfigurationParameter>TimeAcceptanceFile:ferguson/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted_sel.txt</ConfigurationParameter>
-                    <ConfigurationParameter>TimeAcceptanceFile:MC2012_Hlt2DiMuonDetachedPsi2S_efficiency_40bins.txt</ConfigurationParameter>
+                    <ConfigurationParameter>TimeAcceptanceFile:2013-3fbAnalysis/Bs_HltPropertimeAcceptance_Data_2012_40bins_Hlt1DiMuon_Hlt2DiMuonDetached_Reweighted.txt</ConfigurationParameter>
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
-            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeUnbiased.root</FileName>
-            #<CutString>(5000000. > B_s0_LOKI_DTF_CHI2NDOF) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.)</CutString>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/Bs2JpsiPhi_MC2012_ntupleB_20130904.root</FileName>
+            <NTuplePath>DecayTree</NTuplePath>
+            <CutString>sel_cleantail==1 && sel_clonecut==1 && sel_qualitycut==1 && sel_daughter1==1 && 60>bkgcat && triggerDecisionUnbiased==1</CutString>
             <NumberEvents>1000000000</NumberEvents>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>
@@ -331,7 +329,9 @@
                 </PDFConfigurator>
 		<DataSet>
 			<Source>File</Source>
-            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeExclBiased.root</FileName>
+            <FileName>/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/ferguson/noonecand/MC2012_psi2s_allcuts.root</FileName>
+            <NTuplePath>DecayTree</NTuplePath>
+            <CutString>triggerDecisionBiasedExcl_2012==1</CutString>
 			<NumberEvents>0000000</NumberEvents>
 			<CommonPhaseSpace>
 			</CommonPhaseSpace>

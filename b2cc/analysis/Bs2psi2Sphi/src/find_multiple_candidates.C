@@ -22,9 +22,10 @@ void find_multiple_candidates(){
     // -- and also the name of the output file
     const std::string filename = "/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/Bs2psi2Sphi.root";
     const std::string treename("psi_Tuple/DecayTree");
-    //const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && (B_s0_BKGCAT == 0 || B_s0_BKGCAT == 50) && B_s0_Hlt1DiMuonHighMassDecision_TOS==1 && B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1 && B_s0_LOKI_DTF_CTAU/0.299792458 > 0.3 && B_s0_LOKI_DTF_CTAU/0.299792458 < 14.";
-    const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && (B_s0_BKGCAT == 0 || B_s0_BKGCAT == 50) && B_s0_Hlt1DiMuonHighMassDecision_TOS==0 && (B_s0_Hlt1TrackMuonDecision_TOS==1 || B_s0_Hlt1TrackAllL0Decision_TOS==1) && B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1 && B_s0_LOKI_DTF_CTAU/0.299792458 > 0.3 && B_s0_LOKI_DTF_CTAU/0.299792458 < 14.";
-    const std::string outFilename("/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeExclBiased.root");
+    const std::string cuts = "(40. > TMath::Abs(psi_MM - 3686.1)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (B_s0_BKGCAT == 0 || B_s0_BKGCAT == 50) && B_s0_Hlt1DiMuonHighMassDecision_TOS==1 && B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1 && B_s0_LOKI_DTF_CTAU/0.299792458 > 0.3 && B_s0_LOKI_DTF_CTAU/0.299792458 < 14.";
+    //const std::string cuts = "(30. > TMath::Abs(phi_M - 1020.)) && (0.12 > B_s0_LOKI_DTF_CTAUERR/0.299792458) && (B_s0_LOKI_DTF_CHI2NDOF > 0) && (B_s0_LOKI_DTF_VCHI2NDOF > 0) && (5. > B_s0_LOKI_DTF_CHI2NDOF) && (25. > B_s0_IPCHI2_OWNPV) && (Kplus_PIDK > 0.) && (Kminus_PIDK > 0.) && (B_s0_BKGCAT == 0 || B_s0_BKGCAT == 50) && B_s0_Hlt1DiMuonHighMassDecision_TOS==0 && (B_s0_Hlt1TrackMuonDecision_TOS==1 || B_s0_Hlt1TrackAllL0Decision_TOS==1) && B_s0_Hlt2DiMuonDetachedPsi2SDecision_TOS==1 && B_s0_LOKI_DTF_CTAU/0.299792458 > 0.3 && B_s0_LOKI_DTF_CTAU/0.299792458 < 14.";
+    const std::string outFilename("/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeUnbiased.root");
+    //const std::string outFilename("/Home/gcowan1/lhcb/lhcb/b2cc/analysis/Bs2psi2Sphi/data/reducedTreeExclBiased.root");
 
 
     TFile* file = TFile::Open( filename.c_str() );
@@ -37,6 +38,7 @@ void find_multiple_candidates(){
 
     tree->SetBranchStatus("*", 0);
     tree->SetBranchStatus("phi_M",1);
+    tree->SetBranchStatus("psi_MM",1);
     tree->SetBranchStatus("B_s0_LOKI_DTF_CTAU",1);
     tree->SetBranchStatus("B_s0_LOKI_DTF_CTAUERR",1);
     tree->SetBranchStatus("B_s0_LOKI_DTF_CHI2NDOF",1);
@@ -110,6 +112,8 @@ void find_multiple_candidates(){
     std::cout << "Number of duplicates " << totalNumberOfDuplicates << std::endl;
     std::cout << "Fraction of duplicates " << double(totalNumberOfDuplicates)/n << std::endl;
 
+    double B_s0_LOKI_DTF_CHI2NDOF;
+    double Kplus_PIDK, Kminus_PIDK;
     double B_s0_LOKI_DTF_CTAU, B_s0_LOKI_DTF_CTAUERR;
     int B_s0_TRUEID, B_s0_BKGCAT;
     ULong64_t eventNumber;
@@ -136,6 +140,7 @@ void find_multiple_candidates(){
 
     rTree1->SetBranchAddress("B_s0_LOKI_DTF_CTAU", &B_s0_LOKI_DTF_CTAU);
     rTree1->SetBranchAddress("B_s0_LOKI_DTF_CTAUERR", &B_s0_LOKI_DTF_CTAUERR);
+    rTree1->SetBranchAddress("B_s0_LOKI_DTF_CHI2NDOF", &B_s0_LOKI_DTF_CHI2NDOF);
     rTree1->SetBranchAddress("eventNumber", &eventNumber);
     rTree1->SetBranchAddress("runNumber", &runNumber);
     rTree1->SetBranchAddress("B_s0_TRUEID", &B_s0_TRUEID);
@@ -143,6 +148,8 @@ void find_multiple_candidates(){
     rTree1->SetBranchAddress("B_s0_ThetaL", &B_s0_ThetaL);
     rTree1->SetBranchAddress("B_s0_ThetaK", &B_s0_ThetaK);
     rTree1->SetBranchAddress("B_s0_Phi", &B_s0_Phi);
+    rTree1->SetBranchAddress("Kplus_PIDK", &Kplus_PIDK);
+    rTree1->SetBranchAddress("Kminus_PIDK", &Kminus_PIDK);
     rTree1->SetBranchAddress("Kplus_PX", &Kplus_PX);
     rTree1->SetBranchAddress("Kplus_PY", &Kplus_PY);
     rTree1->SetBranchAddress("Kplus_PZ", &Kplus_PZ);
@@ -169,6 +176,7 @@ void find_multiple_candidates(){
     TFile* rFile = new TFile( outFilename.c_str() ,"RECREATE");
     TTree* rTree2 = new TTree();
     rTree2->SetName("dataNTuple");
+    rTree2->Branch("B_s0_LOKI_DTF_CHI2NDOF", &B_s0_LOKI_DTF_CHI2NDOF, "B_s0_LOKI_DTF_CHI2NDOF/D");
     rTree2->Branch("B_s0_LOKI_DTF_CTAU", &B_s0_LOKI_DTF_CTAU, "B_s0_LOKI_DTF_CTAU/D");
     rTree2->Branch("B_s0_LOKI_DTF_CTAUERR", &B_s0_LOKI_DTF_CTAUERR, "B_s0_LOKI_DTF_CTAUERR/D");
     rTree2->Branch("B_s0_BKGCAT", &B_s0_BKGCAT, "B_s0_BKGCAT/I");
@@ -190,6 +198,8 @@ void find_multiple_candidates(){
     rTree2->Branch("B_s0_TRUEENDVERTEX_Y", &B_s0_ENDVERTEX_Y, "B_s0_TRUEENDVERTEX_Y/D");
     rTree2->Branch("muplus_IPz", &IPz_mp, "muplus_IPz/D");
     rTree2->Branch("muminus_IPz", &IPz_mm, "muminus_IPz/D");
+    rTree2->Branch("Kplus_PIDK", &Kplus_PIDK, "Kplus_PIDK/D");
+    rTree2->Branch("Kminus_PIDK", &Kminus_PIDK, "Kminus_PIDK/D");
     rTree2->Branch("Kplus_IPz", &IPz_kp, "Kplus_IPz/D");
     rTree2->Branch("Kminus_IPz", &IPz_km, "Kminus_IPz/D");
     rTree2->Branch("weight_dimuon_trigger", &weight, "weight_dimuon_trigger/D");

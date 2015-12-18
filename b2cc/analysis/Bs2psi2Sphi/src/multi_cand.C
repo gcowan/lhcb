@@ -64,6 +64,6 @@ int main(int argc, const char * argv[])
     const char * treePath = argv[2];
     const char * cuts = argv[3];
     const unsigned int verbose = atoi(argv[4]);
-    find_multiple_candidates(fileName, treePath, verbose);  
+    find_multiple_candidates(fileName, treePath, cuts, verbose);  
     return 0;
 }
