@@ -19,182 +19,103 @@
 #include "RooGounarisSakurai.h"
 #include "RooRealVar.h"
 #include "RooDataSet.h"
-#include "TGenPhaseSpace.h"
 
-const double mBs = 5.36677;
-const double mBd= 5.27958;
-const double mLb= 5.6195;
-const double mpi =0.13957;
-const double mpi0 =0.1349766;
-const double mK =0.493677;
-const double mphi = 1.0197;
-const double mp = 0.938272;
-const double mJpsi= 3.096916;
-const double mchic= 3.51066;
-const double mchic0= 3.41475;
-const double mchic2=3.55620;
-const double mPsi = 3.686093;
-const double mDs = 1.9683;
-const double mDplus = 1.86961;
-const double mrho = 0.77511;
-const double mmu = 0.1134289267;
-const double mDstar = 2.1121;
-const double mlc = 2.28646;
-const double mKstar = 8.9166;
+const double me      = 0.000510998928;
+const double mmu     = 0.1134289267;
+const double mtau    = 1.77686;
+const double mpi0    = 0.1349766;
+const double mpi     = 0.13957;
+const double meta    = 0.547862;
+const double mrho0   = 0.77526;
+const double mrho    = 0.77511;
+const double momega  = 0.78265;
+const double mK0     = 0.497611;
+const double mK      = 0.493677;
+const double mKstar  = 0.89166;
+const double mKstar0 = 0.89581;
+const double metapr  = 0.95778;
+const double mphi    = 1.0197;
+const double mDplus  = 1.86961;
+const double mD0     = 1.86484;
+const double mDs     = 1.9683;
+const double mDstar  = 2.01027;
+const double mD0star = 2.00697;
+const double mDsstar = 2.1121;
+const double metac   = 2.9836;
+const double mchic0  = 3.41475;
+const double mJpsi   = 3.096916;
+const double mchic   = 3.51066;
+const double mPsi    = 3.686093;
+const double mchic2  = 3.55620;
+const double mBd     = 5.27958;
+const double mB      = 5.27929;
+const double mBs     = 5.36677;
+const double mBc     = 6.2751;
+const double mB0star = 5.32483;
+const double mBstar  = 5.32483;
+const double mBsstar = 5.4154;
+const double metab   = 9.3980;
+const double mUp1S   = 9.46030;
+const double mUp2S   = 10.02326;
+const double mUp3S   = 10.3552;
+const double mUp4S   = 10.5794;
 
-bool generateEvent(TLorentzVector& head, TGenPhaseSpace& event, double* masses , int np, TRandom& ran, int m_maxgen ){
+const double mn      = 0.939565379;
+const double mp      = 0.938272046;
+const double mL      = 1.115683;
+const double mSm     = 1.197449;
+const double mS0     = 1.192642;
+const double mSp     = 1.18937;
+const double mLc     = 2.28646;
+const double mSc0    = 2.45375;
+const double mScp    = 2.4529;
+const double mScpp   = 2.45397;
+const double mLb     = 5.61951;
+const double mSbm    = 5.8155;
+const double mSbp    = 5.8113;
 
-    /* TLorentzVector head Particle to decay
-       TGenPhaseSpace decay generator
-       double* masses array of output particles
-       int m_maxgen number to try  
-       */
+bool generateEvent(TLorentzVector& head, TGenPhaseSpace& event, double* masses , int np, TRandom& ran, int m_maxgen );
 
-    // check decay kinematics valid
-    bool isok = event.SetDecay(head, np, masses);
-    if (!isok) return false;
-
-    // make an event
-    int ntoGen = 0; bool accept = false;
-    while (ntoGen < m_maxgen && accept == false){
-        Double_t weight = event.Generate();
-        accept = weight > ran.Uniform();
-        ++ntoGen;
-    } // while
-
-    return accept;
-
-}
-
-
-double pick(RooDataSet * data ,TRandom& ran, std::string var_name){
-    int entry = int(data->numEntries() * ran.Uniform());
-    const RooArgSet* row = data->get(entry); 
-    double value = row->getRealValue(var_name.c_str()); 
-    return value;
-}
+double pick(RooDataSet * data ,TRandom& ran, std::string var_name);
 
 const double barrierFactor = 3;
 
-std::string varname(std::string header, std::string var){
-    return (header + "_" + var);
-}
+std::string varname(std::string header, std::string var);
 
 RooGounarisSakurai* rooGS(RooRealVar& m, double mean = 0.77511 , double gamma = 0.1491,
-        double thespin = 1, double m1 = 0.13957,double m2 = 0.1349766 , std::string name = "rhoplus"){ 
-    // rho+ -> pi0 pi+ decay
-    RooRealVar* m0 = new RooRealVar(varname(name,std::string("m0")).c_str(),varname(name,std::string("m0")).c_str(), mean);
-    RooRealVar* g0 = new RooRealVar(varname(name,std::string("g0")).c_str(),varname(name,std::string("g0")).c_str(),gamma);
-    RooRealVar* spin = new RooRealVar(varname(name,std::string("spin")).c_str(),varname(name,std::string("spin")).c_str(),thespin);
-    RooRealVar* radius = new RooRealVar(varname(name,std::string("radius")).c_str(),varname(name,std::string("radius")).c_str(), barrierFactor); // not used
-    RooRealVar* ma = new RooRealVar(varname(name,std::string("ma")).c_str(),varname(name,std::string("ma")).c_str(),m1);
-    RooRealVar* mb = new RooRealVar(varname(name,std::string("mb")).c_str(),varname(name,std::string("mb")).c_str(),m2);   
-
-    return new RooGounarisSakurai(name.c_str(),name.c_str(), m,*m0,*g0,*spin, *radius,*ma,*mb);
-}
+        double thespin = 1, double m1 = 0.13957,double m2 = 0.1349766 , std::string name = "rhoplus"); 
 
 
 RooRelBreitWigner* rooBW(RooRealVar& m,  double mean = 1.019461 , double gamma = 0.001491,
-        double thespin = 1, double m1 =0.493677,double m2 = 0.493677 , std::string name = "phi"){
+        double thespin = 1, double m1 =0.493677,double m2 = 0.493677 , std::string name = "phi");
 
-    RooRealVar* m0 = new RooRealVar(varname(name,std::string("m0")).c_str(),varname(name,std::string("m0")).c_str(), mean);
-    RooRealVar* g0 = new RooRealVar(varname(name,std::string("g0")).c_str(),varname(name,std::string("g0")).c_str(),gamma);
-    RooRealVar* spin= new RooRealVar(varname(name,std::string("spin")).c_str(),varname(name,std::string("spin")).c_str(),thespin);
-    RooRealVar* radius= new RooRealVar(varname(name,std::string("radius")).c_str(),varname(name,std::string("radius")).c_str(),barrierFactor); // not used
-    RooRealVar* ma= new RooRealVar(varname(name,std::string("ma")).c_str(),varname(name,std::string("ma")).c_str(), m1);
-    RooRealVar* mb= new RooRealVar(varname(name,std::string("mb")).c_str(),varname(name,std::string("mb")).c_str(), m2);   
+RooGounarisSakurai* createRhoPlus(RooRealVar& m, std::string name = "rhoplus");
 
-    return new RooRelBreitWigner(name.c_str(),name.c_str(), m,*m0,*g0,*radius,*ma,*mb,*spin);
-}
+RooRelBreitWigner* createPhiMassPdf(RooRealVar& m, std::string name = "phi");
 
+RooRelBreitWigner* createKstarMassPdf(RooRealVar& m, std::string name = "kstar");
 
-RooGounarisSakurai* createRhoPlus(RooRealVar& m, std::string name = "rhoplus"){
-    return rooGS(m,0.77511,0.1491,1, 0.13957, 0.1349766 , name);
-}
+RooRelBreitWigner* createChi0MassPdf(RooRealVar& m, std::string name = "chic0");
 
-RooRelBreitWigner* createPhiMassPdf(RooRealVar& m, std::string name = "phi"){
-    return rooBW(m,mphi ,0.001491,1,mK ,mK ,name ); 
-}
+RooRelBreitWigner* createChi1MassPdf(RooRealVar& m, std::string name = "chic1");
 
-RooRelBreitWigner* createKstarMassPdf(RooRealVar& m, std::string name = "kstar"){
-    return rooBW(m,0.89166 ,0.0508,1,mK ,mpi ,name ); 
-}
+RooRelBreitWigner* createChi2MassPdf(RooRealVar& m, std::string name = "chic2");
 
+RooRelBreitWigner* createpsi2MassPdf(RooRealVar& m, std::string name = "chic2");
 
-RooRelBreitWigner* createChi0MassPdf(RooRealVar& m, std::string name = "chic0"){
-    return rooBW(m,mchic0 ,10.5e-3,1,mpi,mpi,name ); 
-}
+TLorentzVector genB(TRandom ran, TH1F* ptHisto, TH1F* etaHisto, double m);
 
-RooRelBreitWigner* createChi1MassPdf(RooRealVar& m, std::string name = "chic1"){
-    return rooBW(m,mchic ,0.31e-3,1,mpi,mpi,name ); 
-}
+double resSlope(double p);
 
-RooRelBreitWigner* createChi2MassPdf(RooRealVar& m, std::string name = "chic2"){
-    return rooBW(m,mchic2 ,1.93e-3,1,mpi,mpi,name ); 
-}
+TLorentzVector toFourVector(const TVector3& vec, double m);
 
-RooRelBreitWigner* createpsi2MassPdf(RooRealVar& m, std::string name = "chic2"){
-    return rooBW(m,mPsi ,0.3e-3,1,mpi,mpi,name ); 
-}
+TLorentzVector reassignMass(const TLorentzVector& vec, double mass);
 
+TVector3 smearedVec(double plus_x, double plus_y, double plus_z, TGraphErrors* dGraph, TRandom& ran);
 
-TLorentzVector genB(TRandom ran, TH1F* ptHisto, TH1F* etaHisto, double m){
-    TLorentzVector vec;
-    double phi = ran.Uniform(0,2*TMath::Pi());
-    vec.SetPtEtaPhiM(ptHisto->GetRandom(),etaHisto->GetRandom(),phi,m);
-    return vec;
-}
+TLorentzVector smearedVec(TLorentzVector& vec, TGraphErrors* dGraph, TRandom& ran);
 
-double resSlope(double p) {
-    // std::cout << p << std::endl;
-    return(sqrt(pow(6.2e-5,2) + pow(2.1e-3/p,2)));  
-}
-
-TLorentzVector toFourVector(const TVector3& vec, double m) {
-    return TLorentzVector(vec, TMath::Sqrt(m*m + vec.Mag2()));
-}
-
-TLorentzVector reassignMass(const TLorentzVector& vec, double mass){
-    const TVector3 threevec = vec.Vect();
-    return toFourVector(threevec, mass);
-}
-
-TVector3 smearedVec(double plus_x, double plus_y, double plus_z, TGraphErrors* dGraph, TRandom& ran) {
-    double kp, kptx, kpty, norm, smear;
-    kp = sqrt(plus_x*plus_x + plus_y*plus_y + plus_z*plus_z );
-    kptx = plus_x/plus_z;
-    kpty = plus_y/plus_z;
-    norm = sqrt(1 + kptx*kptx + kpty*kpty);
-    smear = 1.0*ran.Gaus(0,1)*dGraph->Eval(1000*kp)*kp;
-    kp += smear;
-
-    // smear the slopes
-    double slope_smear = resSlope(kp); 
-    kptx += slope_smear*ran.Gaus(1,0);
-    kpty += slope_smear*ran.Gaus(1,0);
-    norm = sqrt(1 + kptx*kptx + kpty*kpty);
-
-    plus_x = kptx*kp/norm;
-    plus_y = kpty*kp/norm;
-    plus_z = kp/norm;
-    return TVector3(plus_x,plus_y, plus_z);
-
-}
-
-TLorentzVector smearedVec(TLorentzVector& vec, TGraphErrors* dGraph, TRandom& ran){
-
-    TVector3 threeVec = smearedVec(vec.Px(), vec.Py(), vec.Pz(),dGraph,ran);
-    return toFourVector(threeVec, vec.M());
-}
-
-bool inAcceptance(TLorentzVector& vec){
-
-    if (TMath::Abs(vec.Px()/vec.Pz()) > 0.3) return false;
-    if (TMath::Abs(vec.Py()/vec.Pz()) > 0.25) return false;  
-    if (sqrt(pow(vec.Px()/vec.Pz(),2) + pow(vec.Py()/vec.Pz(),2)) <0.01) return false;
-
-    return true;
-}
+bool inAcceptance(TLorentzVector& vec);
 
 const double zC = 5.4;
 const double ptkick= 1.2;
@@ -205,40 +126,13 @@ const double xMinTracker = 9.5*0.001;
 const double yMinTracker = 9.5*0.001;
 
 
-TLorentzVector magnetKick(TLorentzVector& vec, double charge){
+TLorentzVector magnetKick(TLorentzVector& vec, double charge);
 
-    TVector3 threeVec  =  vec.Vect();
+bool inDownstream(TLorentzVector& vec, int charge);
 
-    // extrapolate to magnet centre  
+int pdgCode(TString part);
 
-    // kick 
-    double p = vec.P();
-    double px =  vec.Px() + ptkick*charge ;
-    double py = vec.Py();
-    double pz = sqrt(p*p - px*px - py*py);
-
-    TVector3 threevec = TVector3(px,py,pz) ;
-
-    return toFourVector(threevec, vec.M()); 
-
-}
-
-bool inDownstream(TLorentzVector& vec, int charge){
-
-    TLorentzVector newvec = magnetKick(vec,charge);
-
-    // position at magnet centre
-    double xMag = zC*vec.Px()/vec.Pz(); 
-    double yMag = zC*vec.Py()/vec.Pz();  
-
-    double xTracker = xMag +  (newvec.Px()*(zTracker - zC)/newvec.Pz()); 
-    double yTracker = yMag +  (newvec.Py()*(zTracker - zC)/newvec.Pz());   
-
-    //if (TMath::Abs(xTracker) > xSizeTracker) std::cout << "out of tracker " << std::endl;
-
-    return (TMath::Abs(xTracker) < xSizeTracker && TMath::Abs(xTracker) > xMinTracker 
-            &&  TMath::Abs(yTracker) < ySizeTracker) && TMath::Abs(yTracker) > yMinTracker ;  
-}
+double getMass(int pdgCode);
 
 #endif
 

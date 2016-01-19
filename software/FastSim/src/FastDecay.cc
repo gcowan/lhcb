@@ -13,28 +13,115 @@ void FastDecay::loadParentKinematics(TH1F* pt, TH1F* eta) {
 	etaHisto=eta;
 }
 
+void FastDecay::setAcceptRejectHist(TH1F* hist, ParamType type, std::vector<int> particles) {
+	if(accRejHisto) {
+		std::cout << "WARNING in FastDecay::setAcceptRejectHist : accept/reject histogram already set. Original histogram will be used." << std::endl;
+		return;
+	}
+
+	std::cout << "INFO in FastDecay::setAcceptRejectHist : setting the required kinematic distribution." << std::endl;
+	accRejHisto = hist;
+	CustomParameter param;
+	param.type = type;
+	param.particles = particles;
+	accRejParameter = param;
+
+	//correct the histogram to account for the the phasespace distribution
+	accRejHisto->Divide(generateAccRejDenominator());
+}
+
+void FastDecay::addCustomParameter(TString name, ParamType type, std::vector<int> particles, bool truth, double min, double max) {
+	std::cout << "INFO in FastDecay::addCustomParameter : adding custom parameter " << name << " = ";
+	if(truth) std::cout << "TRUE";
+	switch(type) {
+		case FastDecay::M:
+		       std::cout << "M";
+		       break;
+		case FastDecay::M2:
+		       std::cout << "M2";
+		       break;
+		case FastDecay::MT:
+		       std::cout << "MT";
+		       break;
+		case FastDecay::E:
+			std::cout << "E";
+		       break;
+		case FastDecay::ET:
+			std::cout << "ET";
+		       break;
+		case FastDecay::P:
+		       std::cout << "P";
+		       break;
+		case FastDecay::PX:
+		       std::cout << "PX";
+		       break;
+		case FastDecay::PY:
+		       std::cout << "PY";
+		       break;
+		case FastDecay::PZ:
+		       std::cout << "PZ";
+		       break;
+		case FastDecay::PT:
+		       std::cout << "PT";
+		       break;
+		case FastDecay::ETA:
+		       std::cout << "eta";
+		       break;
+		case FastDecay::PHI:
+		       std::cout << "phi";
+		       break;
+		case FastDecay::RAPIDITY:
+		       std::cout << "Rapidity";
+		       break;
+		case FastDecay::GAMMA:
+		       std::cout << "gamma";
+		       break;
+		case FastDecay::BETA:
+		       std::cout << "beta";
+		       break;
+	}
+	std::cout << "(";
+	for(int i=0; i<particles.size(); ++i) {
+		if(i>0) std::cout << ", ";
+		std::cout << names[particles[i]];
+	}
+	std::cout << ")" << std::endl;
+	CustomParameter param;
+	param.name = name;
+	param.type = type;
+	param.particles = particles;
+	param.truth = truth;
+	param.minVal = min;
+	param.maxVal = max;
+
+	customParams.push_back(param);
+
+	TH1F* hist = new TH1F(name, "", 100, min, max);
+	histos.push_back(hist);
+}
+
 bool FastDecay::generate() {
+	//keep resonance masses and parent kinematics independent of the accept/reject decision
+	//these will only be biased if the function is very inefficient for certain values
+	//however, one should not use an a/r function the is highly correlated to these variables
 	floatMasses();
 	genParent();
 
-	int sumDaug(0);
+	bool passAccRej(true);
+	int ntry(0);
 
-	for(unsigned int i=0; i<parts.size(); ++i) {
-		if(nDaug[i]>0) {
-			TGenPhaseSpace event;
-			if(!generateEvent(p[i], event, &m[1+sumDaug], nDaug[i], rand, maxgen)) {
-				std::cout << "ERROR in FastDecay::generate : generation failed." << std::endl;
-				return false;
-			}
-			for(int j=0; j<nDaug[i]; ++j) {
-				p[sumDaug+1+j] = *event.GetDecay(j);
-			}
+	do {
+		if(!genDecay()) return false;
+		if(accRejHisto) passAccRej = runAcceptReject();
+		++ntry;
 
-			//now increment the counters so we know where the next decay starts
-			//++iDecay;
-			sumDaug+=nDaug[i];
-		}
+	} while(!passAccRej && ntry<maxgen);
+
+	if(!passAccRej) {
+		std::cout << "WARNING in FastDecay::generate : no events found with required kinematics." << std::endl;
+		return false;
 	}
+
 	smearMomenta();
 	fillHistos();
 	if(tree) fillTree();
@@ -406,17 +493,22 @@ void FastDecay::fillHistos() {
 			}
 		}
 	}
+
+	for(unsigned int i=0; i<customParams.size(); ++i) {
+		histos[iHist++]->Fill(evalCustomParam(i));
+	}
 }
 
 void FastDecay::setupTree() {
 	varsPerPart = 19;
 	tree = new TTree("DecayTree","DecayTree");
-	treeVars = std::vector<double>(parts.size()*varsPerPart, 0);
+	treeVars = std::vector<double>(parts.size()*varsPerPart + customParams.size(), 0);
 
 	for(unsigned int i=0; i<parts.size(); ++i) {
 		TString baseName = names[i];
 		tree->Branch(baseName+"_ID"      ,    &treeVars[varsPerPart*i+0] );
 		tree->Branch(baseName+"_M"       ,    &treeVars[varsPerPart*i+1] );
+		tree->Branch(baseName+"_E"       ,    &treeVars[varsPerPart*i+2] );
 		tree->Branch(baseName+"_P"       ,    &treeVars[varsPerPart*i+3] );
 		tree->Branch(baseName+"_PX"      ,    &treeVars[varsPerPart*i+4] );
 		tree->Branch(baseName+"_PY"      ,    &treeVars[varsPerPart*i+5] );
@@ -433,6 +525,9 @@ void FastDecay::setupTree() {
 		tree->Branch(baseName+"_TRUEPT"  ,    &treeVars[varsPerPart*i+16]);
 		tree->Branch(baseName+"_TRUEETA" ,    &treeVars[varsPerPart*i+17]);
 		tree->Branch(baseName+"_TRUEPHI" ,    &treeVars[varsPerPart*i+18]);
+	}
+	for(unsigned int i=0; i<customParams.size(); ++i) {
+		tree->Branch(customParams[i].name, &treeVars[varsPerPart*parts.size() + i]);
 	}
 }
 
@@ -460,6 +555,10 @@ void FastDecay::fillTree() {
 		treeVars[varsPerPart*i+16] = mom.Pt();
 		treeVars[varsPerPart*i+17] = mom.Eta();
 		treeVars[varsPerPart*i+18] = mom.Phi();
+	}
+
+	for(unsigned int i=0; i<customParams.size(); ++i) {
+		treeVars[varsPerPart*parts.size() + i] = evalCustomParam(i);
 	}
 
 	tree->Fill();
@@ -505,6 +604,80 @@ void FastDecay::setupMasses() {//TODO store masses and widths of particles somew
 				break;
 		}
 	}
+}
+
+double FastDecay::evalCustomParam(int i) {
+	CustomParameter param = customParams[i];
+	evalCustomParam(param);
+}
+
+double FastDecay::evalCustomParam(CustomParameter param) {
+	TLorentzVector mom;
+	if(param.truth) {
+		for(int i=0; i<param.particles.size(); ++i) {
+			mom += getP(param.particles[i]);
+		}
+	} else {
+		for(int i=0; i<param.particles.size(); ++i) {
+			mom += getPSmeared(param.particles[i]);
+		}
+	}
+	switch(param.type) {
+		case FastDecay::M:
+			return mom.M();
+		case FastDecay::M2:
+			return mom.M2();
+		case FastDecay::MT:
+			return mom.Mt();
+		case FastDecay::E:
+			return mom.E();
+		case FastDecay::ET:
+			return mom.Et();
+		case FastDecay::P:
+			return mom.P();
+		case FastDecay::PX:
+			return mom.Px();
+		case FastDecay::PY:
+			return mom.Py();
+		case FastDecay::PZ:
+			return mom.Pz();
+		case FastDecay::PT:
+			return mom.Pt();
+		case FastDecay::ETA:
+			return mom.Eta();
+		case FastDecay::PHI:
+			return mom.Phi();
+		case FastDecay::RAPIDITY:
+			return mom.Rapidity();
+		case FastDecay::GAMMA:
+			return mom.Gamma();
+		case FastDecay::BETA:
+			return mom.Beta();
+	}
+
+	return 0.;
+}
+
+bool FastDecay::runAcceptReject() {
+	double val = evalCustomParam(accRejParameter);
+	double score = accRejHisto->Interpolate(val);
+	double max = accRejHisto->GetMaximum();
+	if(score > rand.Uniform(max)) return true;
+	return false;
+}
+
+TH1F* FastDecay::generateAccRejDenominator() {
+	TH1F* denomHisto = dynamic_cast<TH1F*>(accRejHisto->Clone("denom"));
+	denomHisto->Reset();
+
+	std::cout << "INFO in FastDecay::generateAccRejDenominator : generating 1M decays to remove the \"phasespace\" distribution..." << std::endl;
+	for(int i=0; i<1000000; ++i) {
+		floatMasses();
+		genParent();
+		if(!genDecay()) return false;
+		denomHisto->Fill(evalCustomParam(accRejParameter));
+	}
+	return denomHisto;
 }
 
 void FastDecay::setupRhoMass() {
@@ -572,4 +745,26 @@ void FastDecay::genParent() {
 	if(ptHisto)   pt = ptHisto->GetRandom();
 	if(etaHisto) eta = etaHisto->GetRandom();
 	p[0].SetPtEtaPhiM(pt,eta,phi,m[0]);
+}
+
+bool FastDecay::genDecay() {
+	int sumDaug(0);
+	for(unsigned int i=0; i<parts.size(); ++i) {
+		if(nDaug[i]>0) {
+			TGenPhaseSpace event;
+			if(!generateEvent(p[i], event, &m[1+sumDaug], nDaug[i], rand, maxgen)) {
+				std::cout << "ERROR in FastDecay::generate : generation failed." << std::endl;
+				return false;
+			}
+			for(int j=0; j<nDaug[i]; ++j) {
+				p[sumDaug+1+j] = *event.GetDecay(j);
+			}
+
+			//now increment the counters so we know where the next subdecay starts
+			//++iDecay;
+			sumDaug+=nDaug[i];
+		}
+	}
+
+	return true;
 }

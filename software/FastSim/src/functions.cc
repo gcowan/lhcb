@@ -189,12 +189,18 @@ bool inDownstream(TLorentzVector& vec, int charge){
 
 int pdgCode(TString part) {
 	//leptons
-	if(part=="e-")        return  11;
-	if(part=="nue")       return  12;
-	if(part=="mu-")       return  13;
-	if(part=="numu")      return  14;
-	if(part=="tau-")      return  15;
-	if(part=="nutau")     return  16;
+	if(part=="e-")         return  11;
+	if(part=="e+")         return -11;
+	if(part=="nue")        return  12;
+	if(part=="anti-nue")   return -12;
+	if(part=="mu-")        return  13;
+	if(part=="mu+")        return -13;
+	if(part=="numu")       return  14;
+	if(part=="anti-numu")  return -14;
+	if(part=="tau-")       return  15;
+	if(part=="tau+")       return -15;
+	if(part=="nutau")      return  16;
+	if(part=="anti-nutau") return -16;
 
 	//light mesons
 	if(part=="pi0")       return      111;
@@ -303,10 +309,13 @@ int pdgCode(TString part) {
 double getMass(int pdgCode) {
 	switch(pdgCode) {
 		case       11:
+		case      -11:
 			return me;
 		case       13:
+		case      -13:
 			return mmu;
 		case       15:
+		case      -15:
 			return mtau;
 		case      111:
 			return mpi0;
