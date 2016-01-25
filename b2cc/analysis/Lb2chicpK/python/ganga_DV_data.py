@@ -7,17 +7,17 @@ year = sys.argv[1]
 mode = sys.argv[2]
 
 end = '.py'
-if mode == 'norm': middle = '_norm_'
-if mode == 'Lb': middle = '_Lb2chicpK_'
+if mode == 'norm': middle = '_Lb2JpsipK_'
+if mode == 'Lb'  : middle = '_Lb2chicpK_'
 
 script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV' + middle + year + end
 
-job_name = 'Lb2chicpK_data' + str(year)
+job_name = middle + 'data' + str(year)
 print job_name
 print script
 
 DV = DaVinci()
-DV.version = 'v36r1'
+DV.version = 'v36r3p1'
 DV.optsfile = [File(script)]
 
 

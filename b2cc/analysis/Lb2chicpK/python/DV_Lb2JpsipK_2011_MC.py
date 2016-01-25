@@ -24,11 +24,10 @@ from Configurables import TupleToolMCBackgroundInfo
 from Configurables import TupleToolTISTOS, TriggerTisTos
 
 EVTMAX = -1
-MODE = 'data'
+MODE = 'MC'
 OUTPUTLEVEL = ERROR
 
-rootInTES = '/Event/PSIX'
-location='Phys/SelLb2ChicPKForPsiX0/Particles'
+location='Phys/SelPsiPKForPsiX/Particles'
 
 #########################################################################################################
 # Now set up the DecayTreeTuples for the reconstructed particles
@@ -73,7 +72,7 @@ triglist = [
     ,"Hlt2DiMuonDetachedDecision"
     ,"Hlt2DiMuonDetachedJPsiDecision"
     ,"Hlt2DiMuonDetachedHeavyDecision"
-    ,"Hlt2DiMuonLowMassDecision"
+	,"Hlt2DiMuonLowMassDecision"
 	,"Hlt2DiMuonJPsiDecision"
 	,"Hlt2DiMuonJPsiHighPTDecision"
 	,"Hlt2DiMuonPsi2SDecision"
@@ -93,38 +92,24 @@ LoKi_B.Variables =  {
     "FDCHI2"          : "BPVVDCHI2",
     "FDS"             : "BPVDLS",
     "DIRA"            : "BPVDIRA",
-    "pi0veto"         : "CHILDFUN ( PINFO( 25030 , -1 ) , 'gamma' == ABSID ) ",
     "DTF_CTAU"        : "DTF_CTAU( 0, True )",
     "DTF_CTAUS"       : "DTF_CTAUSIGNIFICANCE( 0, True )",
     "DTF_CHI2NDOF"    : "DTF_CHI2NDOF( True )",
     "DTF_CTAUERR"     : "DTF_CTAUERR( 0, True )",
-    "DTF_MASS_constr1"  : "DTF_FUN ( M , True , strings(['chi_c1(1P)', 'J/psi(1S)']) )" ,
-    "DTF_MASS_constr2"  : "DTF_FUN ( M , True , strings(['chi_c2(1P)', 'J/psi(1S)']) )" ,
+    "DTF_MASS_constr1"  : "DTF_FUN ( M , True , strings(['J/psi(1S)']) )" ,
     "DTF_VCHI2NDOF"     : "DTF_FUN ( VFASPF(VCHI2/VDOF) , True )",
-    "PX_chic1P_constr1" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_chic1P_constr1" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_chic1P_constr1" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_chic1P_constr1" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_proton_constr1" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_proton_constr1" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_proton_constr1" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_proton_constr1" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_kaon_constr1"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_kaon_constr1"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_kaon_constr1"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_kaon_constr1"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_chic1P_constr2" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_chic1P_constr2" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_chic1P_constr2" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_chic1P_constr2" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PX_proton_constr2" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_proton_constr2" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_proton_constr2" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_proton_constr2" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PX_kaon_constr2"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_kaon_constr2"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_kaon_constr2"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_kaon_constr2"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
+    "PX_chic1P_constr1" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)']) )",
+    "PY_chic1P_constr1" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)']) )",
+    "PZ_chic1P_constr1" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)']) )",
+    "PE_chic1P_constr1" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)']) )",
+    "PX_proton_constr1" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)']) )",
+    "PY_proton_constr1" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)']) )",
+    "PZ_proton_constr1" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)']) )",
+    "PE_proton_constr1" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)']) )",
+    "PX_kaon_constr1"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)']) )",
+    "PY_kaon_constr1"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)']) )",
+    "PZ_kaon_constr1"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)']) )",
+    "PE_kaon_constr1"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)']) )",
     }
 
 LoKi_Mu = LoKi__Hybrid__TupleTool("LoKi_Mu")
@@ -135,18 +120,16 @@ LoKi_Mu.Variables =  {
 tuple_B2Kmumu = DecayTreeTuple("Tuple")
 tuple_B2Kmumu.Inputs = [ location ]
 tuple_B2Kmumu.ToolList = tupletools[:]
-tuple_B2Kmumu.Decay = '[Lambda_b0 -> ^(chi_c1(1P) -> ^(J/psi(1S) -> ^mu+ ^mu-) ^gamma) ^p+ ^K-]CC'
+tuple_B2Kmumu.Decay = '[Lambda_b0 -> ^(J/psi(1S) -> ^mu+ ^mu-) ^p+ ^K-]CC'
 tuple_B2Kmumu.Branches = {
-        "Lambda_b0" : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma)  p+  K-]CC",
-        "chi_c"     : "[Lambda_b0 -> ^(chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma)  p+  K-]CC",
-        "Jpsi"      : "[Lambda_b0 ->  (chi_c1(1P) -> ^(J/psi(1S) ->  mu+  mu-)  gamma)  p+  K-]CC",
-        "gamma"     : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-) ^gamma)  p+  K-]CC",
-        "muplus"    : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) -> ^mu+  mu-)  gamma)  p+  K-]CC",
-        "muminus"   : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+ ^mu-)  gamma)  p+  K-]CC",
-        "proton"    : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma) ^p+  K-]CC",
-        "kaon"      : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma)  p+ ^K-]CC",
+        "Lambda_b0" : "[Lambda_b0 ->  (J/psi(1S) ->  mu+  mu-)  p+  K-]CC",
+        "Jpsi"      : "[Lambda_b0 -> ^(J/psi(1S) ->  mu+  mu-)  p+  K-]CC",
+        "muplus"    : "[Lambda_b0 ->  (J/psi(1S) -> ^mu+  mu-)  p+  K-]CC",
+        "muminus"   : "[Lambda_b0 ->  (J/psi(1S) ->  mu+ ^mu-)  p+  K-]CC",
+        "proton"    : "[Lambda_b0 ->  (J/psi(1S) ->  mu+  mu-) ^p+  K-]CC",
+        "kaon"      : "[Lambda_b0 ->  (J/psi(1S) ->  mu+  mu-)  p+ ^K-]CC",
 	}
-for particle in ["Lambda_b0", "chi_c", "Jpsi", "gamma", "muplus", "muminus", "proton", "kaon"]:
+for particle in ["Lambda_b0", "Jpsi", "muplus", "muminus", "proton", "kaon"]:
         tuple_B2Kmumu.addTool(TupleToolDecay, name = particle)
 
 # List of the reconstructed tuples
@@ -167,32 +150,94 @@ for tup in tuples:
     tup.muplus.ToolList += ["LoKi::Hybrid::TupleTool/LoKi_Mu"]
     tup.muminus.addTool( LoKi_Mu )
     tup.muminus.ToolList += ["LoKi::Hybrid::TupleTool/LoKi_Mu"]
-    tup.gamma.ToolList += ["TupleToolPhotonInfo/PhotonInfo", "TupleToolPi0Info/Pi0Info"]
     for particle in [ tup.Lambda_b0 ]:
         particle.addTool(TISTOSTool, name = "TISTOSTool")
         particle.ToolList += [ "TupleToolTISTOS/TISTOSTool" ]
 
-##################################################################
-# If we want to write a DST do this
-##################################################################
-from DSTWriters.microdstelements import *
-from DSTWriters.Configuration import (SelDSTWriter,
-                                              stripDSTStreamConf,
-                                              stripDSTElements
-                                              )
-SelDSTWriterElements = {
-    'default'              : stripDSTElements()
-    }
-SelDSTWriterConf = {
-    'default'              : stripDSTStreamConf()
-    }
-if MODE == 'MC':
-  dstWriter = SelDSTWriter( "MyDSTWriter",
-                          StreamConf = SelDSTWriterConf,
-                          MicroDSTElements = SelDSTWriterElements,
-                          OutputFileSuffix ='MC',
-                          SelectionSequences = sc.activeStreams()
-                          )
+########################
+# Re-run the stripping #
+########################
+
+from PhysSelPython.Wrappers import AutomaticData
+jpsi_name = 'FullDSTDiMuonJpsi2MuMuDetachedLine'
+psi2_name = 'FullDSTDiMuonPsi2MuMuDetachedLine'
+jpsi  = AutomaticData ( '/Event/AllStreams/Phys/%s/Particles' % jpsi_name )
+psi2s = AutomaticData ( '/Event/AllStreams/Phys/%s/Particles' % psi2_name )
+
+from PhysSelPython.Wrappers import MergedSelection
+psis = MergedSelection (
+        'SelDetachedPsisForBandQ' ,
+        RequiredSelections = [ jpsi , psi2s ]
+)
+
+from StrippingSelections.StrippingPsiXForBandQ import PsiX_BQ_Conf    as PsiX
+from StrippingSelections.StrippingPsiX0        import PsiX0Conf       as PsiX0
+
+def _psi_ ( self ) :
+    """
+    psi(') -> mu+ mu-
+    """
+    return psis
+
+PsiX0 . psi = _psi_
+PsiX  . psi = _psi_
+
+psix   = PsiX   ( 'PsiX'  , {} )
+psix0  = PsiX0  ( 'PsiX0' , {} )
+for s in ( psix.psi_pi       () ,
+           psix.psi_K        () ,
+           #
+           psix.psi_2pi      () ,
+           psix.psi_2K       () ,
+           psix.psi_2Kpi     () ,
+           ##
+           psix.psi_3pi      () ,
+           psix.psi_3K       () ,
+           psix.psi_3Kpi     () ,
+           ##
+           psix.psi_4pi      () ,
+           psix.psi_4Kpi     () ,
+           psix.psi_4K       () ,
+           ##
+           psix.psi_5pi      () ,
+           psix.psi_5K       () ,
+           psix.psi_5Kpi     () ,
+           ##
+           psix.psi_6pi      () ,
+           psix.psi_6Kpi     () ,
+           ##
+           psix.psi_7pi      () ,
+           psix.psi_7Kpi     () ,
+           ##
+           # Lb
+           psix.psi_pK       () ,
+           psix.psi_ppi      () ,
+           psix.psi_pKpipi   () ,
+           ##
+           # 2protons
+           psix.psi_pp       () ,
+           psix.psi_pppi     () ,
+           psix.psi_ppK      () ,
+           psix.psi_pppipi   () ,
+           psix.psi_ppKpipi  () ,
+           psix.psi_pppipipi () ,
+           ) :
+    a = s.algorithm ()
+    a.ParticleCombiners = { '' : 'LoKi::VertexFitter:PUBLIC' }
+    #
+    a.MaxCandidates          = 2000
+    a.StopAtMaxCandidates    = True
+    a.StopIncidentType       = 'ExceedsCombinatoricsLimit'
+    #
+from PhysSelPython.Wrappers import MultiSelectionSequence
+from PhysSelPython.Wrappers import      SelectionSequence
+psi_x = MultiSelectionSequence (
+        "PSIX"      ,
+        Sequences = [
+        SelectionSequence ( 'Lb2PSIPK'      , psix . psi_pK      () ) ,
+        ]
+    )
+
 
 ###################### DAVINCI SETTINGS ############################################
 DaVinci().SkipEvents = 0  #1945
@@ -200,10 +245,9 @@ DaVinci().PrintFreq = 10000
 DaVinci().EvtMax = EVTMAX
 DaVinci().TupleFile = "DVTuples1.root"
 DaVinci().HistogramFile = 'DVHistos.root'
-DaVinci().RootInTES = rootInTES
-DaVinci().InputType = "MDST"
-DaVinci().Simulation = False
-DaVinci().Lumi = True
+DaVinci().InputType = "DST"
+DaVinci().Simulation = True
+DaVinci().Lumi = False
 DaVinci().DataType = "2011"
 CondDB( LatestGlobalTagByDataType = '2011' )
 
@@ -211,15 +255,9 @@ if False: # Add the DST writing algorithms
 	DaVinci().appendToMainSequence( [ dstWriter.sequence(), printTree ] )
 
 if True: # Add the ntuple writing algorithms
-	DaVinci().UserAlgorithms = [
+    DaVinci().UserAlgorithms = [ psi_x.sequence(),
                 tuple_B2Kmumu
 			]
-if MODE == 'MC':
-    DaVinci().Simulation = True
-    DaVinci().Lumi = False
-    DaVinci().UserAlgorithms += [
-                mctuple_B2Kmumu
-                ]
 
 if OUTPUTLEVEL == DEBUG:
 	DaVinci().MoniSequence += [ mctree ]

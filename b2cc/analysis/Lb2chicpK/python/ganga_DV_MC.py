@@ -11,7 +11,7 @@ if mode not in ['norm', 'signal', 'background_Bd', 'Bu_JpsiX', 'Bd_JpsiX', 'Bs_J
 if magnet not in ['MagDown', 'MagUp']: sys.exit()
 
 if mode == 'norm':
-	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2chicpK_norm_' + year + '_MC.py'
+	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2JpsipK_' + year + '_MC.py'
 else:
 	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2chicpK_' + year + '_MC.py'
 
@@ -20,7 +20,7 @@ print job_name
 print script
 
 DV = DaVinci()
-DV.version = 'v36r1'
+DV.version = 'v36r3p1'
 DV.optsfile = [File(script)]
 
 BK_locations = []
@@ -49,9 +49,13 @@ if year == '2012' and mode =='signal_Bs':
 
 if year == '2011' and mode == 'norm':
 	BK_locations = [
+      '/MC/2011/Beam3500GeV-2011-' + magnet + '-Nu2-Pythia6/Sim08b/Digi13/Trig0x40760037/Reco14a/Stripping20r1NoPrescalingFlagged/15144001/ALLSTREAMS.DST'
+    , '/MC/2011/Beam3500GeV-2011-' + magnet + '-Nu2-Pythia8/Sim08b/Digi13/Trig0x40760037/Reco14a/Stripping20r1NoPrescalingFlagged/15144001/ALLSTREAMS.DST'
 	]
 if year == '2012' and mode =='norm':
 	BK_locations = [
+      '/MC/2012/Beam4000GeV-2012-' + magnet + '-Nu2.5-Pythia6/Sim08b/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/15144001/ALLSTREAMS.DST'
+    , '/MC/2012/Beam4000GeV-2012-' + magnet + '-Nu2.5-Pythia8/Sim08b/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/15144001/ALLSTREAMS.DST'
 	]
 
 if year == '2012' and mode == 'Bu_JpsiX':
@@ -96,7 +100,7 @@ if len(data.files) < 1:
 j = Job(
   name           = job_name,
   application    = DV,
-  splitter       = SplitByFiles(filesPerJob = 20),
+  splitter       = SplitByFiles(filesPerJob = 10),
   inputdata      = data,
   outputfiles     = [LocalFile("*.root")],
   do_auto_resubmit = True,

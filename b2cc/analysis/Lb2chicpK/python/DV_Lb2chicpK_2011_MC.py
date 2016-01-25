@@ -70,6 +70,7 @@ triglist = [
 	,"Hlt2MuonFromHLT1Decision"
 	,"Hlt2DiMuonDecision"
     ,"Hlt2DiMuonDetachedDecision"
+    ,"Hlt2DiMuonDetachedJPsiDecision"
     ,"Hlt2DiMuonDetachedHeavyDecision"
 	,"Hlt2DiMuonLowMassDecision"
 	,"Hlt2DiMuonJPsiDecision"

@@ -28,7 +28,7 @@ MODE = 'data'
 OUTPUTLEVEL = ERROR
 
 rootInTES = '/Event/PSIX'
-location='Phys/SelLb2ChicPKForPsiX0/Particles'
+location='Phys/SelPsiPKForPsiX/Particles'
 
 #########################################################################################################
 # Now set up the DecayTreeTuples for the reconstructed particles
@@ -93,38 +93,24 @@ LoKi_B.Variables =  {
     "FDCHI2"          : "BPVVDCHI2",
     "FDS"             : "BPVDLS",
     "DIRA"            : "BPVDIRA",
-    "pi0veto"         : "CHILDFUN ( PINFO( 25030 , -1 ) , 'gamma' == ABSID ) ",
     "DTF_CTAU"        : "DTF_CTAU( 0, True )",
     "DTF_CTAUS"       : "DTF_CTAUSIGNIFICANCE( 0, True )",
     "DTF_CHI2NDOF"    : "DTF_CHI2NDOF( True )",
     "DTF_CTAUERR"     : "DTF_CTAUERR( 0, True )",
-    "DTF_MASS_constr1"  : "DTF_FUN ( M , True , strings(['chi_c1(1P)', 'J/psi(1S)']) )" ,
-    "DTF_MASS_constr2"  : "DTF_FUN ( M , True , strings(['chi_c2(1P)', 'J/psi(1S)']) )" ,
+    "DTF_MASS_constr1"  : "DTF_FUN ( M , True , strings(['J/psi(1S)']) )" ,
     "DTF_VCHI2NDOF"     : "DTF_FUN ( VFASPF(VCHI2/VDOF) , True )",
-    "PX_chic1P_constr1" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_chic1P_constr1" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_chic1P_constr1" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_chic1P_constr1" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_proton_constr1" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_proton_constr1" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_proton_constr1" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_proton_constr1" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_kaon_constr1"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_kaon_constr1"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_kaon_constr1"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_kaon_constr1"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_chic1P_constr2" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_chic1P_constr2" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_chic1P_constr2" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_chic1P_constr2" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PX_proton_constr2" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_proton_constr2" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_proton_constr2" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_proton_constr2" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PX_kaon_constr2"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_kaon_constr2"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_kaon_constr2"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_kaon_constr2"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
+    "PX_chic1P_constr1" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)']) )",
+    "PY_chic1P_constr1" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)']) )",
+    "PZ_chic1P_constr1" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)']) )",
+    "PE_chic1P_constr1" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)']) )",
+    "PX_proton_constr1" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)']) )",
+    "PY_proton_constr1" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)']) )",
+    "PZ_proton_constr1" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)']) )",
+    "PE_proton_constr1" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)']) )",
+    "PX_kaon_constr1"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)']) )",
+    "PY_kaon_constr1"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)']) )",
+    "PZ_kaon_constr1"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)']) )",
+    "PE_kaon_constr1"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)']) )",
     }
 
 LoKi_Mu = LoKi__Hybrid__TupleTool("LoKi_Mu")
@@ -135,18 +121,16 @@ LoKi_Mu.Variables =  {
 tuple_B2Kmumu = DecayTreeTuple("Tuple")
 tuple_B2Kmumu.Inputs = [ location ]
 tuple_B2Kmumu.ToolList = tupletools[:]
-tuple_B2Kmumu.Decay = '[Lambda_b0 -> ^(chi_c1(1P) -> ^(J/psi(1S) -> ^mu+ ^mu-) ^gamma) ^p+ ^K-]CC'
+tuple_B2Kmumu.Decay = '[Lambda_b0 ->  ^(J/psi(1S) -> ^mu+ ^mu-) ^p+ ^K-]CC'
 tuple_B2Kmumu.Branches = {
-        "Lambda_b0" : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma)  p+  K-]CC",
-        "chi_c"     : "[Lambda_b0 -> ^(chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma)  p+  K-]CC",
-        "Jpsi"      : "[Lambda_b0 ->  (chi_c1(1P) -> ^(J/psi(1S) ->  mu+  mu-)  gamma)  p+  K-]CC",
-        "gamma"     : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-) ^gamma)  p+  K-]CC",
-        "muplus"    : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) -> ^mu+  mu-)  gamma)  p+  K-]CC",
-        "muminus"   : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+ ^mu-)  gamma)  p+  K-]CC",
-        "proton"    : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma) ^p+  K-]CC",
-        "kaon"      : "[Lambda_b0 ->  (chi_c1(1P) ->  (J/psi(1S) ->  mu+  mu-)  gamma)  p+ ^K-]CC",
+        "Lambda_b0" : "[Lambda_b0 ->   (J/psi(1S) ->  mu+  mu-)  p+  K-]CC",
+        "Jpsi"      : "[Lambda_b0 ->  ^(J/psi(1S) ->  mu+  mu-)  p+  K-]CC",
+        "muplus"    : "[Lambda_b0 ->   (J/psi(1S) -> ^mu+  mu-)  p+  K-]CC",
+        "muminus"   : "[Lambda_b0 ->   (J/psi(1S) ->  mu+ ^mu-)  p+  K-]CC",
+        "proton"    : "[Lambda_b0 ->   (J/psi(1S) ->  mu+  mu-) ^p+  K-]CC",
+        "kaon"      : "[Lambda_b0 ->   (J/psi(1S) ->  mu+  mu-)  p+ ^K-]CC",
 	}
-for particle in ["Lambda_b0", "chi_c", "Jpsi", "gamma", "muplus", "muminus", "proton", "kaon"]:
+for particle in ["Lambda_b0", "Jpsi", "muplus", "muminus", "proton", "kaon"]:
         tuple_B2Kmumu.addTool(TupleToolDecay, name = particle)
 
 # List of the reconstructed tuples
@@ -167,7 +151,6 @@ for tup in tuples:
     tup.muplus.ToolList += ["LoKi::Hybrid::TupleTool/LoKi_Mu"]
     tup.muminus.addTool( LoKi_Mu )
     tup.muminus.ToolList += ["LoKi::Hybrid::TupleTool/LoKi_Mu"]
-    tup.gamma.ToolList += ["TupleToolPhotonInfo/PhotonInfo", "TupleToolPi0Info/Pi0Info"]
     for particle in [ tup.Lambda_b0 ]:
         particle.addTool(TISTOSTool, name = "TISTOSTool")
         particle.ToolList += [ "TupleToolTISTOS/TISTOSTool" ]
