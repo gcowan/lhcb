@@ -24,4 +24,10 @@ TARGET_LINK_LIBRARIES( multi_cand.exe dl Core RooFit RooFitCore RooStats RIO Net
 ADD_EXECUTABLE ( fit_lifetime_efficiency.exe ${PROJECT_SOURCE_DIR}/src/fit_lifetime_efficiency.C )
 TARGET_LINK_LIBRARIES( fit_lifetime_efficiency.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
 
+ADD_EXECUTABLE ( swaps.exe ${PROJECT_SOURCE_DIR}/src/swaps.C )
+TARGET_LINK_LIBRARIES( swaps.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
+
+ADD_EXECUTABLE ( Bd_swaps.exe ${PROJECT_SOURCE_DIR}/src/Bd_swaps.C )
+TARGET_LINK_LIBRARIES( Bd_swaps.exe dl Core RooFit RooFitCore RooStats RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui pthread m)
+
 
