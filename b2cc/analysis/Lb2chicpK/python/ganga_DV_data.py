@@ -3,14 +3,14 @@
 
 import sys
 
-year = sys.argv[1]
-mode = sys.argv[2]
+year = str(sys.argv[1])
+mode = str(sys.argv[2])
 
 end = '.py'
 if mode == 'norm': middle = '_Lb2JpsipK_'
 if mode == 'Lb'  : middle = '_Lb2chicpK_'
 
-script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV' + middle + year + end
+script='/afs/cern.ch/user/d/dcraik/Lb2chicpK/lhcb/b2cc/analysis/Lb2chicpK/python/DV' + middle + year + end
 
 job_name = middle + 'data' + str(year)
 print job_name
@@ -60,5 +60,5 @@ j = Job(
   backend        = Dirac(),
   postprocessors = [RootMerger( files = ['DVTuples1.root'], ignorefailed = True )]
   )
-j.submit()
+queues.add(j.submit)
 

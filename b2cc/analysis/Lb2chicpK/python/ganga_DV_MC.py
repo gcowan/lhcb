@@ -3,17 +3,17 @@
 
 import sys
 
-year = sys.argv[1]
-mode = sys.argv[2]
-magnet = sys.argv[3]
+year   = str(sys.argv[1])
+mode   = str(sys.argv[2])
+magnet = str(sys.argv[3])
 
 if mode not in ['norm', 'signal', 'background_Bd', 'Bu_JpsiX', 'Bd_JpsiX', 'Bs_JpsiX', 'Lb_JpsiX']: sys.exit()
 if magnet not in ['MagDown', 'MagUp']: sys.exit()
 
 if mode == 'norm':
-	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2JpsipK_' + year + '_MC.py'
+	script=str('/afs/cern.ch/user/d/dcraik/Lb2chicpK/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2JpsipK_' + year + '_MC.py')
 else:
-	script='/afs/cern.ch/user/g/gcowan/lhcb/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2chicpK_' + year + '_MC.py'
+	script=str('/afs/cern.ch/user/d/dcraik/Lb2chicpK/lhcb/b2cc/analysis/Lb2chicpK/python/DV_Lb2chicpK_' + year + '_MC.py')
 
 job_name = 'MC' + str(year) + mode + magnet
 print job_name
@@ -31,13 +31,13 @@ if year == '2011' and mode == 'background_Bd':
 	]
 if year == '2011' and mode == 'signal':
 	BK_locations = [
-      '/MC/2011/Beam3500GeV-2011-' + magnet + '-Nu2-Pythia6/Sim08e/Digi13/Trig0x40760037/Reco14a/Stripping20r1NoPrescalingFlagged/15244202/ALLSTREAMS.DST'
-    , '/MC/2011/Beam3500GeV-2011-' + magnet + '-Nu2-Pythia8/Sim08e/Digi13/Trig0x40760037/Reco14a/Stripping20r1NoPrescalingFlagged/15244202/ALLSTREAMS.DST'
+      str('/MC/2011/Beam3500GeV-2011-' + magnet + '-Nu2-Pythia6/Sim08e/Digi13/Trig0x40760037/Reco14a/Stripping20r1NoPrescalingFlagged/15244202/ALLSTREAMS.DST')
+    , str('/MC/2011/Beam3500GeV-2011-' + magnet + '-Nu2-Pythia8/Sim08e/Digi13/Trig0x40760037/Reco14a/Stripping20r1NoPrescalingFlagged/15244202/ALLSTREAMS.DST')
 	]
 if year == '2012' and mode =='signal':
 	BK_locations = [
-      '/MC/2012/Beam4000GeV-2012-' + magnet + '-Nu2.5-Pythia6/Sim08e/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/15244202/ALLSTREAMS.DST'
-	, '/MC/2012/Beam4000GeV-2012-' + magnet + '-Nu2.5-Pythia8/Sim08e/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/15244202/ALLSTREAMS.DST'
+      str('/MC/2012/Beam4000GeV-2012-' + magnet + '-Nu2.5-Pythia6/Sim08e/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/15244202/ALLSTREAMS.DST')
+	, str('/MC/2012/Beam4000GeV-2012-' + magnet + '-Nu2.5-Pythia8/Sim08e/Digi13/Trig0x409f0045/Reco14a/Stripping20NoPrescalingFlagged/15244202/ALLSTREAMS.DST')
 	]
 
 if year == '2011' and mode == 'signal_Bs':
@@ -100,12 +100,12 @@ if len(data.files) < 1:
 j = Job(
   name           = job_name,
   application    = DV,
-  splitter       = SplitByFiles(filesPerJob = 10),
+  splitter       = SplitByFiles(filesPerJob = 10, maxFiles = -1),
   inputdata      = data,
   outputfiles     = [LocalFile("*.root")],
   do_auto_resubmit = True,
   backend        = Dirac(),
   postprocessors = [RootMerger( files = ['DVTuples1.root'], ignorefailed = True )]
   )
-j.submit()
+queues.add(j.submit)
 

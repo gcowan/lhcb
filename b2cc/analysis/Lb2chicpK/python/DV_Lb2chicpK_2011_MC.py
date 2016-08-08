@@ -22,6 +22,9 @@ from Configurables import MCTupleToolHierarchy
 from Configurables import TupleToolMCTruth
 from Configurables import TupleToolMCBackgroundInfo
 from Configurables import TupleToolTISTOS, TriggerTisTos
+from Configurables import TupleToolDecayTreeFitter
+
+from DecayTreeTuple.Configuration import *
 
 EVTMAX = -1
 MODE = 'MC'
@@ -93,37 +96,6 @@ LoKi_B.Variables =  {
     "FDS"             : "BPVDLS",
     "DIRA"            : "BPVDIRA",
     "pi0veto"         : "CHILDFUN ( PINFO( 25030 , -1 ) , 'gamma' == ABSID ) ",
-    "DTF_CTAU"        : "DTF_CTAU( 0, True )",
-    "DTF_CTAUS"       : "DTF_CTAUSIGNIFICANCE( 0, True )",
-    "DTF_CHI2NDOF"    : "DTF_CHI2NDOF( True )",
-    "DTF_CTAUERR"     : "DTF_CTAUERR( 0, True )",
-    "DTF_MASS_constr1"  : "DTF_FUN ( M , True , strings(['chi_c1(1P)', 'J/psi(1S)']) )" ,
-    "DTF_MASS_constr2"  : "DTF_FUN ( M , True , strings(['chi_c2(1P)', 'J/psi(1S)']) )" ,
-    "DTF_VCHI2NDOF"     : "DTF_FUN ( VFASPF(VCHI2/VDOF) , True )",
-    "PX_chic1P_constr1" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_chic1P_constr1" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_chic1P_constr1" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_chic1P_constr1" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_proton_constr1" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_proton_constr1" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_proton_constr1" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_proton_constr1" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_kaon_constr1"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PY_kaon_constr1"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PZ_kaon_constr1"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PE_kaon_constr1"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c1(1P)']) )",
-    "PX_chic1P_constr2" : "DTF_FUN ( CHILD(PX, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_chic1P_constr2" : "DTF_FUN ( CHILD(PY, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_chic1P_constr2" : "DTF_FUN ( CHILD(PZ, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_chic1P_constr2" : "DTF_FUN ( CHILD( E, 1) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PX_proton_constr2" : "DTF_FUN ( CHILD(PX, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_proton_constr2" : "DTF_FUN ( CHILD(PY, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_proton_constr2" : "DTF_FUN ( CHILD(PZ, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_proton_constr2" : "DTF_FUN ( CHILD( E, 2) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PX_kaon_constr2"   : "DTF_FUN ( CHILD(PX, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PY_kaon_constr2"   : "DTF_FUN ( CHILD(PY, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PZ_kaon_constr2"   : "DTF_FUN ( CHILD(PZ, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
-    "PE_kaon_constr2"   : "DTF_FUN ( CHILD( E, 3) , True  , strings(['J/psi(1S)', 'chi_c2(1P)']) )",
     }
 
 LoKi_Mu = LoKi__Hybrid__TupleTool("LoKi_Mu")
@@ -170,6 +142,27 @@ for tup in tuples:
     for particle in [ tup.Lambda_b0 ]:
         particle.addTool(TISTOSTool, name = "TISTOSTool")
         particle.ToolList += [ "TupleToolTISTOS/TISTOSTool" ]
+
+    # Fit with chic1 mass constraint and PV constr
+    chic1Const = tup.Lambda_b0.addTupleTool('TupleToolDecayTreeFitter/ConstChic1Fit')
+    chic1Const.UpdateDaughters = True
+    chic1Const.constrainToOriginVertex = True
+    chic1Const.daughtersToConstrain += [ 'J/psi(1S)', 'chi_c1(1P)' ]
+    # Fit with chic2 mass constraint and PV constr
+    chic2Const = tup.Lambda_b0.addTupleTool('TupleToolDecayTreeFitter/ConstChic2Fit')
+    chic2Const.UpdateDaughters = True
+    chic2Const.constrainToOriginVertex = True
+    chic2Const.Substitutions = { 'Beauty -> ^chi_c1(1P) Baryon Meson': 'chi_c2(1P)' }
+    chic2Const.daughtersToConstrain += [ 'J/psi(1S)', 'chi_c2(1P)' ]
+    # Fit with chic1 mass constraint and PV constr
+    chic1ConstNoPV = tup.Lambda_b0.addTupleTool('TupleToolDecayTreeFitter/ConstChic1FitNoPV')
+    chic1ConstNoPV.UpdateDaughters = True
+    chic1ConstNoPV.daughtersToConstrain += [ 'J/psi(1S)', 'chi_c1(1P)' ]
+    # Fit with chic2 mass constraint and PV constr
+    chic2ConstNoPV = tup.Lambda_b0.addTupleTool('TupleToolDecayTreeFitter/ConstChic2FitNoPV')
+    chic2ConstNoPV.UpdateDaughters = True
+    chic2ConstNoPV.Substitutions = { 'Beauty -> ^chi_c1(1P) Baryon Meson': 'chi_c2(1P)' }
+    chic2ConstNoPV.daughtersToConstrain += [ 'J/psi(1S)', 'chi_c2(1P)' ]
 
 ########################
 # Re-run the stripping #
